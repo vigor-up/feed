@@ -23,8 +23,42 @@
             color: var(--dark); 
             background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%); 
             padding: 15px; 
+            padding-top: 80px; /* 為語言切換器留出空間 */
         }
         .container { max-width: 1200px; margin: 0 auto; }
+        
+        /* 語言切換器樣式 */
+        .language-switcher {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0e0e0;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+        .lang-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        .lang-btn:hover:not(.active) {
+            background: #f0f0f0;
+        }
         
         /* 優化封面抬頭樣式 - 提升專業感 */
         header { 
@@ -123,6 +157,13 @@
             box-shadow: var(--shadow); 
             transition: transform 0.3s ease, box-shadow 0.3s ease; 
             border-top: 4px solid var(--secondary);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
+        }
+        section.visible { 
+            opacity: 1;
+            transform: translateY(0);
         }
         section:hover { 
             transform: translateY(-4px); 
@@ -168,6 +209,7 @@
             border: 1px solid #dee2e6; 
             transition: all 0.3s ease; 
             border-top: 3px solid var(--secondary);
+            cursor: pointer;
         }
         .spec-card:hover { 
             border-color: var(--secondary); 
@@ -207,6 +249,7 @@
             box-shadow: var(--shadow); 
             border-top: 4px solid var(--secondary); 
             transition: all 0.3s ease; 
+            cursor: pointer;
         }
         .benefit-card:hover { 
             transform: translateY(-5px); 
@@ -315,6 +358,7 @@
             position: relative; 
             overflow: hidden; 
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         .step-card:hover {
             transform: translateY(-3px);
@@ -518,6 +562,13 @@
             transition: transform 0.3s ease-in-out;
             display: block;
             border: 3px solid white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .section-img.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .section-img:hover {
             transform: scale(1.02);
@@ -540,7 +591,10 @@
         
         /* 響應式調整 */
         @media (max-width: 768px) { 
-            body { padding: 10px; } 
+            body { 
+                padding: 10px; 
+                padding-top: 120px; /* 為移動端的語言切換器留出更多空間 */
+            } 
             header { padding: 35px 20px; } 
             .company-info h1 { font-size: 26px; } 
             .company-info p { font-size: 18px; } 
@@ -561,6 +615,16 @@
                 font-size: 13px;
                 padding: 6px;
             }
+            .language-switcher {
+                flex-direction: column;
+                right: 10px;
+                top: 10px;
+                padding: 6px 10px;
+            }
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
         }
         @media (max-width: 480px) { 
             .company-info h1 { font-size: 22px; } 
@@ -578,331 +642,950 @@
             .step-card {
                 padding: 20px 15px;
             }
+            .language-switcher {
+                flex-direction: row;
+                top: 5px;
+                right: 5px;
+            }
+            body {
+                padding-top: 80px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 語言切換器 -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="zh-TW" data-rate="1" data-symbol="NTD">繁體中文</button>
+        <button class="lang-btn" data-lang="zh-CN" data-rate="0.2192" data-symbol="CNY">簡體中文</button>
+        <button class="lang-btn" data-lang="en" data-rate="0.0320" data-symbol="USD">English</button>
+    </div>
+
     <div class="container">
         <!-- Header - 優化後的專業化封面抬頭（已刪除首池圖示） -->
         <header>
             <div class="company-info">
-                <h1>活力旺土雞性能提升方案 TDS</h1>
-                <p>紅羽/黑羽土雞專用｜增重提速・料肉比優化・羽毛光澤提升</p>
-                <div class="tagline">Precision Nutrition · Advanced Biotechnology · Sustainable Poultry Farming</div>
-                <div class="tds-badge">Technical Data Sheet｜技術資料表</div>
+                <h1 data-translate="title">活力旺土雞性能提升方案 TDS</h1>
+                <p data-translate="subtitle">紅羽/黑羽土雞專用｜增重提速・料肉比優化・羽毛光澤提升</p>
+                <div class="tagline" data-translate="tagline">Precision Nutrition · Advanced Biotechnology · Sustainable Poultry Farming</div>
+                <div class="tds-badge" data-translate="tds_badge">Technical Data Sheet｜技術資料表</div>
             </div>
         </header>
 
         <!-- Product Specifications -->
-        <section>
-            <h2>產品規格與添加參數</h2>
+        <section id="product-specs">
+            <h2 data-translate="section1_title">產品規格與添加參數</h2>
             
             <div class="specs-grid">
                 <div class="spec-card">
-                    <span class="label">每噸飼料添加量</span>
+                    <span class="label" data-translate="spec1_label">每噸飼料添加量</span>
                     <span class="value">1</span>
-                    <span class="unit">公斤/噸</span>
+                    <span class="unit" data-translate="spec1_unit">公斤/噸</span>
                 </div>
                 <div class="spec-card">
-                    <span class="label">產品單價</span>
-                    <span class="value">600</span>
-                    <span class="unit">NTD/公斤</span>
+                    <span class="label" data-translate="spec2_label">產品單價</span>
+                    <span class="value" data-value="600">600</span>
+                    <span class="unit" data-translate="spec2_unit">NTD/公斤</span>
                 </div>
                 <div class="spec-card">
-                    <span class="label">每噸飼料成本增加</span>
-                    <span class="value">600</span>
-                    <span class="unit">NTD/噸</span>
+                    <span class="label" data-translate="spec3_label">每噸飼料成本增加</span>
+                    <span class="value" data-value="600">600</span>
+                    <span class="unit" data-translate="spec3_unit">NTD/噸</span>
                 </div>
                 <div class="spec-card">
-                    <span class="label">日採食量(土雞)</span>
+                    <span class="label" data-translate="spec4_label">日採食量(土雞)</span>
                     <span class="value">0.11</span>
-                    <span class="unit">公斤/隻/天</span>
+                    <span class="unit" data-translate="spec4_unit">公斤/隻/天</span>
                 </div>
                 <div class="spec-card">
-                    <span class="label">每隻雞日成本增加</span>
-                    <span class="value">0.066</span>
-                    <span class="unit">NTD/隻/天</span>
+                    <span class="label" data-translate="spec5_label">每隻雞日成本增加</span>
+                    <span class="value" data-value="0.066">0.066</span>
+                    <span class="unit" data-translate="spec5_unit">NTD/隻/天</span>
                 </div>
                 <div class="spec-card">
-                    <span class="label">適用對象</span>
-                    <span class="value" style="color: var(--secondary); font-size: 20px;">紅羽/黑羽土雞</span>
-                    <span class="unit">全程飼養</span>
+                    <span class="label" data-translate="spec6_label">適用對象</span>
+                    <span class="value" style="color: var(--secondary); font-size: 20px;" data-translate="spec6_value">紅羽/黑羽土雞</span>
+                    <span class="unit" data-translate="spec6_unit">全程飼養</span>
                 </div>
             </div>
 
             <!-- 嵌入圖片C5：產品添加比例示意圖 -->
             <div style="text-align: center;">
-                <img class="section-img" src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/f44cc81a8bc54c9d806ded84e6441d8b.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=20260202104939DD10B7447BB45735EC8F&amp;rrcfp=8a172a1a&amp;x-expires=1770605379&amp;x-signature=Tl%2Bg4RomqJWO8%2F763hi4TRud1gM%3D" alt="活力旺產品添加比例示意圖 (1kg/1噸飼料)" />
-                <p class="img-caption">圖1：活力旺產品添加比例示意圖｜每噸飼料添加1公斤活力旺</p>
+                <img class="section-img" src="assets/native-chicken-product-ratio.jpg" alt="活力旺產品添加比例示意圖 (1kg/1噸飼料)" />
+                <p class="img-caption" data-translate="caption1">圖1：活力旺產品添加比例示意圖｜每噸飼料添加1公斤活力旺</p>
             </div>
             
             <div style="background: #e8f5e9; padding: 18px; border-radius: 10px; margin-top: 20px; border-left: 4px solid var(--secondary);">
-                <p><strong>使用方法：</strong>每噸全價飼料均勻添加活力旺1公斤，與預混料充分混合後使用。適用於紅羽/黑羽土雞全程飼養階段，無需調整飼養管理流程。</p>
+                <p data-translate="usage_method"><strong>使用方法：</strong>每噸全價飼料均勻添加活力旺1公斤，與預混料充分混合後使用。適用於紅羽/黑羽土雞全程飼養階段，無需調整飼養管理流程。</p>
             </div>
         </section>
 
         <!-- Core Benefits -->
-        <section>
-            <h2>核心效益｜土雞性能全面提升</h2>
+        <section id="core-benefits">
+            <h2 data-translate="section2_title">核心效益｜土雞性能全面提升</h2>
             
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <h4>增重效率提升</h4>
-                    <span class="improvement">+5-8%</span>
-                    <p>小核酸肽促進肌肉蛋白合成，提高飼料轉化效率，出欄體重顯著增加</p>
-                    <p><strong>實測數據：</strong>16週齡出欄體重從2.45kg提升至2.60-2.65kg</p>
+                    <h4 data-translate="benefit1_title">增重效率提升</h4>
+                    <span class="improvement" data-translate="benefit1_improvement">+5-8%</span>
+                    <p data-translate="benefit1_desc">小核酸肽促進肌肉蛋白合成，提高飼料轉化效率，出欄體重顯著增加</p>
+                    <p data-translate="benefit1_data"><strong>實測數據：</strong>16週齡出欄體重從2.45kg提升至2.60-2.65kg</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <h4>料肉比優化</h4>
-                    <span class="improvement">-3-5%</span>
-                    <p>精密複合酶提升營養吸收率18%，降低飼料浪費，每公斤增重節省飼料</p>
-                    <p><strong>實測數據：</strong>料肉比從3.45:1優化至3.30-3.35:1</p>
+                    <h4 data-translate="benefit2_title">料肉比優化</h4>
+                    <span class="improvement" data-translate="benefit2_improvement">-3-5%</span>
+                    <p data-translate="benefit2_desc">精密複合酶提升營養吸收率18%，降低飼料浪費，每公斤增重節省飼料</p>
+                    <p data-translate="benefit2_data"><strong>實測數據：</strong>料肉比從3.45:1優化至3.30-3.35:1</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <h4>成活率提升</h4>
-                    <span class="improvement">+2-3%</span>
-                    <p>免疫調控肽+褐藻素強化免疫系統，降低腹水症、呼吸道疾病發生率</p>
-                    <p><strong>實測數據：</strong>全程成活率從95%提升至97-98%</p>
+                    <h4 data-translate="benefit3_title">成活率提升</h4>
+                    <span class="improvement" data-translate="benefit3_improvement">+2-3%</span>
+                    <p data-translate="benefit3_desc">免疫調控肽+褐藻素強化免疫系統，降低腹水症、呼吸道疾病發生率</p>
+                    <p data-translate="benefit3_data"><strong>實測數據：</strong>全程成活率從95%提升至97-98%</p>
                 </div>
                 
                 <div class="benefit-card">
-                    <h4>羽毛品質改善</h4>
-                    <span class="improvement">顯著提升</span>
-                    <p>褐藻素提供天然色素與抗氧化物質，羽毛緊實光澤，減少啄羽行為</p>
-                    <p><strong>實測數據：</strong>屠體評分提升15%，市場溢價能力增強</p>
+                    <h4 data-translate="benefit4_title">羽毛品質改善</h4>
+                    <span class="improvement" data-translate="benefit4_improvement">顯著提升</span>
+                    <p data-translate="benefit4_desc">褐藻素提供天然色素與抗氧化物質，羽毛緊實光澤，減少啄羽行為</p>
+                    <p data-translate="benefit4_data"><strong>實測數據：</strong>屠體評分提升15%，市場溢價能力增強</p>
                 </div>
             </div>
 
             <!-- 嵌入圖片C4：性能提升效益對比圖 -->
             <div style="text-align: center;">
-                <img class="section-img" src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/63a9f0f922074532a7ab4c5c9dcf8d5d.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=20260202104939DD10B7447BB45735EC8F&amp;rrcfp=8a172a1a&amp;x-expires=1770605379&amp;x-signature=b2zenLRfgVW7qHWVhfkAOQc8KDo%3D" alt="活力旺土雞性能提升效益對比圖" />
-                <p class="img-caption">圖2：活力旺土雞性能提升效益對比｜增重+5-8%、料肉比-3-5%、成活率+2-3%</p>
+                <img class="section-img" src="assets/native-chicken-performance-improvement.jpg" alt="活力旺土雞性能提升效益對比圖" />
+                <p class="img-caption" data-translate="caption2">圖2：活力旺土雞性能提升效益對比｜增重+5-8%、料肉比-3-5%、成活率+2-3%</p>
             </div>
         </section>
 
         <!-- Economic Analysis -->
-        <section>
-            <h2>經濟效益分析｜每隻土雞淨利提升</h2>
+        <section id="economic-analysis">
+            <h2 data-translate="section3_title">經濟效益分析｜每隻土雞淨利提升</h2>
             
             <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 20px; border-radius: 10px; margin-bottom: 25px; border-left: 4px solid var(--primary);">
-                <p><strong>計算基準：</strong>土雞飼養週期16週(112天)｜出欄體重2.45kg→2.62kg｜料肉比3.45→3.32｜成活率95%→97.5%｜土雞批發價120元/公斤｜每隻雞總採食量12.32公斤</p>
+                <p data-translate="calculation_basis"><strong>計算基準：</strong>土雞飼養週期16週(112天)｜出欄體重2.45kg→2.62kg｜料肉比3.45→3.32｜成活率95%→97.5%｜土雞批發價120元/公斤｜每隻雞總採食量12.32公斤</p>
             </div>
             
             <div class="economic-card">
                 <table class="profit-table">
                     <thead>
                         <tr>
-                            <<th>效益項目</</th>
-                            <<th>改善幅度</</th>
-                            <<th>每隻雞經濟價值(NTD)</</th>
+                            <th data-translate="table_header1">效益項目</th>
+                            <th data-translate="table_header2">改善幅度</th>
+                            <th data-translate="table_header3">每隻雞經濟價值(NTD)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>增重收益提升(0.17kg×120元/kg)</td>
-                            <td>+5-8%體重</td>
-                            <td>+20.40</td>
+                            <td data-translate="table_row1_col1">增重收益提升(0.17kg×120元/kg)</td>
+                            <td data-translate="table_row1_col2">+5-8%體重</td>
+                            <td data-value="20.40" data-translate="table_row1_col3">+20.40</td>
                         </tr>
                         <tr>
-                            <td>飼料成本節省(0.13kg×15元/kg)</td>
-                            <td>-3-5%料肉比</td>
-                            <td>+1.95</td>
+                            <td data-translate="table_row2_col1">飼料成本節省(0.13kg×15元/kg)</td>
+                            <td data-translate="table_row2_col2">-3-5%料肉比</td>
+                            <td data-value="1.95" data-translate="table_row2_col3">+1.95</td>
                         </tr>
                         <tr>
-                            <td>成活率提升(2.5%×200元/隻)</td>
-                            <td>+2-3%成活率</td>
-                            <td>+5.00</td>
+                            <td data-translate="table_row3_col1">成活率提升(2.5%×200元/隻)</td>
+                            <td data-translate="table_row3_col2">+2-3%成活率</td>
+                            <td data-value="5.00" data-translate="table_row3_col3">+5.00</td>
                         </tr>
                         <tr>
-                            <td>羽毛品質溢價</td>
-                            <td>屠體評分+15%</td>
-                            <td>+3.00</td>
+                            <td data-translate="table_row4_col1">羽毛品質溢價</td>
+                            <td data-translate="table_row4_col2">屠體評分+15%</td>
+                            <td data-value="3.00" data-translate="table_row4_col3">+3.00</td>
                         </tr>
                         <tr>
-                            <td><strong>總效益增加</strong></td>
+                            <td data-translate="table_row5_col1"><strong>總效益增加</strong></td>
                             <td>&mdash;</td>
-                            <td><strong>+30.35</strong></td>
+                            <td data-value="30.35" data-translate="table_row5_col3"><strong>+30.35</strong></td>
                         </tr>
                         <tr>
-                            <td>飼料添加成本增加</td>
-                            <td>12.32kg×0.6元/kg</td>
-                            <td>-7.39</td>
+                            <td data-translate="table_row6_col1">飼料添加成本增加</td>
+                            <td data-translate="table_row6_col2">12.32kg×0.6元/kg</td>
+                            <td data-value="7.39" data-translate="table_row6_col3">-7.39</td>
                         </tr>
                         <tr class="total-row">
-                            <td>每隻土雞淨利潤增加</td>
-                            <td>+22.96</td>
-                            <td>+22.96</td>
+                            <td data-translate="table_row7_col1">每隻土雞淨利潤增加</td>
+                            <td data-translate="table_row7_col2">+22.96</td>
+                            <td data-value="22.96" data-translate="table_row7_col3">+22.96</td>
                         </tr>
                     </tbody>
                 </table>
                 
                 <div class="roi-badge">
-                    <div>每隻土雞投資報酬率 (ROI)</div>
-                    <div class="roi-value">310%</div>
-                    <div class="roi-label">每投入1元，創造4.1元淨收益｜投資回收期 &lt;7天</div>
+                    <div data-translate="roi_label1">每隻土雞投資報酬率 (ROI)</div>
+                    <div class="roi-value" data-translate="roi_value">310%</div>
+                    <div class="roi-label" data-translate="roi_label2">每投入1元，創造4.1元淨收益｜投資回收期 &lt;7天</div>
                 </div>
             </div>
 
             <!-- 嵌入圖片C3：ROI經濟效益分析圖 -->
             <div style="text-align: center;">
-                <img class="section-img" src="https://p26-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/2156bf019d99472888b51a69f9d162f3.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=20260202104939DD10B7447BB45735EC8F&amp;rrcfp=8a172a1a&amp;x-expires=1770605379&amp;x-signature=vfC%2BNSyHG6b0ReC4OGDPNQP%2FzyE%3D" alt="活力旺土雞投資報酬率(ROI)分析圖" />
-                <p class="img-caption">圖3：活力旺土雞投資報酬率分析｜每隻淨利+22.96元、ROI達310%</p>
+                <img class="section-img" src="assets/native-chicken-roi-analysis.jpg" alt="活力旺土雞投資報酬率(ROI)分析圖" />
+                <p class="img-caption" data-translate="caption3">圖3：活力旺土雞投資報酬率分析｜每隻淨利+22.96元、ROI達310%</p>
             </div>
             
             <div style="background: #fff8e1; padding: 18px; border-radius: 10px; margin-top: 20px; border-left: 4px solid var(--accent);">
-                <p><strong>萬隻土雞場年度效益：</strong>每批次淨利增加229,600元｜年出欄3批次總計增加688,800元｜飼料添加總成本僅增加73,920元</p>
+                <p data-translate="farm_benefit"><strong>萬隻土雞場年度效益：</strong>每批次淨利增加229,600元｜年出欄3批次總計增加688,800元｜飼料添加總成本僅增加73,920元</p>
             </div>
         </section>
 
         <!-- Technology Mechanism -->
-        <section>
-            <h2>🔬 核心技術機制｜三層協同作用</h2>
+        <section id="tech-mechanism">
+            <h2>🔬 <span data-translate="section4_title">核心技術機制｜三層協同作用</span></h2>
             
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <h4>精密複合酶製劑</h4>
-                    <p><strong>作用：</strong>提升蛋白質、氨基酸吸收效率18%</p>
-                    <p><strong>效益：</strong>降低料肉比，減少糞便氮排放，改善舍內環境</p>
+                    <h4 data-translate="tech1_title">精密複合酶製劑</h4>
+                    <p data-translate="tech1_desc1"><strong>作用：</strong>提升蛋白質、氨基酸吸收效率18%</p>
+                    <p data-translate="tech1_desc2"><strong>效益：</strong>降低料肉比，減少糞便氮排放，改善舍內環境</p>
                     <div style="margin-top: 10px; padding: 10px; background: #e3f2fd; border-radius: 6px; font-size: 14px;">
-                        <strong>科學依據：</strong>《Poultry Science》研究證實，複合酶製劑可提升土雞飼料轉化率4.2%(Chen et al., 2023)
+                        <strong data-translate="science_basis">科學依據：</strong><span data-translate="tech1_reference">《Poultry Science》研究證實，複合酶製劑可提升土雞飼料轉化率4.2%(Chen et al., 2023)</span>
                     </div>
                 </div>
                 
                 <div class="benefit-card">
-                    <h4>免疫調控肽</h4>
-                    <p><strong>作用：</strong>激活Nrf2/ARE抗氧化通路，提升SOD活性30%</p>
-                    <p><strong>效益：</strong>降低腹水症發生率，提高全程成活率，減少藥物使用</p>
+                    <h4 data-translate="tech2_title">免疫調控肽</h4>
+                    <p data-translate="tech2_desc1"><strong>作用：</strong>激活Nrf2/ARE抗氧化通路，提升SOD活性30%</p>
+                    <p data-translate="tech2_desc2"><strong>效益：</strong>降低腹水症發生率，提高全程成活率，減少藥物使用</p>
                     <div style="margin-top: 10px; padding: 10px; background: #e8f5e9; border-radius: 6px; font-size: 14px;">
-                        <strong>科學依據：</strong>《Veterinary Immunology》證實免疫肽可降低土雞呼吸道疾病發生率25%(Wang et al., 2022)
+                        <strong data-translate="science_basis">科學依據：</strong><span data-translate="tech2_reference">《Veterinary Immunology》證實免疫肽可降低土雞呼吸道疾病發生率25%(Wang et al., 2022)</span>
                     </div>
                 </div>
                 
                 <div class="benefit-card">
-                    <h4>代謝調控複方</h4>
-                    <p><strong>成分：</strong>小核酸肽 + 褐藻素</p>
-                    <p><strong>效益：</strong>小核酸肽促進肌肉生長；褐藻素改善羽毛色素沉著與光澤</p>
+                    <h4 data-translate="tech3_title">代謝調控複方</h4>
+                    <p data-translate="tech3_desc1"><strong>成分：</strong>小核酸肽 + 褐藻素</p>
+                    <p data-translate="tech3_desc2"><strong>效益：</strong>小核酸肽促進肌肉生長；褐藻素改善羽毛色素沉著與光澤</p>
                     <div style="margin-top: 10px; padding: 10px; background: #fff8e1; border-radius: 6px; font-size: 14px;">
-                        <strong>科學依據：</strong>《Animal Feed Science》研究顯示褐藻素可提升土雞屠體評分18%(Liu et al., 2023)
+                        <strong data-translate="science_basis">科學依據：</strong><span data-translate="tech3_reference">《Animal Feed Science》研究顯示褐藻素可提升土雞屠體評分18%(Liu et al., 2023)</span>
                     </div>
                 </div>
             </div>
 
             <!-- 嵌入圖片C2：核心技術機制示意圖 -->
             <div style="text-align: center;">
-                <img class="section-img" src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/9f493beb2e4342378adaa8b5e2ca35ac.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=20260202104939DD10B7447BB45735EC8F&amp;rrcfp=8a172a1a&amp;x-expires=1770605379&amp;x-signature=Z5YuT66P1HV5AFARkLYagpiqZdw%3D" alt="活力旺核心技術三層協同作用機制圖" />
-                <p class="img-caption">圖4：活力旺核心技術三層協同作用｜消化吸收、免疫調控、代謝優化</p>
+                <img class="section-img" src="assets/native-chicken-tech-mechanism.jpg" alt="活力旺核心技術三層協同作用機制圖" />
+                <p class="img-caption" data-translate="caption4">圖4：活力旺核心技術三層協同作用｜消化吸收、免疫調控、代謝優化</p>
             </div>
         </section>
 
         <!-- Implementation Plan -->
-        <section>
-            <h2>✅ 三階段導入方案｜低風險驗證</h2>
+        <section id="implementation">
+            <h2>✅ <span data-translate="section5_title">三階段導入方案｜低風險驗證</span></h2>
             
             <div class="usage-steps">
                 <div class="step-card" data-step="1">
-                    <h4>小群驗證(2週)</h4>
-                    <p><strong>規模：</strong>200隻土雞</p>
-                    <p><strong>投入成本：</strong><span class="cost-highlight">NTD 1,478</span></p>
-                    <p><strong>驗證指標：</strong>採食量、糞便形態、精神狀態觀察</p>
+                    <h4 data-translate="stage1_title">小群驗證(2週)</h4>
+                    <p data-translate="stage1_desc1"><strong>規模：</strong>200隻土雞</p>
+                    <p data-translate="stage1_desc2"><strong>投入成本：</strong><span class="cost-highlight" data-value="1478" data-translate="stage1_cost">NTD 1,478</span></p>
+                    <p data-translate="stage1_desc3"><strong>驗證指標：</strong>採食量、糞便形態、精神狀態觀察</p>
                 </div>
                 
                 <div class="step-card" data-step="2">
-                    <h4>批次驗證(8週)</h4>
-                    <p><strong>規模：</strong>1,000隻土雞</p>
-                    <p><strong>投入成本：</strong><span class="cost-highlight">NTD 7,392</span></p>
-                    <p><strong>驗證指標：</strong>體重抽測、料肉比計算、成活率統計</p>
+                    <h4 data-translate="stage2_title">批次驗證(8週)</h4>
+                    <p data-translate="stage2_desc1"><strong>規模：</strong>1,000隻土雞</p>
+                    <p data-translate="stage2_desc2"><strong>投入成本：</strong><span class="cost-highlight" data-value="7392" data-translate="stage2_cost">NTD 7,392</span></p>
+                    <p data-translate="stage2_desc3"><strong>驗證指標：</strong>體重抽測、料肉比計算、成活率統計</p>
                 </div>
                 
                 <div class="step-card" data-step="3">
-                    <h4>全場導入(持續)</h4>
-                    <p><strong>規模：</strong>全場土雞</p>
-                    <p><strong>投入成本：</strong>每萬隻雞/批次 NTD 73,920</p>
-                    <p><strong>核心效益：</strong>每萬隻雞淨利增加229,600元</p>
+                    <h4 data-translate="stage3_title">全場導入(持續)</h4>
+                    <p data-translate="stage3_desc1"><strong>規模：</strong>全場土雞</p>
+                    <p data-translate="stage3_desc2"><strong>投入成本：</strong><span data-translate="stage3_cost1">每萬隻雞/批次 NTD 73,920</span></p>
+                    <p data-translate="stage3_desc3"><strong>核心效益：</strong>每萬隻雞淨利增加229,600元</p>
                 </div>
             </div>
             
             <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 18px; border-radius: 10px; margin-top: 20px; border-left: 4px solid var(--secondary);">
-                <p><strong>技術支援：</strong>首池提供全程技術指導，包括添加比例校準、效果追蹤、數據分析，確保效益最大化。</p>
+                <p data-translate="tech_support"><strong>技術支援：</strong>首池提供全程技術指導，包括添加比例校準、效果追蹤、數據分析，確保效益最大化。</p>
             </div>
         </section>
 
         <!-- Traditional vs Innovative -->
-        <section>
-            <h2>🔄 傳統飼養 vs 活力旺方案</h2>
+        <section id="comparison">
+            <h2>🔄 <span data-translate="section6_title">傳統飼養 vs 活力旺方案</span></h2>
             
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <<th>評估項目</</th>
-                        <<th class="traditional">傳統飼養模式</</th>
-                        <<th class="innovative">活力旺方案</</th>
+                        <th data-translate="comparison_header1">評估項目</th>
+                        <th class="traditional" data-translate="comparison_header2">傳統飼養模式</th>
+                        <th class="innovative" data-translate="comparison_header3">活力旺方案</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>飼料成本思維</strong></td>
-                        <td class="traditional">追求飼料最低單價</td>
-                        <td class="innovative">追求每隻雞最高淨利潤</td>
+                        <td data-translate="comparison1_col1"><strong>飼料成本思維</strong></td>
+                        <td class="traditional" data-translate="comparison1_col2">追求飼料最低單價</td>
+                        <td class="innovative" data-translate="comparison1_col3">追求每隻雞最高淨利潤</td>
                     </tr>
                     <tr>
-                        <td><strong>增重效率</strong></td>
-                        <td class="traditional">依賴品種遺傳潛力</td>
-                        <td class="innovative">科學激活生長潛能+5-8%</td>
+                        <td data-translate="comparison2_col1"><strong>增重效率</strong></td>
+                        <td class="traditional" data-translate="comparison2_col2">依賴品種遺傳潛力</td>
+                        <td class="innovative" data-translate="comparison2_col3">科學激活生長潛能+5-8%</td>
                     </tr>
                     <tr>
-                        <td><strong>成活率管理</strong></td>
-                        <td class="traditional">依賴藥物預防疾病</td>
-                        <td class="innovative">免疫調控提升自身抵抗力</td>
+                        <td data-translate="comparison3_col1"><strong>成活率管理</strong></td>
+                        <td class="traditional" data-translate="comparison3_col2">依賴藥物預防疾病</td>
+                        <td class="innovative" data-translate="comparison3_col3">免疫調控提升自身抵抗力</td>
                     </tr>
                     <tr>
-                        <td><strong>產品競爭力</strong></td>
-                        <td class="traditional">同質化嚴重，價格競爭</td>
-                        <td class="innovative">羽毛光澤、體型均勻，品牌溢價</td>
+                        <td data-translate="comparison4_col1"><strong>產品競爭力</strong></td>
+                        <td class="traditional" data-translate="comparison4_col2">同質化嚴重，價格競爭</td>
+                        <td class="innovative" data-translate="comparison4_col3">羽毛光澤、體型均勻，品牌溢價</td>
                     </tr>
                     <tr>
-                        <td><strong>環境影響</strong></td>
-                        <td class="traditional">糞便氮含量高，環保壓力大</td>
-                        <td class="innovative">降低氮排放15%，綠色養殖</td>
+                        <td data-translate="comparison5_col1"><strong>環境影響</strong></td>
+                        <td class="traditional" data-translate="comparison5_col2">糞便氮含量高，環保壓力大</td>
+                        <td class="innovative" data-translate="comparison5_col3">降低氮排放15%，綠色養殖</td>
                     </tr>
                 </tbody>
             </table>
 
             <!-- 嵌入圖片C1：傳統vs創新方案對比圖 -->
             <div style="text-align: center;">
-                <img class="section-img" src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/776bd2d716f64c20bd8ab79541961bb3.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&amp;rcl=20260202104939DD10B7447BB45735EC8F&amp;rrcfp=8a172a1a&amp;x-expires=1770605379&amp;x-signature=aUeCmSTQ7lc8FdRCqz6D4SEZjGk%3D" alt="傳統飼養 vs 活力旺方案對比圖" />
-                <p class="img-caption">圖5：傳統飼養 vs 活力旺方案｜養殖模式轉型帶來價值提升</p>
+                <img class="section-img" src="assets/native-chicken-traditional-vs-innovative.jpg" alt="傳統飼養 vs 活力旺方案對比圖" />
+                <p class="img-caption" data-translate="caption5">圖5：傳統飼養 vs 活力旺方案｜養殖模式轉型帶來價值提升</p>
             </div>
         </section>
 
         <!-- CTA Section -->
         <section class="cta-section">
-            <h2>🚀 立即提升土雞養殖獲利能力</h2>
+            <h2>🚀 <span data-translate="cta_title">立即提升土雞養殖獲利能力</span></h2>
             
-            <div class="big-number">+22.96</div>
-            <p>每隻土雞淨利潤增加(NTD)</p>
+            <div class="big-number" data-value="22.96" data-translate="cta_big_number1">+22.96</div>
+            <p data-translate="cta_desc1">每隻土雞淨利潤增加(NTD)</p>
             
-            <div class="big-number">310%</div>
-            <p>投資報酬率(ROI)</p>
+            <div class="big-number" data-translate="cta_big_number2">310%</div>
+            <p data-translate="cta_desc2">投資報酬率(ROI)</p>
             
-            <div class="highlight-text">萬隻土雞場年增淨利潤 68.88 萬元</div>
-            <div class="highlight-text">飼料添加成本僅增加 7.39 萬元</div>
+            <div class="highlight-text" data-translate="cta_highlight1">萬隻土雞場年增淨利潤 68.88 萬元</div>
+            <div class="highlight-text" data-translate="cta_highlight2">飼料添加成本僅增加 7.39 萬元</div>
             
             <div class="cta-buttons">
-                <a class="btn btn-primary" href="#">📞 立即技術諮詢</a>
-                <a class="btn btn-secondary" href="#">📋 獲取試用方案</a>
+                <a class="btn btn-primary" href="#" data-translate="cta_btn1">📞 立即技術諮詢</a>
+                <a class="btn btn-secondary" href="#" data-translate="cta_btn2">📋 獲取試用方案</a>
             </div>
         </section>
 
         <!-- Footer -->
         <footer>
             <div class="footer-content">
-                <p><strong>首池有限公司</strong>｜精密營養 &times; 生物技術 &times; 永續畜牧</p>
-                <p>本技術資料表數據基於台灣土雞養殖場實測結果，實際效果因管理條件略有差異</p>
-                <p>&copy; 2024 首池有限公司 版權所有｜本技術資料內容為商業機密，未經授權禁止轉載</p>
+                <p data-translate="footer_company"><strong>首池有限公司</strong>｜精密營養 &times; 生物技術 &times; 永續畜牧</p>
+                <p data-translate="footer_disclaimer">本技術資料表數據基於台灣土雞養殖場實測結果，實際效果因管理條件略有差異</p>
+                <p class="copyright" data-translate="footer_copyright">&copy; 2024 首池有限公司 版權所有｜本技術資料內容為商業機密，未經授權禁止轉載</p>
             </div>
         </footer>
     </div>
+
+    <script>
+        // 多語言翻譯數據
+        const translations = {
+            'zh-TW': {
+                // 標題和副標題
+                'title': '活力旺土雞性能提升方案 TDS',
+                'subtitle': '紅羽/黑羽土雞專用｜增重提速・料肉比優化・羽毛光澤提升',
+                'tagline': 'Precision Nutrition · Advanced Biotechnology · Sustainable Poultry Farming',
+                'tds_badge': 'Technical Data Sheet｜技術資料表',
+                
+                // 圖片說明
+                'caption1': '圖1：活力旺產品添加比例示意圖｜每噸飼料添加1公斤活力旺',
+                'caption2': '圖2：活力旺土雞性能提升效益對比｜增重+5-8%、料肉比-3-5%、成活率+2-3%',
+                'caption3': '圖3：活力旺土雞投資報酬率分析｜每隻淨利+22.96元、ROI達310%',
+                'caption4': '圖4：活力旺核心技術三層協同作用｜消化吸收、免疫調控、代謝優化',
+                'caption5': '圖5：傳統飼養 vs 活力旺方案｜養殖模式轉型帶來價值提升',
+                
+                // 產品規格
+                'section1_title': '產品規格與添加參數',
+                'spec1_label': '每噸飼料添加量',
+                'spec1_unit': '公斤/噸',
+                'spec2_label': '產品單價',
+                'spec2_unit': 'NTD/公斤',
+                'spec3_label': '每噸飼料成本增加',
+                'spec3_unit': 'NTD/噸',
+                'spec4_label': '日採食量(土雞)',
+                'spec4_unit': '公斤/隻/天',
+                'spec5_label': '每隻雞日成本增加',
+                'spec5_unit': 'NTD/隻/天',
+                'spec6_label': '適用對象',
+                'spec6_value': '紅羽/黑羽土雞',
+                'spec6_unit': '全程飼養',
+                'usage_method': '使用方法：每噸全價飼料均勻添加活力旺1公斤，與預混料充分混合後使用。適用於紅羽/黑羽土雞全程飼養階段，無需調整飼養管理流程。',
+                
+                // 核心效益
+                'section2_title': '核心效益｜土雞性能全面提升',
+                'benefit1_title': '增重效率提升',
+                'benefit1_improvement': '+5-8%',
+                'benefit1_desc': '小核酸肽促進肌肉蛋白合成，提高飼料轉化效率，出欄體重顯著增加',
+                'benefit1_data': '實測數據：16週齡出欄體重從2.45kg提升至2.60-2.65kg',
+                'benefit2_title': '料肉比優化',
+                'benefit2_improvement': '-3-5%',
+                'benefit2_desc': '精密複合酶提升營養吸收率18%，降低飼料浪費，每公斤增重節省飼料',
+                'benefit2_data': '實測數據：料肉比從3.45:1優化至3.30-3.35:1',
+                'benefit3_title': '成活率提升',
+                'benefit3_improvement': '+2-3%',
+                'benefit3_desc': '免疫調控肽+褐藻素強化免疫系統，降低腹水症、呼吸道疾病發生率',
+                'benefit3_data': '實測數據：全程成活率從95%提升至97-98%',
+                'benefit4_title': '羽毛品質改善',
+                'benefit4_improvement': '顯著提升',
+                'benefit4_desc': '褐藻素提供天然色素與抗氧化物質，羽毛緊實光澤，減少啄羽行為',
+                'benefit4_data': '實測數據：屠體評分提升15%，市場溢價能力增強',
+                
+                // 經濟效益
+                'section3_title': '經濟效益分析｜每隻土雞淨利提升',
+                'calculation_basis': '計算基準：土雞飼養週期16週(112天)｜出欄體重2.45kg→2.62kg｜料肉比3.45→3.32｜成活率95%→97.5%｜土雞批發價120元/公斤｜每隻雞總採食量12.32公斤',
+                'table_header1': '效益項目',
+                'table_header2': '改善幅度',
+                'table_header3': '每隻雞經濟價值(NTD)',
+                'table_row1_col1': '增重收益提升(0.17kg×120元/kg)',
+                'table_row1_col2': '+5-8%體重',
+                'table_row1_col3': '+20.40',
+                'table_row2_col1': '飼料成本節省(0.13kg×15元/kg)',
+                'table_row2_col2': '-3-5%料肉比',
+                'table_row2_col3': '+1.95',
+                'table_row3_col1': '成活率提升(2.5%×200元/隻)',
+                'table_row3_col2': '+2-3%成活率',
+                'table_row3_col3': '+5.00',
+                'table_row4_col1': '羽毛品質溢價',
+                'table_row4_col2': '屠體評分+15%',
+                'table_row4_col3': '+3.00',
+                'table_row5_col1': '總效益增加',
+                'table_row5_col3': '+30.35',
+                'table_row6_col1': '飼料添加成本增加',
+                'table_row6_col2': '12.32kg×0.6元/kg',
+                'table_row6_col3': '-7.39',
+                'table_row7_col1': '每隻土雞淨利潤增加',
+                'table_row7_col2': '+22.96',
+                'table_row7_col3': '+22.96',
+                'roi_label1': '每隻土雞投資報酬率 (ROI)',
+                'roi_value': '310%',
+                'roi_label2': '每投入1元，創造4.1元淨收益｜投資回收期 <7天',
+                'farm_benefit': '萬隻土雞場年度效益：每批次淨利增加229,600元｜年出欄3批次總計增加688,800元｜飼料添加總成本僅增加73,920元',
+                
+                // 技術機制
+                'section4_title': '核心技術機制｜三層協同作用',
+                'tech1_title': '精密複合酶製劑',
+                'tech1_desc1': '作用：提升蛋白質、氨基酸吸收效率18%',
+                'tech1_desc2': '效益：降低料肉比，減少糞便氮排放，改善舍內環境',
+                'tech2_title': '免疫調控肽',
+                'tech2_desc1': '作用：激活Nrf2/ARE抗氧化通路，提升SOD活性30%',
+                'tech2_desc2': '效益：降低腹水症發生率，提高全程成活率，減少藥物使用',
+                'tech3_title': '代謝調控複方',
+                'tech3_desc1': '成分：小核酸肽 + 褐藻素',
+                'tech3_desc2': '效益：小核酸肽促進肌肉生長；褐藻素改善羽毛色素沉著與光澤',
+                'science_basis': '科學依據：',
+                'tech1_reference': '《Poultry Science》研究證實，複合酶製劑可提升土雞飼料轉化率4.2%(Chen et al., 2023)',
+                'tech2_reference': '《Veterinary Immunology》證實免疫肽可降低土雞呼吸道疾病發生率25%(Wang et al., 2022)',
+                'tech3_reference': '《Animal Feed Science》研究顯示褐藻素可提升土雞屠體評分18%(Liu et al., 2023)',
+                
+                // 實施方案
+                'section5_title': '三階段導入方案｜低風險驗證',
+                'stage1_title': '小群驗證(2週)',
+                'stage1_desc1': '規模：200隻土雞',
+                'stage1_desc2': '投入成本：NTD 1,478',
+                'stage1_desc3': '驗證指標：採食量、糞便形態、精神狀態觀察',
+                'stage2_title': '批次驗證(8週)',
+                'stage2_desc1': '規模：1,000隻土雞',
+                'stage2_desc2': '投入成本：NTD 7,392',
+                'stage2_desc3': '驗證指標：體重抽測、料肉比計算、成活率統計',
+                'stage3_title': '全場導入(持續)',
+                'stage3_desc1': '規模：全場土雞',
+                'stage3_desc2': '投入成本：每萬隻雞/批次 NTD 73,920',
+                'stage3_desc3': '核心效益：每萬隻雞淨利增加229,600元',
+                'tech_support': '技術支援：首池提供全程技術指導，包括添加比例校準、效果追蹤、數據分析，確保效益最大化。',
+                
+                // 對比表格
+                'section6_title': '傳統飼養 vs 活力旺方案',
+                'comparison_header1': '評估項目',
+                'comparison_header2': '傳統飼養模式',
+                'comparison_header3': '活力旺方案',
+                'comparison1_col1': '飼料成本思維',
+                'comparison1_col2': '追求飼料最低單價',
+                'comparison1_col3': '追求每隻雞最高淨利潤',
+                'comparison2_col1': '增重效率',
+                'comparison2_col2': '依賴品種遺傳潛力',
+                'comparison2_col3': '科學激活生長潛能+5-8%',
+                'comparison3_col1': '成活率管理',
+                'comparison3_col2': '依賴藥物預防疾病',
+                'comparison3_col3': '免疫調控提升自身抵抗力',
+                'comparison4_col1': '產品競爭力',
+                'comparison4_col2': '同質化嚴重，價格競爭',
+                'comparison4_col3': '羽毛光澤、體型均勻，品牌溢價',
+                'comparison5_col1': '環境影響',
+                'comparison5_col2': '糞便氮含量高，環保壓力大',
+                'comparison5_col3': '降低氮排放15%，綠色養殖',
+                
+                // CTA部分
+                'cta_title': '立即提升土雞養殖獲利能力',
+                'cta_big_number1': '+22.96',
+                'cta_desc1': '每隻土雞淨利潤增加(NTD)',
+                'cta_big_number2': '310%',
+                'cta_desc2': '投資報酬率(ROI)',
+                'cta_highlight1': '萬隻土雞場年增淨利潤 68.88 萬元',
+                'cta_highlight2': '飼料添加成本僅增加 7.39 萬元',
+                'cta_btn1': '📞 立即技術諮詢',
+                'cta_btn2': '📋 獲取試用方案',
+                
+                // 頁腳
+                'footer_company': '首池有限公司｜精密營養 &times; 生物技術 &times; 永續畜牧',
+                'footer_disclaimer': '本技術資料表數據基於台灣土雞養殖場實測結果，實際效果因管理條件略有差異',
+                'footer_copyright': '© 2024 首池有限公司 版權所有｜本技術資料內容為商業機密，未經授權禁止轉載'
+            },
+            'zh-CN': {
+                // 標題和副標題
+                'title': '活力旺土鸡性能提升方案 TDS',
+                'subtitle': '红羽/黑羽土鸡专用｜增重提速・料肉比优化・羽毛光泽提升',
+                'tagline': '精准营养 · 先进生物技术 · 可持续家禽养殖',
+                'tds_badge': '技术资料表｜Technical Data Sheet',
+                
+                // 圖片說明
+                'caption1': '图1：活力旺产品添加比例示意图｜每吨饲料添加1公斤活力旺',
+                'caption2': '图2：活力旺土鸡性能提升效益对比｜增重+5-8%、料肉比-3-5%、成活率+2-3%',
+                'caption3': '图3：活力旺土鸡投资报酬率分析｜每只净利+22.96元、ROI达310%',
+                'caption4': '图4：活力旺核心技术三层协同作用｜消化吸收、免疫调控、代谢优化',
+                'caption5': '图5：传统饲养 vs 活力旺方案｜养殖模式转型带来价值提升',
+                
+                // 產品規格
+                'section1_title': '产品规格与添加参数',
+                'spec1_label': '每吨饲料添加量',
+                'spec1_unit': '公斤/吨',
+                'spec2_label': '产品单价',
+                'spec2_unit': 'CNY/公斤',
+                'spec3_label': '每吨饲料成本增加',
+                'spec3_unit': 'CNY/吨',
+                'spec4_label': '日采食量(土鸡)',
+                'spec4_unit': '公斤/只/天',
+                'spec5_label': '每只鸡日成本增加',
+                'spec5_unit': 'CNY/只/天',
+                'spec6_label': '适用对象',
+                'spec6_value': '红羽/黑羽土鸡',
+                'spec6_unit': '全程饲养',
+                'usage_method': '使用方法：每吨全价饲料均匀添加活力旺1公斤，与预混料充分混合后使用。适用于红羽/黑羽土鸡全程饲养阶段，无需调整饲养管理流程。',
+                
+                // 核心效益
+                'section2_title': '核心效益｜土鸡性能全面提升',
+                'benefit1_title': '增重效率提升',
+                'benefit1_improvement': '+5-8%',
+                'benefit1_desc': '小核酸肽促进肌肉蛋白合成，提高饲料转化效率，出栏体重显著增加',
+                'benefit1_data': '实测数据：16周龄出栏体重从2.45kg提升至2.60-2.65kg',
+                'benefit2_title': '料肉比优化',
+                'benefit2_improvement': '-3-5%',
+                'benefit2_desc': '精密复合酶提升营养吸收率18%，降低饲料浪费，每公斤增重节省饲料',
+                'benefit2_data': '实测数据：料肉比从3.45:1优化至3.30-3.35:1',
+                'benefit3_title': '成活率提升',
+                'benefit3_improvement': '+2-3%',
+                'benefit3_desc': '免疫调控肽+褐藻素强化免疫系统，降低腹水症、呼吸道疾病发生率',
+                'benefit3_data': '实测数据：全程成活率从95%提升至97-98%',
+                'benefit4_title': '羽毛品质改善',
+                'benefit4_improvement': '显著提升',
+                'benefit4_desc': '褐藻素提供天然色素与抗氧化物质，羽毛紧实光泽，减少啄羽行为',
+                'benefit4_data': '实测数据：屠体评分提升15%，市场溢价能力增强',
+                
+                // 經濟效益
+                'section3_title': '经济效益分析｜每只土鸡净利提升',
+                'calculation_basis': '计算基准：土鸡饲养周期16周(112天)｜出栏体重2.45kg→2.62kg｜料肉比3.45→3.32｜成活率95%→97.5%｜土鸡批发价26.3元/公斤｜每只鸡总采食量12.32公斤',
+                'table_header1': '效益项目',
+                'table_header2': '改善幅度',
+                'table_header3': '每只鸡经济价值(CNY)',
+                'table_row1_col1': '增重收益提升(0.17kg×26.3元/kg)',
+                'table_row1_col2': '+5-8%体重',
+                'table_row1_col3': '+4.47',
+                'table_row2_col1': '饲料成本节省(0.13kg×3.29元/kg)',
+                'table_row2_col2': '-3-5%料肉比',
+                'table_row2_col3': '+0.43',
+                'table_row3_col1': '成活率提升(2.5%×43.84元/只)',
+                'table_row3_col2': '+2-3%成活率',
+                'table_row3_col3': '+1.10',
+                'table_row4_col1': '羽毛品质溢价',
+                'table_row4_col2': '屠体评分+15%',
+                'table_row4_col3': '+0.66',
+                'table_row5_col1': '总效益增加',
+                'table_row5_col3': '+6.66',
+                'table_row6_col1': '饲料添加成本增加',
+                'table_row6_col2': '12.32kg×0.1315元/kg',
+                'table_row6_col3': '-1.62',
+                'table_row7_col1': '每只土鸡净利润增加',
+                'table_row7_col2': '+5.03',
+                'table_row7_col3': '+5.03',
+                'roi_label1': '每只土鸡投资报酬率 (ROI)',
+                'roi_value': '310%',
+                'roi_label2': '每投入1元，创造4.1元净收益｜投资回收期 <7天',
+                'farm_benefit': '万只土鸡场年度效益：每批次净利润增加50,300元｜年出栏3批次总计增加150,900元｜饲料添加总成本仅增加16,200元',
+                
+                // 技術機制
+                'section4_title': '核心技术机制｜三层协同作用',
+                'tech1_title': '精密复合酶制剂',
+                'tech1_desc1': '作用：提升蛋白质、氨基酸吸收效率18%',
+                'tech1_desc2': '效益：降低料肉比，减少粪便氮排放，改善舍内环境',
+                'tech2_title': '免疫调控肽',
+                'tech2_desc1': '作用：激活Nrf2/ARE抗氧化通路，提升SOD活性30%',
+                'tech2_desc2': '效益：降低腹水症发生率，提高全程成活率，减少药物使用',
+                'tech3_title': '代谢调控复方',
+                'tech3_desc1': '成分：小核酸肽 + 褐藻素',
+                'tech3_desc2': '效益：小核酸肽促进肌肉生长；褐藻素改善羽毛色素沉着与光泽',
+                'science_basis': '科学依据：',
+                'tech1_reference': '《Poultry Science》研究证实，复合酶制剂可提升土鸡饲料转化率4.2%(Chen et al., 2023)',
+                'tech2_reference': '《Veterinary Immunology》证实免疫肽可降低土鸡呼吸道疾病发生率25%(Wang et al., 2022)',
+                'tech3_reference': '《Animal Feed Science》研究显示褐藻素可提升土鸡屠体评分18%(Liu et al., 2023)',
+                
+                // 實施方案
+                'section5_title': '三阶段导入方案｜低风险验证',
+                'stage1_title': '小群验证(2周)',
+                'stage1_desc1': '规模：200只土鸡',
+                'stage1_desc2': '投入成本：CNY 324',
+                'stage1_desc3': '验证指标：采食量、粪便形态、精神状态观察',
+                'stage2_title': '批次验证(8周)',
+                'stage2_desc1': '规模：1,000只土鸡',
+                'stage2_desc2': '投入成本：CNY 1,620',
+                'stage2_desc3': '验证指标：体重抽测、料肉比计算、成活率统计',
+                'stage3_title': '全场导入(持续)',
+                'stage3_desc1': '规模：全场土鸡',
+                'stage3_desc2': '投入成本：每万只鸡/批次 CNY 16,200',
+                'stage3_desc3': '核心效益：每万只鸡净利润增加50,300元',
+                'tech_support': '技术支持：首池提供全程技术指导，包括添加比例校准、效果追踪、数据分析，确保效益最大化。',
+                
+                // 對比表格
+                'section6_title': '传统饲养 vs 活力旺方案',
+                'comparison_header1': '评估项目',
+                'comparison_header2': '传统饲养模式',
+                'comparison_header3': '活力旺方案',
+                'comparison1_col1': '饲料成本思维',
+                'comparison1_col2': '追求饲料最低单价',
+                'comparison1_col3': '追求每只鸡最高净利润',
+                'comparison2_col1': '增重效率',
+                'comparison2_col2': '依赖品种遗传潜力',
+                'comparison2_col3': '科学激活生长潜能+5-8%',
+                'comparison3_col1': '成活率管理',
+                'comparison3_col2': '依赖药物预防疾病',
+                'comparison3_col3': '免疫调控提升自身抵抗力',
+                'comparison4_col1': '产品竞争力',
+                'comparison4_col2': '同质化严重，价格竞争',
+                'comparison4_col3': '羽毛光泽、体型均匀，品牌溢价',
+                'comparison5_col1': '环境影响',
+                'comparison5_col2': '粪便氮含量高，环保压力大',
+                'comparison5_col3': '降低氮排放15%，绿色养殖',
+                
+                // CTA部分
+                'cta_title': '立即提升土鸡养殖获利能力',
+                'cta_big_number1': '+5.03',
+                'cta_desc1': '每只土鸡净利润增加(CNY)',
+                'cta_big_number2': '310%',
+                'cta_desc2': '投资报酬率(ROI)',
+                'cta_highlight1': '万只土鸡场年增净利润 15.09 万元',
+                'cta_highlight2': '饲料添加成本仅增加 1.62 万元',
+                'cta_btn1': '📞 立即技术咨询',
+                'cta_btn2': '📋 获取试用方案',
+                
+                // 頁腳
+                'footer_company': '首池有限公司｜精准营养 &times; 生物技术 &times; 可持续畜牧',
+                'footer_disclaimer': '本技术资料表数据基于台湾土鸡养殖场实测结果，实际效果因管理条件略有差异',
+                'footer_copyright': '© 2024 首池有限公司 版权所有｜本技术资料内容为商业机密，未经授权禁止转载'
+            },
+            'en': {
+                // 標題和副標題
+                'title': 'Vitality Boost Native Chicken Performance Enhancement TDS',
+                'subtitle': 'For Red/Black Feather Native Chickens｜Weight Gain Acceleration・FCR Optimization・Feather Gloss Improvement',
+                'tagline': 'Precision Nutrition · Advanced Biotechnology · Sustainable Poultry Farming',
+                'tds_badge': 'Technical Data Sheet',
+                
+                // 圖片說明
+                'caption1': 'Figure 1: Vitality Boost Product Addition Ratio｜Add 1kg per ton of feed',
+                'caption2': 'Figure 2: Native Chicken Performance Improvement Benefits｜Weight Gain +5-8%、FCR -3-5%、Survival Rate +2-3%',
+                'caption3': 'Figure 3: Native Chicken ROI Analysis｜Net Profit +$0.73 per bird、ROI 310%',
+                'caption4': 'Figure 4: Core Technology Three-layer Synergistic Mechanism｜Digestion & Absorption, Immune Regulation, Metabolic Optimization',
+                'caption5': 'Figure 5: Traditional Farming vs Vitality Boost Program｜Value Enhancement through Farming Model Transformation',
+                
+                // 產品規格
+                'section1_title': 'Product Specifications & Addition Parameters',
+                'spec1_label': 'Addition per ton of feed',
+                'spec1_unit': 'kg/ton',
+                'spec2_label': 'Product Unit Price',
+                'spec2_unit': 'USD/kg',
+                'spec3_label': 'Cost increase per ton of feed',
+                'spec3_unit': 'USD/ton',
+                'spec4_label': 'Daily feed intake (Native chicken)',
+                'spec4_unit': 'kg/bird/day',
+                'spec5_label': 'Daily cost increase per bird',
+                'spec5_unit': 'USD/bird/day',
+                'spec6_label': 'Target Audience',
+                'spec6_value': 'Red/Black Feather Native Chickens',
+                'spec6_unit': 'Full-cycle feeding',
+                'usage_method': 'Usage: Add 1kg of Vitality Boost per ton of complete feed, mix thoroughly with premix. Suitable for full-cycle feeding of red/black feather native chickens, no need to adjust farming management procedures.',
+                
+                // 核心效益
+                'section2_title': 'Core Benefits｜Comprehensive Native Chicken Performance Enhancement',
+                'benefit1_title': 'Weight Gain Efficiency Improvement',
+                'benefit1_improvement': '+5-8%',
+                'benefit1_desc': 'Small nucleic acid peptides promote muscle protein synthesis, improve feed conversion efficiency, significantly increase slaughter weight',
+                'benefit1_data': 'Field data: 16-week slaughter weight increased from 2.45kg to 2.60-2.65kg',
+                'benefit2_title': 'FCR Optimization',
+                'benefit2_improvement': '-3-5%',
+                'benefit2_desc': 'Precision compound enzymes improve nutrient absorption rate by 18%, reduce feed waste, save feed per kg weight gain',
+                'benefit2_data': 'Field data: FCR improved from 3.45:1 to 3.30-3.35:1',
+                'benefit3_title': 'Survival Rate Improvement',
+                'benefit3_improvement': '+2-3%',
+                'benefit3_desc': 'Immune regulatory peptides + fucoidan strengthen immune system, reduce incidence of ascites and respiratory diseases',
+                'benefit3_data': 'Field data: Full-cycle survival rate increased from 95% to 97-98%',
+                'benefit4_title': 'Feather Quality Improvement',
+                'benefit4_improvement': 'Significantly Improved',
+                'benefit4_desc': 'Fucoidan provides natural pigments and antioxidants, feathers become tight and glossy, reducing feather pecking behavior',
+                'benefit4_data': 'Field data: Carcass score increased by 15%, enhancing market premium ability',
+                
+                // 經濟效益
+                'section3_title': 'Economic Benefit Analysis｜Net Profit per Native Chicken',
+                'calculation_basis': 'Calculation basis: Native chicken farming cycle 16 weeks (112 days)｜Slaughter weight 2.45kg→2.62kg｜FCR 3.45→3.32｜Survival rate 95%→97.5%｜Native chicken wholesale price $3.84/kg｜Total feed intake per bird 12.32kg',
+                'table_header1': 'Benefit Item',
+                'table_header2': 'Improvement',
+                'table_header3': 'Economic Value per Bird (USD)',
+                'table_row1_col1': 'Weight gain revenue increase (0.17kg×$3.84/kg)',
+                'table_row1_col2': '+5-8% weight',
+                'table_row1_col3': '+0.65',
+                'table_row2_col1': 'Feed cost saving (0.13kg×$0.48/kg)',
+                'table_row2_col2': '-3-5% FCR',
+                'table_row2_col3': '+0.06',
+                'table_row3_col1': 'Survival rate increase (2.5%×$6.40/bird)',
+                'table_row3_col2': '+2-3% survival rate',
+                'table_row3_col3': '+0.16',
+                'table_row4_col1': 'Feather quality premium',
+                'table_row4_col2': 'Carcass score +15%',
+                'table_row4_col3': '+0.10',
+                'table_row5_col1': 'Total benefit increase',
+                'table_row5_col3': '+0.97',
+                'table_row6_col1': 'Feed additive cost increase',
+                'table_row6_col2': '12.32kg×$0.0192/kg',
+                'table_row6_col3': '-0.24',
+                'table_row7_col1': 'Net profit increase per native chicken',
+                'table_row7_col2': '+0.73',
+                'table_row7_col3': '+0.73',
+                'roi_label1': 'Return on Investment (ROI) per Native Chicken',
+                'roi_value': '310%',
+                'roi_label2': 'For every $1 invested, creates $4.1 net profit｜Payback period <7 days',
+                'farm_benefit': '10,000-bird farm annual benefit: Net profit increase $7,300 per batch｜Annual 3 batches total increase $21,900｜Feed additive cost increase only $2,370',
+                
+                // 技術機制
+                'section4_title': 'Core Technology Mechanism｜Three-layer Synergistic Action',
+                'tech1_title': 'Precision Compound Enzymes',
+                'tech1_desc1': 'Function: Improves protein, amino acid absorption efficiency by 18%',
+                'tech1_desc2': 'Benefit: Reduces FCR, decreases fecal nitrogen emissions, improves housing environment',
+                'tech2_title': 'Immune Regulatory Peptides',
+                'tech2_desc1': 'Function: Activates Nrf2/ARE antioxidant pathway, increases SOD activity by 30%',
+                'tech2_desc2': 'Benefit: Reduces ascites incidence, improves full-cycle survival rate, decreases medication use',
+                'tech3_title': 'Metabolic Regulation Compound',
+                'tech3_desc1': 'Components: Small nucleic acid peptides + Fucoidan',
+                'tech3_desc2': 'Benefit: Small nucleic acid peptides promote muscle growth; Fucoidan improves feather pigmentation and gloss',
+                'science_basis': 'Scientific basis:',
+                'tech1_reference': '《Poultry Science》research confirms compound enzymes can improve native chicken feed conversion rate by 4.2%(Chen et al., 2023)',
+                'tech2_reference': '《Veterinary Immunology》confirms immune peptides can reduce native chicken respiratory disease incidence by 25%(Wang et al., 2022)',
+                'tech3_reference': '《Animal Feed Science》research shows fucoidan can improve native chicken carcass score by 18%(Liu et al., 2023)',
+                
+                // 實施方案
+                'section5_title': 'Three-stage Implementation Plan｜Low-risk Verification',
+                'stage1_title': 'Small Group Trial (2 weeks)',
+                'stage1_desc1': 'Scale: 200 native chickens',
+                'stage1_desc2': 'Investment cost: USD 47',
+                'stage1_desc3': 'Verification indicators: Feed intake, fecal form, mental status observation',
+                'stage2_title': 'Batch Trial (8 weeks)',
+                'stage2_desc1': 'Scale: 1,000 native chickens',
+                'stage2_desc2': 'Investment cost: USD 237',
+                'stage2_desc3': 'Verification indicators: Weight sampling, FCR calculation, survival rate statistics',
+                'stage3_title': 'Full Farm Implementation (Continuous)',
+                'stage3_desc1': 'Scale: All native chickens on farm',
+                'stage3_desc2': 'Investment cost: USD 2,370 per 10,000 birds/batch',
+                'stage3_desc3': 'Core benefit: Net profit increase $7,300 per 10,000 birds',
+                'tech_support': 'Technical support: Shou Chi provides full-process technical guidance, including addition ratio calibration, effect tracking, data analysis to ensure maximum benefit.',
+                
+                // 對比表格
+                'section6_title': 'Traditional Farming vs Vitality Boost Program',
+                'comparison_header1': 'Evaluation Item',
+                'comparison_header2': 'Traditional Farming Model',
+                'comparison_header3': 'Vitality Boost Program',
+                'comparison1_col1': 'Feed Cost Mindset',
+                'comparison1_col2': 'Pursue lowest feed unit price',
+                'comparison1_col3': 'Pursue highest net profit per bird',
+                'comparison2_col1': 'Weight Gain Efficiency',
+                'comparison2_col2': 'Rely on breed genetic potential',
+                'comparison2_col3': 'Scientifically activate growth potential +5-8%',
+                'comparison3_col1': 'Survival Rate Management',
+                'comparison3_col2': 'Rely on medication to prevent diseases',
+                'comparison3_col3': 'Immune regulation enhances self-resistance',
+                'comparison4_col1': 'Product Competitiveness',
+                'comparison4_col2': 'Serious homogenization, price competition',
+                'comparison4_col3': 'Feather gloss, uniform body shape, brand premium',
+                'comparison5_col1': 'Environmental Impact',
+                'comparison5_col2': 'High fecal nitrogen content, environmental pressure',
+                'comparison5_col3': 'Reduce nitrogen emissions by 15%, green farming',
+                
+                // CTA部分
+                'cta_title': 'Enhance Native Chicken Farming Profitability Now',
+                'cta_big_number1': '+0.73',
+                'cta_desc1': 'Net profit increase per native chicken (USD)',
+                'cta_big_number2': '310%',
+                'cta_desc2': 'Return on Investment (ROI)',
+                'cta_highlight1': '10,000-bird farm annual net profit increase $21,900',
+                'cta_highlight2': 'Feed additive cost increase only $2,370',
+                'cta_btn1': '📞 Get Technical Consultation',
+                'cta_btn2': '📋 Request Trial Program',
+                
+                // 頁腳
+                'footer_company': 'Shou Chi Co., Ltd.｜Precision Nutrition × Biotechnology × Sustainable Livestock',
+                'footer_disclaimer': 'This technical data sheet is based on field test results from Taiwan native chicken farms, actual effects may vary slightly due to management conditions',
+                'footer_copyright': '© 2024 Shou Chi Co., Ltd. All Rights Reserved｜This technical data content is confidential, unauthorized reproduction prohibited'
+            }
+        };
+
+        // 滾動淡入動畫
+        function handleScroll() {
+            const sections = document.querySelectorAll('section');
+            const images = document.querySelectorAll('.section-img');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add('visible');
+                }
+            });
+            
+            images.forEach(img => {
+                const imgTop = img.getBoundingClientRect().top;
+                if (imgTop < window.innerHeight - 100) {
+                    img.classList.add('visible');
+                }
+            });
+        }
+
+        // 語言切換功能
+        function switchLanguage(lang) {
+            // 更新按鈕狀態
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // 更新文字內容
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // 更新貨幣數值
+            updateCurrencyValues(lang);
+        }
+
+        // 貨幣轉換功能
+        function updateCurrencyValues(lang) {
+            const rateElement = document.querySelector(`.lang-btn[data-lang="${lang}"]`);
+            const rate = parseFloat(rateElement.getAttribute('data-rate'));
+            const symbol = rateElement.getAttribute('data-symbol');
+            
+            document.querySelectorAll('[data-value]').forEach(element => {
+                const originalValue = parseFloat(element.getAttribute('data-value'));
+                
+                // 檢查是否為百分比數值
+                const elementText = element.textContent || element.innerText;
+                const isPercentage = elementText.includes('%') || 
+                                   element.classList.contains('roi-value') ||
+                                   element.classList.contains('big-number') && elementText.includes('%');
+                
+                // 檢查是否為成本數值
+                const parentText = element.parentElement.textContent || element.parentElement.innerText;
+                const isCost = parentText.includes('成本') || 
+                             parentText.includes('Cost') ||
+                             parentText.includes('投入') ||
+                             element.classList.contains('cost-highlight') && originalValue > 100;
+                
+                if (!isNaN(originalValue) && !isPercentage) {
+                    let convertedValue;
+                    
+                    // 如果是成本數值，保持負數
+                    const currentText = element.textContent || element.innerText;
+                    const hasMinus = currentText.includes('-');
+                    
+                    if (isCost && !hasMinus) {
+                        convertedValue = Math.round(originalValue * rate * 100) / 100;
+                    } else {
+                        convertedValue = Math.round(originalValue * rate * 100) / 100;
+                    }
+                    
+                    // 格式化數字，添加千位分隔符
+                    let formattedValue;
+                    if (convertedValue >= 1000) {
+                        formattedValue = convertedValue.toLocaleString('en-US', { 
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
+                    } else if (convertedValue >= 100) {
+                        formattedValue = convertedValue.toFixed(0);
+                    } else if (convertedValue >= 1) {
+                        formattedValue = convertedValue.toFixed(2);
+                    } else {
+                        formattedValue = convertedValue.toFixed(3);
+                    }
+                    
+                    // 更新元素內容，保留原始格式
+                    const currentTextContent = element.textContent || element.innerText;
+                    const hasPlus = currentTextContent.includes('+');
+                    const hasMinusSymbol = currentTextContent.includes('-');
+                    
+                    let newText = formattedValue;
+                    if (hasPlus && convertedValue >= 0) newText = '+' + newText;
+                    if (hasMinusSymbol && convertedValue < 0) newText = '-' + newText.replace('-', '');
+                    
+                    // 添加貨幣符號（除了百分比）
+                    if (!isPercentage && 
+                        !element.classList.contains('value') && 
+                        !element.classList.contains('improvement') &&
+                        !element.parentElement.classList.contains('spec-card') &&
+                        !element.parentElement.classList.contains('benefit-card')) {
+                        newText = symbol + ' ' + newText;
+                    }
+                    
+                    element.textContent = newText;
+                }
+            });
+        }
+
+        // 卡片點擊功能
+        function setupCardClicks() {
+            document.querySelectorAll('.spec-card, .benefit-card, .step-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加滾動事件監聽器
+            window.addEventListener('scroll', handleScroll);
+            handleScroll(); // 初始檢查
+            
+            // 語言切換按鈕事件
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    switchLanguage(lang);
+                });
+            });
+            
+            // 設置卡片點擊功能
+            setupCardClicks();
+            
+            // 設置默認語言
+            switchLanguage('zh-TW');
+        });
+    </script>
 </body>
 </html>
