@@ -1,8 +1,10 @@
-├── index.html           (繁體中文版本，NTD貨幣)
-├── index-cn.html        (簡體中文版本，CNY貨幣匯率換算)
+your-repository/
+├── index.html                      (合併版多語言HTML檔案)
 └── assets/
-    ├── header-banner.png
-    ├── core-tech.png
-    ├── sperm-motility-comparison.png
-    ├── semen-volume-comparison.png
-    └── traditional-vs-smart-farming.png
+    ├── modern-boar-farm-header.jpg
+    ├── boar-semen-analysis-lab.jpg
+    ├── sperm-motility-comparison-chart.jpg
+    ├── semen-volume-measurement.jpg
+    ├── sperm-quality-mechanism-diagram.jpg
+    ├── economic-benefit-analysis-chart.jpg
+    └── traditional-vs-modern-pig-farm.jpg
