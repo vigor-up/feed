@@ -14,6 +14,7 @@
             --warning: #f1c40f;
             --danger: #e74c3c;
             --success: #27ae60;
+            --blue: #3498db;
             --border-radius: 12px;
             --shadow: 0 4px 12px rgba(0,0,0,0.1);
             --safe-area-inset-top: env(safe-area-inset-top);
@@ -36,7 +37,7 @@
         }
         
         body {
-            background: #f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             color: #333;
             line-height: 1.6;
             padding: 0;
@@ -57,12 +58,13 @@
             z-index: 1000;
             display: flex;
             gap: 4px;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 6px;
             border-radius: 20px;
             box-shadow: var(--shadow);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(230, 126, 34, 0.2);
         }
         
         .lang-btn {
@@ -75,8 +77,11 @@
             font-size: 0.85rem;
             font-weight: 600;
             transition: all 0.3s;
-            min-height: 44px; /* 觸控友好尺寸 */
+            min-height: 44px;
             min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .lang-btn:active {
@@ -86,6 +91,7 @@
         .lang-btn.active {
             background: var(--primary);
             color: white;
+            box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
         }
         
         /* 響應式容器 */
@@ -96,6 +102,7 @@
             padding: 15px;
             position: relative;
             overflow-x: hidden;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
         }
         
         /* 表頭樣式 - 手機優化 */
@@ -104,7 +111,12 @@
             padding: 15px 0 20px;
             margin-bottom: 20px;
             border-bottom: 2px solid var(--primary);
-            padding-top: calc(60px + var(--safe-area-inset-top, 0px)); /* 為語言切換器留出空間 */
+            padding-top: calc(60px + var(--safe-area-inset-top, 0px));
+            background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
+            border-radius: var(--border-radius);
+            margin: 15px 15px 25px;
+            padding: 25px 15px;
+            box-shadow: var(--shadow);
         }
         
         .company-info h1 {
@@ -112,6 +124,10 @@
             color: var(--dark);
             margin-bottom: 10px;
             line-height: 1.3;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .company-info > p {
@@ -119,6 +135,7 @@
             color: #666;
             margin-bottom: 12px;
             line-height: 1.4;
+            font-weight: 500;
         }
         
         .tagline {
@@ -126,6 +143,10 @@
             font-style: italic;
             margin-bottom: 15px;
             font-size: 0.95rem;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: inline-block;
         }
         
         .highlight-badge {
@@ -139,6 +160,7 @@
             display: inline-block;
             width: 100%;
             max-width: 400px;
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3);
         }
         
         .feature-badges {
@@ -149,24 +171,28 @@
         }
         
         .feature-badge {
-            background: #f8f9fa;
-            padding: 10px 12px;
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 12px 10px;
             border-radius: 16px;
-            border: 1px solid var(--primary);
+            border: 2px solid var(--primary);
             color: var(--secondary);
             font-weight: 600;
             font-size: 0.85rem;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         /* 區塊標題 - 手機優化 */
         h2 {
             font-size: 1.4rem;
             color: var(--dark);
-            margin: 25px 0 15px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
+            margin: 30px 0 20px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            border-left: 4px solid var(--primary);
             line-height: 1.3;
+            box-shadow: var(--shadow);
         }
         
         /* 產蛋率提升專區 - 手機優化 */
@@ -182,8 +208,8 @@
         }
         
         .egg-card {
-            background: #f9f9f9;
-            padding: 18px;
+            background: linear-gradient(135deg, #fff, #fef6ec);
+            padding: 20px;
             border-radius: var(--border-radius);
             border-left: 4px solid var(--primary);
             box-shadow: var(--shadow);
@@ -191,6 +217,7 @@
             cursor: pointer;
             will-change: transform;
             -webkit-tap-highlight-color: transparent;
+            border: 1px solid rgba(230, 126, 34, 0.1);
         }
         
         .egg-card:active {
@@ -201,6 +228,9 @@
             font-size: 1.1rem;
             color: var(--secondary);
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .egg-metric {
@@ -208,6 +238,7 @@
             font-weight: bold;
             color: var(--primary);
             margin: 8px 0;
+            text-shadow: 0 2px 4px rgba(230, 126, 34, 0.1);
         }
         
         .egg-card p {
@@ -226,31 +257,41 @@
         }
         
         .spec-card {
-            background: #f8f9fa;
-            padding: 12px;
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 15px 10px;
             border-radius: var(--border-radius);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             border: 1px solid #eee;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .spec-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
         }
         
         .spec-card .label {
             color: #777;
             font-size: 0.8rem;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
         
         .spec-card .value {
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary);
+            margin-bottom: 4px;
         }
         
         .spec-card .unit {
             color: #666;
             font-size: 0.8rem;
+            font-weight: 500;
         }
         
         /* 蛋品品質專區 */
@@ -266,8 +307,8 @@
         }
         
         .quality-card {
-            background: #f9f9f9;
-            padding: 18px;
+            background: linear-gradient(135deg, #fff, #fef0ec);
+            padding: 20px;
             border-radius: var(--border-radius);
             border-left: 4px solid var(--danger);
             box-shadow: var(--shadow);
@@ -275,6 +316,7 @@
             cursor: pointer;
             will-change: transform;
             -webkit-tap-highlight-color: transparent;
+            border: 1px solid rgba(231, 76, 60, 0.1);
         }
         
         .quality-card:active {
@@ -285,6 +327,9 @@
             font-size: 1.1rem;
             color: var(--danger);
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         /* 健康度提升專區 */
@@ -296,8 +341,8 @@
         }
         
         .benefit-card {
-            background: #f9f9f9;
-            padding: 18px;
+            background: linear-gradient(135deg, #fff, #ecf9f0);
+            padding: 20px;
             border-radius: var(--border-radius);
             border-left: 4px solid var(--success);
             box-shadow: var(--shadow);
@@ -305,6 +350,7 @@
             transition: all 0.3s;
             will-change: transform;
             -webkit-tap-highlight-color: transparent;
+            border: 1px solid rgba(39, 174, 96, 0.1);
         }
         
         .benefit-card:active {
@@ -315,6 +361,9 @@
             font-size: 1.1rem;
             color: var(--success);
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .benefit-metric {
@@ -323,17 +372,19 @@
             color: var(--success);
             margin: 8px 0;
             display: block;
+            text-shadow: 0 2px 4px rgba(39, 174, 96, 0.1);
         }
         
         /* 經濟效益分析 - 手機優化 */
         .economic-card {
-            background: #f9f9f9;
+            background: linear-gradient(135deg, #fff, #fef9ec);
             padding: 20px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             margin-bottom: 15px;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
+            border: 1px solid rgba(241, 196, 15, 0.2);
         }
         
         .profit-table-container {
@@ -342,52 +393,66 @@
             margin-bottom: 20px;
             border-radius: 8px;
             border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         
         .profit-table {
             width: 100%;
-            min-width: 500px; /* 確保表格在手機上可以橫向滾動 */
+            min-width: 500px;
             border-collapse: collapse;
         }
         
         .profit-table th, .profit-table td {
-            padding: 12px 10px;
+            padding: 14px 12px;
             text-align: left;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #eee;
             font-size: 0.9rem;
         }
         
         .profit-table th {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             position: sticky;
             left: 0;
+            font-weight: 600;
+        }
+        
+        .profit-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .profit-table tr:hover {
+            background: #fff8e1;
         }
         
         .roi-badge {
             text-align: center;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 18px;
+            padding: 25px 20px;
             border-radius: var(--border-radius);
             font-weight: bold;
             margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(230, 126, 34, 0.3);
         }
         
         .roi-value {
-            font-size: 2.5rem;
-            margin: 8px 0;
+            font-size: 2.8rem;
+            margin: 15px 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         /* CTA區塊 - 手機優化 */
         .cta-section {
-            background: linear-gradient(135deg, var(--dark), var(--secondary));
+            background: linear-gradient(135deg, var(--dark), #2a4365);
             color: white;
-            padding: 30px 15px;
+            padding: 35px 20px;
             border-radius: var(--border-radius);
             text-align: center;
-            margin: 30px 0;
-            padding-bottom: max(30px, var(--safe-area-inset-bottom, 30px));
+            margin: 35px 0;
+            padding-bottom: max(35px, var(--safe-area-inset-bottom, 35px));
+            box-shadow: 0 10px 30px rgba(44, 62, 80, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .big-number {
@@ -395,10 +460,11 @@
             font-weight: bold;
             color: var(--warning);
             margin: 8px 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
         .cta-buttons {
-            margin-top: 20px;
+            margin-top: 25px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -413,11 +479,12 @@
             transition: all 0.3s;
             display: block;
             text-align: center;
-            min-height: 56px; /* 觸控友好尺寸 */
+            min-height: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
             will-change: transform;
+            gap: 10px;
         }
         
         .btn:active {
@@ -425,26 +492,29 @@
         }
         
         .btn-primary {
-            background: var(--warning);
+            background: linear-gradient(135deg, var(--warning), #f39c12);
             color: var(--dark);
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.4);
         }
         
         .btn-secondary {
             background: transparent;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.8);
             color: white;
+            backdrop-filter: blur(10px);
         }
         
         /* 圖片容器 - 手機優化 */
         .egg-image-container {
             width: 100%;
-            margin: 15px 0;
+            margin: 20px 0;
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
+            border: 1px solid #eee;
         }
         
         .egg-image-container.visible {
@@ -454,7 +524,7 @@
         
         .egg-image-container img {
             width: 100%;
-            height: auto;
+            height: 200px;
             object-fit: cover;
             display: block;
             loading: lazy;
@@ -462,23 +532,26 @@
         
         .image-caption {
             text-align: center;
-            padding: 10px;
+            padding: 12px 15px;
             color: #666;
             font-style: italic;
             background: #f9f9f9;
             font-size: 0.85rem;
+            border-top: 1px solid #eee;
         }
         
         /* 產蛋高峰機制專區 */
         .peak-mechanism {
-            background: #fdf2e9;
-            padding: 20px;
+            background: linear-gradient(135deg, #fdf2e9, #fff);
+            padding: 25px 20px;
             border-radius: var(--border-radius);
-            margin: 20px 0;
+            margin: 25px 0;
             border-left: 4px solid var(--secondary);
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(211, 84, 0, 0.1);
         }
         
         .peak-mechanism.visible {
@@ -489,7 +562,10 @@
         .peak-mechanism h3 {
             color: var(--secondary);
             font-size: 1.3rem;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .mechanism-list {
@@ -498,18 +574,19 @@
         }
         
         .mechanism-list li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             position: relative;
-            padding-left: 28px;
+            padding-left: 32px;
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         .mechanism-list li::before {
             content: "✅";
             position: absolute;
             left: 0;
-            top: 0;
+            top: 2px;
+            font-size: 1.1rem;
         }
         
         /* 滾動淡入效果 */
@@ -525,34 +602,28 @@
             transform: translateY(0);
         }
         
-        /* 貨幣轉換指示 */
-        .currency-indicator {
-            display: inline-block;
-            background: var(--warning);
-            color: var(--dark);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+        /* 貨幣標示 */
+        .currency {
             font-weight: bold;
-            margin-left: 5px;
-            vertical-align: middle;
+            color: var(--primary);
         }
         
         /* 頁腳 - 手機優化 */
         footer {
             text-align: center;
-            padding: 25px 15px;
+            padding: 30px 20px;
             border-radius: var(--border-radius);
-            margin-top: 30px;
-            background: var(--dark);
-            color: rgba(255,255,255,0.85);
-            padding-bottom: max(25px, var(--safe-area-inset-bottom, 25px));
+            margin-top: 35px;
+            background: linear-gradient(135deg, var(--dark), #1a252f);
+            color: rgba(255,255,255,0.9);
+            padding-bottom: max(30px, var(--safe-area-inset-bottom, 30px));
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         footer p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-size: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
         /* 響應式調整 - 平板 (min-width: 768px) */
@@ -564,10 +635,14 @@
             .container {
                 padding: 25px;
                 max-width: 100%;
+                border-radius: 20px;
+                margin: 15px auto;
             }
             
             header {
                 padding-top: calc(70px + var(--safe-area-inset-top, 0px));
+                margin: 20px;
+                padding: 30px;
             }
             
             .company-info h1 {
@@ -576,12 +651,13 @@
             
             .highlight-badge {
                 width: auto;
-                padding: 12px 25px;
+                padding: 15px 30px;
+                font-size: 1.1rem;
             }
             
             .feature-badges {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
+                gap: 12px;
             }
             
             .egg-grid,
@@ -599,12 +675,13 @@
             .cta-buttons {
                 flex-direction: row;
                 justify-content: center;
-                gap: 15px;
+                gap: 20px;
             }
             
             .btn {
                 width: auto;
-                min-width: 200px;
+                min-width: 220px;
+                padding: 18px 30px;
             }
             
             .profit-table {
@@ -613,6 +690,11 @@
             
             h2 {
                 font-size: 1.6rem;
+                margin: 35px 0 25px;
+            }
+            
+            .egg-image-container img {
+                height: 250px;
             }
         }
         
@@ -620,7 +702,9 @@
         @media (min-width: 992px) {
             .container {
                 max-width: 1200px;
-                padding: 30px;
+                padding: 35px;
+                margin: 20px auto;
+                border-radius: 25px;
             }
             
             .egg-grid,
@@ -642,7 +726,7 @@
             }
             
             .roi-value {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             /* 桌面端添加懸停效果 */
@@ -650,7 +734,7 @@
             .quality-card:hover,
             .benefit-card:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             }
             
             .btn:hover {
@@ -663,7 +747,16 @@
             }
             
             .btn-primary:hover {
-                background: #f39c12;
+                background: linear-gradient(135deg, #f39c12, #e67e22);
+            }
+            
+            .egg-image-container img {
+                height: 300px;
+            }
+            
+            header {
+                margin: 25px;
+                padding: 40px;
             }
         }
         
@@ -675,6 +768,12 @@
             
             .container {
                 padding: 12px;
+                border-radius: 15px;
+            }
+            
+            header {
+                margin: 10px;
+                padding: 20px 15px;
             }
             
             .company-info h1 {
@@ -683,7 +782,7 @@
             
             .highlight-badge {
                 font-size: 0.9rem;
-                padding: 10px 12px;
+                padding: 10px 15px;
             }
             
             .feature-badges {
@@ -711,6 +810,11 @@
                 padding: 10px;
                 font-size: 0.8rem;
             }
+            
+            h2 {
+                padding: 10px 12px;
+                font-size: 1.2rem;
+            }
         }
         
         /* 橫向模式優化 */
@@ -729,17 +833,22 @@
             .benefits-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .container {
+                padding: 15px;
+            }
         }
         
         /* 暗色模式支援 */
         @media (prefers-color-scheme: dark) {
             body {
-                background: #121212;
+                background: linear-gradient(135deg, #121212, #1a1a1a);
                 color: #e0e0e0;
             }
             
             .container {
                 background: #1e1e1e;
+                box-shadow: 0 0 30px rgba(0,0,0,0.3);
             }
             
             .egg-card,
@@ -750,6 +859,7 @@
             .peak-mechanism {
                 background: #2a2a2a;
                 color: #e0e0e0;
+                border-color: rgba(255, 255, 255, 0.1);
             }
             
             .egg-card p,
@@ -762,7 +872,7 @@
             }
             
             .profit-table th {
-                background: #333;
+                background: linear-gradient(135deg, #333, #444);
             }
             
             .profit-table td {
@@ -771,7 +881,12 @@
             
             h2 {
                 color: #e0e0e0;
+                background: #2a2a2a;
                 border-bottom-color: #333;
+            }
+            
+            header {
+                background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
             }
         }
         
@@ -813,41 +928,40 @@
                 <div class="tagline" data-translate="tagline">Egg Production Enhancement &middot; Yolk Quality Improvement &middot; Shell Strength Optimization</div>
                 <div class="highlight-badge" data-translate="highlight">🥚 產蛋率提升5-8%｜蛋黃品質提升3-4級｜暗斑蛋減少70-80%</div>
                 <div class="feature-badges">
-                    <!-- 修正：這裡的內容會由JavaScript動態填充 -->
-                    <div class="feature-badge" id="feature1">成本：NTD <span data-value="600" data-currency>600</span>/公斤</div>
+                    <div class="feature-badge" id="feature1">成本：<span class="currency" data-base-value="600">NTD 600</span>/公斤</div>
                     <div class="feature-badge" id="feature2" data-translate="feature2">添加量：1公斤/噸飼料</div>
                     <div class="feature-badge" id="feature3" data-translate="feature3">發炎指數降低40%</div>
-                    <div class="feature-badge" id="feature4">投資報酬率：<span data-value="580" data-percent>580</span>%</div>
+                    <div class="feature-badge" id="feature4">投資報酬率：<span class="currency" data-base-value="580">580%</span></div>
                 </div>
             </div>
         </header>
 
         <!-- 產蛋率提升專區 -->
         <section class="egg-production-section">
-            <h2 style="color: #d35400;" data-translate="section1_title">🥚 產蛋率提升專區｜高產穩定持久</h2>
-            <p style="font-size: 1rem; margin-bottom: 15px; font-weight: 600;" data-translate="section1_desc">專為蛋雞設計的營養調控方案，顯著提升產蛋率，延長產蛋高峰，改善蛋品品質，創造更高經濟價值。</p>
+            <h2 style="border-left-color: #d35400;" data-translate="section1_title">🥚 產蛋率提升專區｜高產穩定持久</h2>
+            <p style="font-size: 1rem; margin-bottom: 15px; font-weight: 600; color: #666;" data-translate="section1_desc">專為蛋雞設計的營養調控方案，顯著提升產蛋率，延長產蛋高峰，改善蛋品品質，創造更高經濟價值。</p>
             
             <div class="egg-grid">
                 <div class="egg-card fade-in">
-                    <h4 data-translate="egg_card1_title">產蛋率提升</h4>
+                    <h4>📈 <span data-translate="egg_card1_title">產蛋率提升</span></h4>
                     <div class="egg-metric" data-translate="egg_card1_metric">+5-8%</div>
                     <p data-translate="egg_card1_desc1">營養精準調控延長產蛋高峰，提升整體產蛋效率</p>
                     <p><strong data-translate="egg_card1_data_label">實測數據：</strong><span data-translate="egg_card1_data">產蛋率從92%提升至97-98%高峰</span></p>
                 </div>
                 <div class="egg-card fade-in">
-                    <h4 data-translate="egg_card2_title">產蛋高峰期延長</h4>
+                    <h4>⏱️ <span data-translate="egg_card2_title">產蛋高峰期延長</span></h4>
                     <div class="egg-metric" data-translate="egg_card2_metric">+4-6週</div>
                     <p data-translate="egg_card2_desc1">維持90%以上產蛋率時間延長，提升總產蛋數</p>
                     <p><strong data-translate="egg_card2_data_label">實測數據：</strong><span data-translate="egg_card2_data">產蛋高峰期從32週延長至36-38週</span></p>
                 </div>
                 <div class="egg-card fade-in">
-                    <h4 data-translate="egg_card3_title">飼料效率優化</h4>
+                    <h4>⚖️ <span data-translate="egg_card3_title">飼料效率優化</span></h4>
                     <div class="egg-metric" data-translate="egg_card3_metric">FCR -8-12%</div>
                     <p data-translate="egg_card3_desc1">提升營養吸收效率，每公斤蛋飼料成本降低</p>
                     <p><strong data-translate="egg_card3_data_label">實測數據：</strong><span data-translate="egg_card3_data">料蛋比從2.2:1優化至2.0-2.1:1</span></p>
                 </div>
                 <div class="egg-card fade-in">
-                    <h4 data-translate="egg_card4_title">產蛋持續性改善</h4>
+                    <h4>📊 <span data-translate="egg_card4_title">產蛋持續性改善</span></h4>
                     <div class="egg-metric" data-translate="egg_card4_metric">淘汰率 -15%</div>
                     <p data-translate="egg_card4_desc1">改善後期產蛋表現，降低過早淘汰比例</p>
                     <p><strong data-translate="egg_card4_data_label">實測數據：</strong><span data-translate="egg_card4_data">72週齡產蛋率從78%提升至82-84%</span></p>
@@ -856,7 +970,7 @@
 
             <!-- 產蛋高峰延長機制補充 -->
             <div class="peak-mechanism">
-                <h3 data-translate="peak_mechanism_title">📈 延長產蛋高峰期核心作用機制</h3>
+                <h3>📈 <span data-translate="peak_mechanism_title">延長產蛋高峰期核心作用機制</span></h3>
                 <ul class="mechanism-list">
                     <li data-translate="mechanism1">調節下丘腦-垂體-卵巢軸 (HPO軸)，維持促卵泡素(FSH)與黃體生成素(LH)穩定分泌，延緩卵巢功能衰退</li>
                     <li data-translate="mechanism2">提升卵母細胞成熟率，減少空殼蛋/無殼蛋發生率，維持穩定排卵節律</li>
@@ -875,7 +989,7 @@
 
         <!-- 產品規格 -->
         <section>
-            <h2 data-translate="specs_title">產品規格與添加參數</h2>
+            <h2 data-translate="specs_title">📋 產品規格與添加參數</h2>
             <div class="specs-grid">
                 <div class="spec-card">
                     <span class="label" data-translate="spec1_label">每噸飼料添加量</span>
@@ -884,13 +998,13 @@
                 </div>
                 <div class="spec-card">
                     <span class="label" data-translate="spec2_label">產品單價</span>
-                    <span class="value"><span data-value="600" data-currency>600</span></span>
-                    <span class="unit" data-translate="spec2_unit">NTD/公斤</span>
+                    <span class="value currency" data-base-value="600">NTD 600</span>
+                    <span class="unit" data-translate="spec2_unit">/公斤</span>
                 </div>
                 <div class="spec-card">
                     <span class="label" data-translate="spec3_label">每噸飼料成本增加</span>
-                    <span class="value"><span data-value="600" data-currency>600</span></span>
-                    <span class="unit" data-translate="spec3_unit">NTD/噸</span>
+                    <span class="value currency" data-base-value="600">NTD 600</span>
+                    <span class="unit" data-translate="spec3_unit">/噸</span>
                 </div>
                 <div class="spec-card">
                     <span class="label" data-translate="spec4_label">蛋雞日採食量</span>
@@ -899,8 +1013,8 @@
                 </div>
                 <div class="spec-card">
                     <span class="label" data-translate="spec5_label">每隻雞日成本增加</span>
-                    <span class="value"><span data-value="0.069" data-currency>0.069</span></span>
-                    <span class="unit" data-translate="spec5_unit">NTD/隻/天</span>
+                    <span class="value currency" data-base-value="0.069">NTD 0.069</span>
+                    <span class="unit" data-translate="spec5_unit">/隻/天</span>
                 </div>
                 <div class="spec-card">
                     <span class="label" data-translate="spec6_label">適用階段</span>
@@ -908,7 +1022,7 @@
                     <span class="unit" data-translate="spec6_unit">18-72週齡</span>
                 </div>
             </div>
-            <div style="background: #fff8e1; padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid var(--primary);" class="fade-in">
+            <div style="background: #fff8e1; padding: 18px; border-radius: 12px; margin-top: 18px; border-left: 4px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.05);" class="fade-in">
                 <p><strong data-translate="usage_label">使用方法：</strong><span data-translate="usage_desc">每噸蛋雞全價飼料均勻添加活力旺蛋雞專用配方1公斤，從產蛋開始全程使用，無需調整現有飼養管理流程。</span></p>
             </div>
 
@@ -921,34 +1035,34 @@
 
         <!-- 蛋品品質提升專區 -->
         <section class="egg-quality-section">
-            <h2 style="color: #c0392b;" data-translate="section2_title">⭐ 蛋品品質提升專區｜內外品質全面優化</h2>
-            <p style="font-size: 1rem; margin-bottom: 15px; font-weight: 600;" data-translate="section2_desc">全面改善蛋品內外品質，提升蛋黃顏色、蛋殼強度，大幅減少暗斑蛋，創造市場差異化競爭優勢。</p>
+            <h2 style="border-left-color: #c0392b;" data-translate="section2_title">⭐ 蛋品品質提升專區｜內外品質全面優化</h2>
+            <p style="font-size: 1rem; margin-bottom: 15px; font-weight: 600; color: #666;" data-translate="section2_desc">全面改善蛋品內外品質，提升蛋黃顏色、蛋殼強度，大幅減少暗斑蛋，創造市場差異化競爭優勢。</p>
             
             <div class="quality-grid">
                 <div class="quality-card fade-in">
-                    <h4 data-translate="quality_card1_title">蛋黃品質提升</h4>
-                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0;" data-translate="quality_card1_metric">+3-4級</div>
+                    <h4>🎨 <span data-translate="quality_card1_title">蛋黃品質提升</span></h4>
+                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0; text-shadow: 0 2px 4px rgba(231, 76, 60, 0.1);" data-translate="quality_card1_metric">+3-4級</div>
                     <p data-translate="quality_card1_desc1">天然色素沉積提升蛋黃顏色，胡蘿蔔素含量增加</p>
                     <p><strong data-translate="quality_card1_data_label">實測數據：</strong><span data-translate="quality_card1_data">羅氏比色計從8級提升至11-12級</span></p>
                     <p><strong data-translate="quality_card1_mechanism_label">作用機制：</strong><span data-translate="quality_card1_mechanism">促進類胡蘿蔔素吸收與沉積，提升卵黃腺色素結合能力</span></p>
                 </div>
                 <div class="quality-card fade-in">
-                    <h4 data-translate="quality_card2_title">暗斑蛋減少</h4>
-                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0;" data-translate="quality_card2_metric">-70-80%</div>
+                    <h4>🔍 <span data-translate="quality_card2_title">暗斑蛋減少</span></h4>
+                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0; text-shadow: 0 2px 4px rgba(231, 76, 60, 0.1);" data-translate="quality_card2_metric">-70-80%</div>
                     <p data-translate="quality_card2_desc1">改善蛋殼腺功能，減少鈣質沉積異常</p>
                     <p><strong data-translate="quality_card2_data_label">實測數據：</strong><span data-translate="quality_card2_data">暗斑蛋比例從15%降低至3-5%</span></p>
                     <p><strong data-translate="quality_card2_mechanism_label">作用機制：</strong><span data-translate="quality_card2_mechanism">調節蛋殼腺碳酸酐酶活性，優化鈣質晶體排列結構</span></p>
                 </div>
                 <div class="quality-card fade-in">
-                    <h4 data-translate="quality_card3_title">蛋殼強度提升</h4>
-                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0;" data-translate="quality_card3_metric">+25-30%</div>
+                    <h4>🛡️ <span data-translate="quality_card3_title">蛋殼強度提升</span></h4>
+                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0; text-shadow: 0 2px 4px rgba(231, 76, 60, 0.1);" data-translate="quality_card3_metric">+25-30%</div>
                     <p data-translate="quality_card3_desc1">優化鈣磷代謝，提升蛋殼厚度與均勻度</p>
                     <p><strong data-translate="quality_card3_data_label">實測數據：</strong><span data-translate="quality_card3_data">蛋殼厚度從0.33mm提升至0.40-0.42mm</span></p>
                     <p><strong data-translate="quality_card3_mechanism_label">作用機制：</strong><span data-translate="quality_card3_mechanism">提升維生素D3活化效率，促進小腸鈣吸收與蛋殼腺沉積</span></p>
                 </div>
                 <div class="quality-card fade-in">
-                    <h4 data-translate="quality_card4_title">哈氏單位提升</h4>
-                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0;" data-translate="quality_card4_metric">+15-20</div>
+                    <h4>📏 <span data-translate="quality_card4_title">哈氏單位提升</span></h4>
+                    <div style="font-size: 2rem; font-weight: bold; color: #e74c3c; margin: 8px 0; text-shadow: 0 2px 4px rgba(231, 76, 60, 0.1);" data-translate="quality_card4_metric">+15-20</div>
                     <p data-translate="quality_card4_desc1">蛋白濃稠度改善，提升蛋品新鮮度與保存性</p>
                     <p><strong data-translate="quality_card4_data_label">實測數據：</strong><span data-translate="quality_card4_data">哈氏單位從80提升至95-100</span></p>
                     <p><strong data-translate="quality_card4_mechanism_label">作用機制：</strong><span data-translate="quality_card4_mechanism">維持卵白蛋白合成效率，減少蛋白水分流失</span></p>
@@ -973,25 +1087,25 @@
             <h2 data-translate="section3_title">🩺 健康度提升專區｜產卵發炎降低與免疫力增強</h2>
             <div class="benefits-grid">
                 <div class="benefit-card fade-in">
-                    <h4 data-translate="benefit_card1_title">產卵發炎降低</h4>
+                    <h4>🔥 <span data-translate="benefit_card1_title">產卵發炎降低</span></h4>
                     <span class="benefit-metric" data-translate="benefit_card1_metric">-40-50%</span>
                     <p data-translate="benefit_card1_desc1">抗炎成分降低輸卵管炎症發生率，改善產蛋舒適度</p>
                     <p><strong data-translate="benefit_card1_mechanism_label">作用機制：</strong><span data-translate="benefit_card1_mechanism">抑制COX-2炎症通路，調節前列腺素水平，減少輸卵管黏膜充血水腫</span></p>
                 </div>
                 <div class="benefit-card fade-in">
-                    <h4 data-translate="benefit_card2_title">免疫力提升</h4>
+                    <h4>🛡️ <span data-translate="benefit_card2_title">免疫力提升</span></h4>
                     <span class="benefit-metric" data-translate="benefit_card2_metric">+30-40%</span>
                     <p data-translate="benefit_card2_desc1">免疫調節成分提升抗體水平，降低疾病發生率</p>
                     <p><strong data-translate="benefit_card2_mechanism_label">作用機制：</strong><span data-translate="benefit_card2_mechanism">促進IgA分泌，強化黏膜免疫屏障，提升巨噬細胞吞噬能力</span></p>
                 </div>
                 <div class="benefit-card fade-in">
-                    <h4 data-translate="benefit_card3_title">肝臟健康改善</h4>
+                    <h4>💪 <span data-translate="benefit_card3_title">肝臟健康改善</span></h4>
                     <span class="benefit-metric" data-translate="benefit_card3_metric">脂肪肝 -60%</span>
                     <p data-translate="benefit_card3_desc1">改善脂質代謝，減少脂肪肝發生，延長產蛋壽命</p>
                     <p><strong data-translate="benefit_card3_mechanism_label">作用機制：</strong><span data-translate="benefit_card3_mechanism">促進脂肪酸氧化，抑制脂肪合成，提升肝臟脂蛋白合成與運輸能力</span></p>
                 </div>
                 <div class="benefit-card fade-in">
-                    <h4 data-translate="benefit_card4_title">骨骼強度提升</h4>
+                    <h4>🦴 <span data-translate="benefit_card4_title">骨骼強度提升</span></h4>
                     <span class="benefit-metric" data-translate="benefit_card4_metric">骨密度 +20%</span>
                     <p data-translate="benefit_card4_desc1">優化鈣磷吸收與代謝，減少產蛋疲勞症發生</p>
                     <p><strong data-translate="benefit_card4_mechanism_label">作用機制：</strong><span data-translate="benefit_card4_mechanism">維生素D代謝調控，改善鈣質沉積，提升骨鈣素合成效率</span></p>
@@ -1008,7 +1122,7 @@
         <!-- 經濟效益分析 -->
         <section>
             <h2 data-translate="section4_title">💰 經濟效益分析｜每隻蛋雞淨利提升</h2>
-            <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid var(--primary);" class="fade-in">
+            <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); padding: 18px; border-radius: 12px; margin-bottom: 22px; border-left: 4px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05);" class="fade-in">
                 <p><strong data-translate="calc_basis_label">計算基準：</strong><span data-translate="calc_basis">蛋雞產蛋期40週(280天)｜產蛋率92%→97%｜料蛋比2.2→2.05｜蛋價6元/顆｜每隻雞日採食量115克｜添加成本0.069元/天</span></p>
             </div>
             <div class="economic-card fade-in">
@@ -1018,61 +1132,61 @@
                             <tr>
                                 <th data-translate="table_header1">效益項目</th>
                                 <th data-translate="table_header2">改善幅度</th>
-                                <th data-translate="table_header3">每隻蛋雞經濟價值(NTD)</th>
+                                <th data-translate="table_header3">每隻蛋雞經濟價值</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td data-translate="row1_col1">產蛋率提升收益(+5%)</td>
                                 <td data-translate="row1_col2">+5%產蛋率</td>
-                                <td><span data-value="33.60" data-currency>33.60</span></td>
+                                <td><span class="currency" data-base-value="33.60">NTD 33.60</span></td>
                             </tr>
                             <tr>
                                 <td data-translate="row2_col1">飼料效率優化(FCR -7%)</td>
                                 <td data-translate="row2_col2">料蛋比2.2→2.05</td>
-                                <td><span data-value="18.90" data-currency>18.90</span></td>
+                                <td><span class="currency" data-base-value="18.90">NTD 18.90</span></td>
                             </tr>
                             <tr>
                                 <td data-translate="row3_col1">蛋品品質溢價</td>
                                 <td data-translate="row3_col2">價格+15%</td>
-                                <td><span data-value="37.80" data-currency>37.80</span></td>
+                                <td><span class="currency" data-base-value="37.80">NTD 37.80</span></td>
                             </tr>
                             <tr>
                                 <td data-translate="row4_col1">暗斑蛋減少收益</td>
                                 <td data-translate="row4_col2">-75%次級蛋</td>
-                                <td><span data-value="12.60" data-currency>12.60</span></td>
+                                <td><span class="currency" data-base-value="12.60">NTD 12.60</span></td>
                             </tr>
                             <tr>
                                 <td data-translate="row5_col1">健康度提升減少損失</td>
                                 <td data-translate="row5_col2">死亡率-2%</td>
-                                <td><span data-value="8.40" data-currency>8.40</span></td>
+                                <td><span class="currency" data-base-value="8.40">NTD 8.40</span></td>
                             </tr>
                             <tr style="background: #ffeaa7; font-weight: bold;">
                                 <td data-translate="row6_col1"><strong>總效益增加</strong></td>
                                 <td>—</td>
-                                <td><strong><span data-value="111.30" data-currency>111.30</span></strong></td>
+                                <td><strong><span class="currency" data-base-value="111.30">NTD 111.30</span></strong></td>
                             </tr>
                             <tr>
                                 <td data-translate="row7_col1">飼料添加成本增加</td>
                                 <td data-translate="row7_col2">0.069元/天×280天</td>
-                                <td><span data-value="-19.32" data-currency>-19.32</span></td>
+                                <td><span class="currency" data-base-value="-19.32">NTD -19.32</span></td>
                             </tr>
                             <tr style="background: linear-gradient(135deg, var(--primary) 0%, #d35400 100%); color: white; font-weight: bold;">
                                 <td data-translate="row8_col1">每隻蛋雞淨利潤增加</td>
                                 <td>—</td>
-                                <td><span data-value="91.98" data-currency>91.98</span></td>
+                                <td><span class="currency" data-base-value="91.98">NTD 91.98</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="roi-badge">
                     <div data-translate="roi_title">每隻蛋雞投資報酬率 (ROI)</div>
-                    <div class="roi-value"><span data-value="576" data-percent>576</span>%</div>
-                    <div style="font-size: 0.9rem;" data-translate="roi_desc">產蛋期每投入1元，創造6.76元淨收益｜投資回收期 &lt;15天</div>
+                    <div class="roi-value"><span data-translate="roi_value">576%</span></div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;" data-translate="roi_desc">產蛋期每投入1元，創造6.76元淨收益｜投資回收期 &lt;15天</div>
                 </div>
             </div>
-            <div style="background: #fff8e1; padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid var(--secondary);" class="fade-in">
-                <p><strong data-translate="large_scale_label">萬隻蛋雞場年度效益：</strong><span data-translate="large_scale">每批蛋雞淨利增加<span data-value="919800" data-currency>919,800</span>元｜年更新1.5批次總計增加<span data-value="1379700" data-currency>1,379,700</span>元｜飼料添加總成本僅增加<span data-value="193200" data-currency>193,200</span>元</span></p>
+            <div style="background: #fff8e1; padding: 18px; border-radius: 12px; margin-top: 18px; border-left: 4px solid var(--secondary); box-shadow: 0 2px 8px rgba(0,0,0,0.05);" class="fade-in">
+                <p><strong data-translate="large_scale_label">萬隻蛋雞場年度效益：</strong><span data-translate="large_scale">每批蛋雞淨利增加<span class="currency" data-base-value="919800">NTD 919,800</span>元｜年更新1.5批次總計增加<span class="currency" data-base-value="1379700">NTD 1,379,700</span>元｜飼料添加總成本僅增加<span class="currency" data-base-value="193200">NTD 193,200</span>元</span></p>
             </div>
 
             <!-- 經濟效益示意圖 (E2) -->
@@ -1084,12 +1198,12 @@
 
         <!-- CTA行動區塊 -->
         <section class="cta-section">
-            <h2 style="color: white; border-bottom-color: var(--secondary);" data-translate="cta_title">🚀 立即啟動蛋雞性能提升方案</h2>
-            <div class="big-number"><span data-value="91.98" data-currency>91.98</span></div>
-            <p data-translate="cta_subtitle1">每隻蛋雞淨利潤增加(NTD)</p>
-            <div class="big-number"><span data-value="576" data-percent>576</span>%</div>
+            <h2 style="color: white; border-bottom: 2px solid var(--warning); padding-bottom: 10px;" data-translate="cta_title">🚀 立即啟動蛋雞性能提升方案</h2>
+            <div class="big-number"><span class="currency" data-base-value="91.98">NTD 91.98</span></div>
+            <p data-translate="cta_subtitle1">每隻蛋雞淨利潤增加</p>
+            <div class="big-number"><span data-translate="roi_value">576%</span></div>
             <p data-translate="cta_subtitle2">投資報酬率(ROI)</p>
-            <div style="background: rgba(241, 196, 15, 0.2); padding: 10px 20px; border-radius: 25px; display: inline-block; margin: 12px 0; font-weight: bold; font-size: 0.9rem;" data-translate="cta_bullets">🥚 產蛋率提升5-8%｜⭐ 蛋黃品質提升3-4級｜🩺 發炎降低40-50%</div>
+            <div style="background: rgba(241, 196, 15, 0.2); padding: 12px 20px; border-radius: 25px; display: inline-block; margin: 15px 0; font-weight: bold; font-size: 0.9rem; border: 1px solid rgba(241, 196, 15, 0.3);" data-translate="cta_bullets">🥚 產蛋率提升5-8%｜⭐ 蛋黃品質提升3-4級｜🩺 發炎降低40-50%</div>
             <div class="cta-buttons">
                 <a class="btn btn-primary" href="tel:+886912345678" data-translate="cta_btn1">📞 獲取蛋雞專案技術諮詢</a>
                 <a class="btn btn-secondary" href="#" data-translate="cta_btn2">📋 免費索取蛋雞試用方案</a>
@@ -1101,152 +1215,41 @@
             <div style="max-width: 800px; margin: 0 auto;">
                 <p><strong data-translate="footer_company">首池有限公司</strong>｜<span data-translate="footer_tagline">蛋雞性能優化 × 蛋品品質提升 × 健康養殖解決方案</span></p>
                 <p data-translate="footer_disclaimer">本技術資料表數據基於海蘭、羅曼等蛋雞品種實測結果，實際效果因管理條件略有差異</p>
-                <div style="margin-top: 15px; opacity: 0.8; font-size: 0.8rem; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);" data-translate="footer_copyright">&copy; 2026 首池有限公司 版權所有｜蛋雞優化技術為商業機密，未經授權禁止轉載</div>
+                <div style="margin-top: 18px; opacity: 0.8; font-size: 0.8rem; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1);" data-translate="footer_copyright">&copy; 2026 首池有限公司 版權所有｜蛋雞優化技術為商業機密，未經授權禁止轉載</div>
             </div>
         </footer>
     </div>
 
     <script>
-        // 多語言翻譯內容 (保持不變，因重點是RWD設計)
-        const translations = {
-            'zh-TW': { /* 繁體中文翻譯 */ },
-            'zh-CN': { /* 簡體中文翻譯 */ },
-            'en': { /* 英文翻譯 */ }
-        };
-
         // 匯率設定 (NTD:CNY:USD = 1:0.23:0.033)
         const exchangeRates = {
-            'zh-TW': 1,      // NTD
-            'zh-CN': 0.23,   // CNY (NTD 1 = CNY 0.23)
-            'en': 0.033      // USD (NTD 1 = USD 0.033)
-        };
-
-        // 貨幣符號
-        const currencySymbols = {
-            'zh-TW': 'NTD ',
-            'zh-CN': 'CNY ',
-            'zh-CN_symbol': '¥',
-            'en': 'USD ',
-            'en_symbol': '$'
+            'zh-TW': { rate: 1, symbol: 'NTD ', format: 'NTD {value}' },
+            'zh-CN': { rate: 0.23, symbol: '¥', format: 'CNY {value}' },
+            'en': { rate: 0.033, symbol: '$', format: 'USD {value}' }
         };
 
         // 當前語言
         let currentLang = 'zh-TW';
 
-        // 檢測是否為移動設備
-        function isMobileDevice() {
-            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-        }
-
-        // DOM載入完成後初始化
+        // 初始化語言切換
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化語言按鈕事件
+            // 語言按鈕事件
             document.querySelectorAll('.lang-btn').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    // 防止移動設備上的雙擊縮放
-                    e.preventDefault();
+                button.addEventListener('click', function() {
                     const lang = this.getAttribute('data-lang');
                     switchLanguage(lang);
-                    // 移動設備觸摸反饋
-                    if (isMobileDevice()) {
-                        this.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 200);
-                    }
                 });
-                
-                // 為移動設備添加觸摸事件
-                if (isMobileDevice()) {
-                    button.addEventListener('touchstart', function() {
-                        this.style.opacity = '0.8';
-                    });
-                    
-                    button.addEventListener('touchend', function() {
-                        this.style.opacity = '';
-                    });
-                }
             });
 
-            // 初始化卡片點擊事件 - 移動設備優化
-            document.querySelectorAll('.egg-card, .quality-card, .benefit-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // 移動設備觸摸反饋
-                    if (isMobileDevice()) {
-                        this.style.transform = 'scale(0.98)';
-                        setTimeout(() => {
-                            this.style.transform = '';
-                        }, 200);
-                    }
-                });
-                
-                // 為移動設備添加觸摸事件
-                if (isMobileDevice()) {
-                    card.addEventListener('touchstart', function() {
-                        this.style.opacity = '0.9';
-                    });
-                    
-                    card.addEventListener('touchend', function() {
-                        this.style.opacity = '';
-                    });
-                }
-            });
-
-            // 初始化滾動淡入效果
+            // 初始化滾動動畫
             initScrollAnimation();
             
             // 初始載入繁體中文
             switchLanguage('zh-TW');
             
-            // 設置視口高度，解決iOS 100vh問題
-            setVH();
-            window.addEventListener('resize', setVH);
-            window.addEventListener('orientationchange', setVH);
-            
-            // 優化滾動性能
-            optimizeScrollPerformance();
-            
-            // 防止iOS橡皮筋效果
-            document.body.addEventListener('touchmove', function(e) {
-                if (document.body.scrollHeight === document.body.clientHeight) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
+            // 優化移動設備體驗
+            optimizeMobileExperience();
         });
-
-        // 設置視口高度，解決iOS 100vh問題
-        function setVH() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-            
-            // 設置最小高度
-            const container = document.querySelector('.container');
-            if (container) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const footerHeight = document.querySelector('footer').offsetHeight;
-                const minHeight = window.innerHeight - headerHeight - footerHeight - 40;
-                container.style.minHeight = `${minHeight}px`;
-            }
-        }
-
-        // 優化滾動性能
-        function optimizeScrollPerformance() {
-            // 使用被動事件監聽器提升滾動性能
-            document.addEventListener('touchstart', function() {}, { passive: true });
-            document.addEventListener('touchmove', function() {}, { passive: true });
-            
-            // 減少滾動事件的觸發頻率
-            let ticking = false;
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    window.requestAnimationFrame(function() {
-                        // 滾動時需要執行的操作
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            }, { passive: true });
-        }
 
         // 切換語言函數
         function switchLanguage(lang) {
@@ -1260,119 +1263,120 @@
 
             // 更新當前語言
             currentLang = lang;
-
-            // 更新所有文本內容
-            updateTextContent(lang);
-
-            // 更新所有貨幣數值
+            
+            // 更新貨幣顯示
             updateCurrencyValues(lang);
-
-            // 更新頁面語言屬性
+            
+            // 更新語言屬性
             document.documentElement.lang = lang === 'zh-CN' ? 'zh-Hans' : lang;
-        }
-
-        // 更新文本內容
-        function updateTextContent(lang) {
-            // 遍歷所有帶有data-translate屬性的元素
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    // 如果是innerHTML需要處理的標籤
-                    if (element.hasAttribute('data-inner-html')) {
-                        element.innerHTML = translations[lang][key];
-                    } else {
-                        element.textContent = translations[lang][key];
-                    }
-                }
-            });
             
-            // 特殊處理頁首的feature1和feature4
-            updateFeatureBadges(lang);
-        }
-
-        // 更新頁首特徵標籤
-        function updateFeatureBadges(lang) {
-            const feature1 = document.getElementById('feature1');
-            const feature4 = document.getElementById('feature4');
-            
-            if (feature1 && feature4) {
-                // 根據語言更新內容
-                if (lang === 'zh-TW') {
-                    feature1.innerHTML = '成本：NTD <span data-value="600" data-currency>600</span>/公斤';
-                    feature4.innerHTML = '投資報酬率：<span data-value="580" data-percent>580</span>%';
-                } else if (lang === 'zh-CN') {
-                    feature1.innerHTML = '成本：CNY <span data-value="138" data-currency>138</span>/公斤';
-                    feature4.innerHTML = '投资报酬率：<span data-value="580" data-percent>580</span>%';
-                } else if (lang === 'en') {
-                    feature1.innerHTML = 'Cost: USD <span data-value="19.8" data-currency>19.8</span>/kg';
-                    feature4.innerHTML = 'ROI: <span data-value="580" data-percent>580</span>%';
-                }
-            }
+            // 更新文本翻譯（簡化示例）
+            updateTextContent(lang);
         }
 
         // 更新貨幣數值
         function updateCurrencyValues(lang) {
-            const rate = exchangeRates[lang];
-            const symbol = currencySymbols[lang];
-            const symbolOnly = lang === 'zh-CN' ? currencySymbols['zh-CN_symbol'] : 
-                              lang === 'en' ? currencySymbols['en_symbol'] : symbol;
-
-            // 更新所有帶有data-value和data-currency屬性的元素
-            document.querySelectorAll('[data-value][data-currency]').forEach(element => {
-                const originalValue = parseFloat(element.getAttribute('data-value'));
-                const convertedValue = originalValue * rate;
-                
-                // 格式化數字
-                let formattedValue;
-                if (originalValue % 1 === 0) {
-                    formattedValue = Math.round(convertedValue);
-                } else {
-                    formattedValue = convertedValue.toFixed(3);
-                    formattedValue = parseFloat(formattedValue).toString();
-                }
-                
-                // 添加千位分隔符
-                formattedValue = addThousandsSeparator(formattedValue);
-                
-                // 更新顯示
-                element.textContent = symbolOnly + formattedValue;
-                
-                // 更新父元素的單位顯示
-                const parentUnit = element.closest('.spec-card')?.querySelector('.unit');
-                if (parentUnit && lang !== 'zh-TW') {
-                    parentUnit.textContent = parentUnit.textContent.replace('NTD', lang === 'zh-CN' ? 'CNY' : 'USD');
+            const rateInfo = exchangeRates[lang];
+            
+            // 更新所有帶有currency類的元素
+            document.querySelectorAll('.currency').forEach(element => {
+                const baseValue = element.getAttribute('data-base-value');
+                if (baseValue) {
+                    const numericValue = parseFloat(baseValue);
+                    if (!isNaN(numericValue)) {
+                        const convertedValue = (numericValue * rateInfo.rate).toFixed(2);
+                        
+                        // 格式化數字（添加千位分隔符）
+                        let formattedValue = addThousandsSeparator(convertedValue);
+                        
+                        // 應用格式
+                        if (rateInfo.format) {
+                            element.textContent = rateInfo.format.replace('{value}', formattedValue);
+                        } else {
+                            element.textContent = rateInfo.symbol + formattedValue;
+                        }
+                    }
                 }
             });
-
-            // 更新百分比數值（不需要轉換，只需更新顯示）
-            document.querySelectorAll('[data-value][data-percent]').forEach(element => {
-                const value = element.getAttribute('data-value');
-                element.textContent = value;
-            });
-
+            
             // 更新表格中的貨幣單位
-            document.querySelectorAll('.profit-table th, .profit-table td').forEach(cell => {
-                if (cell.textContent.includes('NTD') && lang !== 'zh-TW') {
-                    cell.textContent = cell.textContent.replace('NTD', lang === 'zh-CN' ? 'CNY' : 'USD');
+            document.querySelectorAll('[data-translate="table_header3"]').forEach(cell => {
+                if (lang === 'zh-TW') {
+                    cell.textContent = '每隻蛋雞經濟價值(NTD)';
+                } else if (lang === 'zh-CN') {
+                    cell.textContent = '每只蛋鸡经济价值(CNY)';
+                } else if (lang === 'en') {
+                    cell.textContent = 'Economic Value Per Hen(USD)';
                 }
             });
-
-            // 更新CTA區塊中的貨幣單位
-            const ctaSubtitle = document.querySelector('.cta-section p');
-            if (ctaSubtitle && ctaSubtitle.textContent.includes('NTD') && lang !== 'zh-TW') {
-                ctaSubtitle.textContent = ctaSubtitle.textContent.replace('NTD', lang === 'zh-CN' ? 'CNY' : 'USD');
+            
+            // 更新CTA中的貨幣單位
+            const ctaSubtitle = document.querySelector('[data-translate="cta_subtitle1"]');
+            if (ctaSubtitle) {
+                if (lang === 'zh-TW') {
+                    ctaSubtitle.textContent = '每隻蛋雞淨利潤增加(NTD)';
+                } else if (lang === 'zh-CN') {
+                    ctaSubtitle.textContent = '每只蛋鸡净利润增加(CNY)';
+                } else if (lang === 'en') {
+                    ctaSubtitle.textContent = 'Net Profit Increase Per Hen(USD)';
+                }
             }
         }
 
         // 添加千位分隔符
-        function addThousandsSeparator(numberStr) {
-            if (numberStr.includes('.')) {
-                const parts = numberStr.split('.');
-                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-                return parts.join('.');
-            } else {
-                return numberStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        function addThousandsSeparator(numStr) {
+            // 檢查是否為負數
+            let isNegative = false;
+            if (numStr.startsWith('-')) {
+                isNegative = true;
+                numStr = numStr.substring(1);
             }
+            
+            // 分離整數和小數部分
+            let parts = numStr.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            // 重新組合並添加負號
+            let result = parts.join('.');
+            if (isNegative) {
+                result = '-' + result;
+            }
+            
+            return result;
+        }
+
+        // 更新文本內容（簡化版本）
+        function updateTextContent(lang) {
+            // 這裡可以根據語言更新文本內容
+            // 由於原翻譯資料較多，這裡只做示範
+            const translations = {
+                'zh-TW': {
+                    'title': '活力旺蛋雞性能提升方案 TDS',
+                    'subtitle': '產蛋率提升・蛋黃品質優化・暗斑蛋減少・產卵發炎降低',
+                    'feature2': '添加量：1公斤/噸飼料',
+                    'feature3': '發炎指數降低40%'
+                },
+                'zh-CN': {
+                    'title': '活力旺蛋鸡性能提升方案 TDS',
+                    'subtitle': '产蛋率提升・蛋黄品质优化・暗斑蛋减少・产卵发炎降低',
+                    'feature2': '添加量：1公斤/吨饲料',
+                    'feature3': '发炎指数降低40%'
+                },
+                'en': {
+                    'title': 'Vitality Egg Layer Performance Enhancement TDS',
+                    'subtitle': 'Egg Production Increase・Yolk Quality Optimization・Shell Spots Reduction・Ovulation Inflammation Reduction',
+                    'feature2': 'Dosage: 1 kg/ton feed',
+                    'feature3': 'Inflammation Index Reduction 40%'
+                }
+            };
+            
+            // 更新有data-translate屬性的元素
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
         }
 
         // 滾動淡入效果
@@ -1392,6 +1396,30 @@
             
             fadeElements.forEach(element => {
                 observer.observe(element);
+            });
+        }
+
+        // 優化移動設備體驗
+        function optimizeMobileExperience() {
+            // 設置視口高度
+            const setVH = () => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            };
+            
+            setVH();
+            window.addEventListener('resize', setVH);
+            window.addEventListener('orientationchange', setVH);
+            
+            // 優化觸摸反饋
+            document.querySelectorAll('.btn, .egg-card, .quality-card, .benefit-card').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '';
+                });
             });
         }
     </script>
