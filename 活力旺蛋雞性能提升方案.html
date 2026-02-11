@@ -2,10 +2,10 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>活力旺蛋雞性能提升方案 TDS - 首池有限公司</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <title>活力旺蛋雞性能提升方案 TDS - 首池有限公司 · 即時語言切換</title>
     <style>
-        /* ----- 全域變數與重置 (手機優先) ----- */
+        /* ----- 全域變數與重置 (手機優先 · 完全保留原始設計) ----- */
         :root {
             --primary: #e67e22;
             --secondary: #d35400;
@@ -44,7 +44,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* ----- 語言切換器 (手機垂直/水平適配) ----- */
+        /* ----- 語言切換器 (黏貼 · 觸控優化) ----- */
         .language-switcher {
             position: fixed;
             top: max(10px, var(--safe-area-inset-top));
@@ -92,7 +92,7 @@
             overflow-x: hidden;
             box-shadow: 0 0 30px rgba(0,0,0,0.08);
         }
-        /* ----- 表頭 (純色漸層，無背景圖片，專業美化) ----- */
+        /* ----- 表頭 (純色漸層，無背景圖片) ----- */
         header {
             text-align: center;
             padding: 15px 0 20px;
@@ -488,7 +488,7 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         footer p { margin-bottom: 12px; font-size: 0.9rem; line-height: 1.6; }
-        /* ----- 響應式 (平板/桌機/超小手機/橫向) ----- */
+        /* ----- 響應式 (平板/桌機/超小手機/橫向) 完全保留原始設計 ----- */
         @media (min-width: 768px) {
             html { font-size: 16px; }
             .container { padding: 25px; max-width: 100%; border-radius: 20px; margin: 15px auto; }
@@ -538,7 +538,7 @@
             .egg-grid, .quality-grid, .benefits-grid { grid-template-columns: repeat(2, 1fr); }
             .container { padding: 15px; }
         }
-        /* ----- 暗色模式 (純色背景，無圖片) ----- */
+        /* ----- 暗色模式 (純色背景) ----- */
         @media (prefers-color-scheme: dark) {
             body { background: linear-gradient(135deg, #121212, #1a1a1a); color: #e0e0e0; }
             .container { background: #1e1e1e; }
@@ -569,7 +569,7 @@
     </style>
 </head>
 <body>
-    <!-- 語言切換器 -->
+    <!-- ========== 語言切換器 (即時切換繁/簡/英，完整翻譯) ========= -->
     <div class="language-switcher">
         <button class="lang-btn active" data-lang="zh-TW">繁(NTD)</button>
         <button class="lang-btn" data-lang="zh-CN">简(CNY)</button>
@@ -577,18 +577,19 @@
     </div>
 
     <div class="container">
-        <!-- 封面抬頭 (純色漸層，無背景圖片) -->
+        <!-- 封面抬頭 (純色漸層，無背景圖片 · 無返回主頁按鈕) -->
         <header>
             <div class="company-info">
                 <h1 data-translate="title">活力旺蛋雞性能提升方案 TDS</h1>
                 <p data-translate="subtitle">產蛋率提升・蛋黃品質優化・暗斑蛋減少・產卵發炎降低</p>
-                <div class="tagline" data-translate="tagline">Egg Production Enhancement &middot; Yolk Quality Improvement &middot; Shell Strength Optimization</div>
+                <div class="tagline" data-translate="tagline">Egg Production Enhancement · Yolk Quality Improvement · Shell Strength Optimization</div>
                 <div class="highlight-badge" data-translate="highlight">🥚 產蛋率提升5-8%｜蛋黃品質提升3-4級｜暗斑蛋減少70-80%</div>
                 <div class="feature-badges">
-                    <div class="feature-badge" id="feature1">成本：<span class="currency" data-base-value="600">NTD 600</span>/公斤</div>
-                    <div class="feature-badge" id="feature2" data-translate="feature2">添加量：1公斤/噸飼料</div>
-                    <div class="feature-badge" id="feature3" data-translate="feature3">發炎指數降低40%</div>
-                    <div class="feature-badge" id="feature4">投資報酬率：<span class="currency" data-base-value="580">580%</span></div>
+                    <!-- 為每個feature badge加上data-translate，並保留貨幣使用data-value動態切換 -->
+                    <div class="feature-badge" data-translate="feature1_label">成本：<span class="currency" data-value="600">NTD 600</span>/公斤</div>
+                    <div class="feature-badge" data-translate="feature2_label">添加量：1公斤/噸飼料</div>
+                    <div class="feature-badge" data-translate="feature3_label">發炎指數降低40%</div>
+                    <div class="feature-badge" data-translate="feature4_label">投資報酬率：<span class="currency" data-value="580">580%</span></div>
                 </div>
             </div>
         </header>
@@ -650,12 +651,12 @@
                 </div>
                 <div class="spec-card" onclick="alert('產品單價')">
                     <span class="label" data-translate="spec2_label">產品單價</span>
-                    <span class="value currency" data-base-value="600">NTD 600</span>
+                    <span class="value currency" data-value="600">NTD 600</span>
                     <span class="unit" data-translate="spec2_unit">/公斤</span>
                 </div>
                 <div class="spec-card" onclick="alert('每噸成本增加')">
                     <span class="label" data-translate="spec3_label">每噸飼料成本增加</span>
-                    <span class="value currency" data-base-value="600">NTD 600</span>
+                    <span class="value currency" data-value="600">NTD 600</span>
                     <span class="unit" data-translate="spec3_unit">/噸</span>
                 </div>
                 <div class="spec-card" onclick="alert('蛋雞日採食量')">
@@ -665,7 +666,7 @@
                 </div>
                 <div class="spec-card" onclick="alert('每隻雞日成本增加')">
                     <span class="label" data-translate="spec5_label">每隻雞日成本增加</span>
-                    <span class="value currency" data-base-value="0.069">NTD 0.069</span>
+                    <span class="value currency" data-value="0.069">NTD 0.069</span>
                     <span class="unit" data-translate="spec5_unit">/隻/天</span>
                 </div>
                 <div class="spec-card" onclick="alert('適用階段')">
@@ -762,7 +763,7 @@
             </div>
         </section>
 
-        <!-- 經濟效益分析 -->
+        <!-- 經濟效益分析 (每個貨幣數字已添加 data-value 屬性) -->
         <section>
             <h2 data-translate="section4_title">💰 經濟效益分析｜每隻蛋雞淨利提升</h2>
             <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%); padding: 18px; border-radius: 12px; margin-bottom: 22px; border-left: 4px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.05);" class="fade-in">
@@ -779,25 +780,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td data-translate="row1_col1">產蛋率提升收益(+5%)</td><td data-translate="row1_col2">+5%產蛋率</td><td><span class="currency" data-base-value="33.60">NTD 33.60</span></td></tr>
-                            <tr><td data-translate="row2_col1">飼料效率優化(FCR -7%)</td><td data-translate="row2_col2">料蛋比2.2→2.05</td><td><span class="currency" data-base-value="18.90">NTD 18.90</span></td></tr>
-                            <tr><td data-translate="row3_col1">蛋品品質溢價</td><td data-translate="row3_col2">價格+15%</td><td><span class="currency" data-base-value="37.80">NTD 37.80</span></td></tr>
-                            <tr><td data-translate="row4_col1">暗斑蛋減少收益</td><td data-translate="row4_col2">-75%次級蛋</td><td><span class="currency" data-base-value="12.60">NTD 12.60</span></td></tr>
-                            <tr><td data-translate="row5_col1">健康度提升減少損失</td><td data-translate="row5_col2">死亡率-2%</td><td><span class="currency" data-base-value="8.40">NTD 8.40</span></td></tr>
-                            <tr style="background: #ffeaa7; font-weight: bold;"><td data-translate="row6_col1"><strong>總效益增加</strong></td><td>—</td><td><strong><span class="currency" data-base-value="111.30">NTD 111.30</span></strong></td></tr>
-                            <tr><td data-translate="row7_col1">飼料添加成本增加</td><td data-translate="row7_col2">0.069元/天×280天</td><td><span class="currency" data-base-value="-19.32">NTD -19.32</span></td></tr>
-                            <tr style="background: linear-gradient(135deg, var(--primary) 0%, #d35400 100%); color: white; font-weight: bold;"><td data-translate="row8_col1">每隻蛋雞淨利潤增加</td><td>—</td><td><span class="currency" data-base-value="91.98">NTD 91.98</span></td></tr>
+                            <tr><td data-translate="row1_col1">產蛋率提升收益(+5%)</td><td data-translate="row1_col2">+5%產蛋率</td><td><span class="currency" data-value="33.60">NTD 33.60</span></td></tr>
+                            <tr><td data-translate="row2_col1">飼料效率優化(FCR -7%)</td><td data-translate="row2_col2">料蛋比2.2→2.05</td><td><span class="currency" data-value="18.90">NTD 18.90</span></td></tr>
+                            <tr><td data-translate="row3_col1">蛋品品質溢價</td><td data-translate="row3_col2">價格+15%</td><td><span class="currency" data-value="37.80">NTD 37.80</span></td></tr>
+                            <tr><td data-translate="row4_col1">暗斑蛋減少收益</td><td data-translate="row4_col2">-75%次級蛋</td><td><span class="currency" data-value="12.60">NTD 12.60</span></td></tr>
+                            <tr><td data-translate="row5_col1">健康度提升減少損失</td><td data-translate="row5_col2">死亡率-2%</td><td><span class="currency" data-value="8.40">NTD 8.40</span></td></tr>
+                            <tr style="background: #ffeaa7; font-weight: bold;"><td data-translate="row6_col1"><strong>總效益增加</strong></td><td>—</td><td><strong><span class="currency" data-value="111.30">NTD 111.30</span></strong></td></tr>
+                            <tr><td data-translate="row7_col1">飼料添加成本增加</td><td data-translate="row7_col2">0.069元/天×280天</td><td><span class="currency" data-value="-19.32">NTD -19.32</span></td></tr>
+                            <tr style="background: linear-gradient(135deg, var(--primary) 0%, #d35400 100%); color: white; font-weight: bold;"><td data-translate="row8_col1">每隻蛋雞淨利潤增加</td><td>—</td><td><span class="currency" data-value="91.98">NTD 91.98</span></td></tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="roi-badge">
                     <div data-translate="roi_title">每隻蛋雞投資報酬率 (ROI)</div>
-                    <div class="roi-value"><span data-translate="roi_value">576%</span></div>
+                    <div class="roi-value"><span data-translate="roi_value" data-percent="true">576%</span></div>
                     <div style="font-size: 0.9rem; opacity: 0.9;" data-translate="roi_desc">產蛋期每投入1元，創造6.76元淨收益｜投資回收期 &lt;15天</div>
                 </div>
             </div>
             <div style="background: #fff8e1; padding: 18px; border-radius: 12px; margin-top: 18px; border-left: 4px solid var(--secondary); box-shadow: 0 2px 8px rgba(0,0,0,0.05);" class="fade-in">
-                <p><strong data-translate="large_scale_label">萬隻蛋雞場年度效益：</strong><span data-translate="large_scale">每批蛋雞淨利增加<span class="currency" data-base-value="919800">NTD 919,800</span>元｜年更新1.5批次總計增加<span class="currency" data-base-value="1379700">NTD 1,379,700</span>元｜飼料添加總成本僅增加<span class="currency" data-base-value="193200">NTD 193,200</span>元</span></p>
+                <p><strong data-translate="large_scale_label">萬隻蛋雞場年度效益：</strong>
+                    <span data-translate="large_scale_text" style="display: inline;">
+                        <!-- 為數字加上單獨的currency以便切換，但整句翻譯保留，因此將數字拆出並用data-value動態更新 -->
+                        每批蛋雞淨利增加<span class="currency" data-value="919800">NTD 919,800</span>元｜年更新1.5批次總計增加<span class="currency" data-value="1379700">NTD 1,379,700</span>元｜飼料添加總成本僅增加<span class="currency" data-value="193200">NTD 193,200</span>元
+                    </span>
+                </p>
             </div>
             <div class="egg-image-container">
                 <img src="assets/roi-chart.png" alt="蛋雞經濟效益計算圖" data-translate="image6_alt" loading="lazy">
@@ -805,12 +811,12 @@
             </div>
         </section>
 
-        <!-- CTA行動區塊 -->
+        <!-- CTA行動區塊 (無返回主頁按鈕) -->
         <section class="cta-section">
             <h2 style="color: white; border-bottom: 2px solid var(--warning); padding-bottom: 10px;" data-translate="cta_title">🚀 立即啟動蛋雞性能提升方案</h2>
-            <div class="big-number"><span class="currency" data-base-value="91.98">NTD 91.98</span></div>
+            <div class="big-number"><span class="currency" data-value="91.98">NTD 91.98</span></div>
             <p data-translate="cta_subtitle1">每隻蛋雞淨利潤增加(NTD)</p>
-            <div class="big-number"><span data-translate="roi_value">576%</span></div>
+            <div class="big-number"><span data-translate="roi_value" data-percent="true">576%</span></div>
             <p data-translate="cta_subtitle2">投資報酬率(ROI)</p>
             <div style="background: rgba(241, 196, 15, 0.2); padding: 12px 20px; border-radius: 25px; display: inline-block; margin: 15px 0; font-weight: bold; font-size: 0.9rem; border: 1px solid rgba(241, 196, 15, 0.3);" data-translate="cta_bullets">🥚 產蛋率提升5-8%｜⭐ 蛋黃品質提升3-4級｜🩺 發炎降低40-50%</div>
             <div class="cta-buttons">
@@ -839,15 +845,17 @@
 
         let currentLang = 'zh-TW';
 
-        // ----- 完整三語翻譯詞庫 (涵蓋所有 data-translate 鍵) -----
+        // ----- 完整三語翻譯詞庫 (涵蓋所有 data-translate 鍵，已完整補齊) -----
         const translations = {
             'zh-TW': {
                 'title': '活力旺蛋雞性能提升方案 TDS',
                 'subtitle': '產蛋率提升・蛋黃品質優化・暗斑蛋減少・產卵發炎降低',
                 'tagline': 'Egg Production Enhancement · Yolk Quality Improvement · Shell Strength Optimization',
                 'highlight': '🥚 產蛋率提升5-8%｜蛋黃品質提升3-4級｜暗斑蛋減少70-80%',
-                'feature2': '添加量：1公斤/噸飼料',
-                'feature3': '發炎指數降低40%',
+                'feature1_label': '成本：{currency}/公斤',
+                'feature2_label': '添加量：1公斤/噸飼料',
+                'feature3_label': '發炎指數降低40%',
+                'feature4_label': '投資報酬率：{currency}',
                 'section1_title': '🥚 產蛋率提升專區｜高產穩定持久',
                 'section1_desc': '專為蛋雞設計的營養調控方案，顯著提升產蛋率，延長產蛋高峰，改善蛋品品質，創造更高經濟價值。',
                 'egg_card1_title': '產蛋率提升',
@@ -977,7 +985,7 @@
                 'roi_value': '576%',
                 'roi_desc': '產蛋期每投入1元，創造6.76元淨收益｜投資回收期 <15天',
                 'large_scale_label': '萬隻蛋雞場年度效益：',
-                'large_scale': '每批蛋雞淨利增加NTD 919,800元｜年更新1.5批次總計增加NTD 1,379,700元｜飼料添加總成本僅增加NTD 193,200元',
+                'large_scale_text': '每批蛋雞淨利增加{currency1}元｜年更新1.5批次總計增加{currency2}元｜飼料添加總成本僅增加{currency3}元',
                 'image6_alt': '蛋雞經濟效益計算圖',
                 'image6_caption': '圖6：蛋雞場經濟效益計算 (ROI 580%｜每隻淨利+45.2元)',
                 'cta_title': '🚀 立即啟動蛋雞性能提升方案',
@@ -992,13 +1000,15 @@
                 'footer_copyright': '© 2026 首池有限公司 版權所有｜蛋雞優化技術為商業機密，未經授權禁止轉載'
             },
             'zh-CN': {
-                // 簡體中文翻譯 (完整對應)
+                // 簡體翻譯 (已完整對應，貨幣符號與文字配合動態轉換)
                 'title': '活力旺蛋鸡性能提升方案 TDS',
                 'subtitle': '产蛋率提升·蛋黄品质优化·暗斑蛋减少·产卵发炎降低',
                 'tagline': 'Egg Production Enhancement · Yolk Quality Improvement · Shell Strength Optimization',
                 'highlight': '🥚 产蛋率提升5-8%｜蛋黄品质提升3-4级｜暗斑蛋减少70-80%',
-                'feature2': '添加量：1公斤/吨饲料',
-                'feature3': '发炎指数降低40%',
+                'feature1_label': '成本：{currency}/公斤',
+                'feature2_label': '添加量：1公斤/吨饲料',
+                'feature3_label': '发炎指数降低40%',
+                'feature4_label': '投资报酬率：{currency}',
                 'section1_title': '🥚 产蛋率提升专区｜高产稳定持久',
                 'section1_desc': '专为蛋鸡设计的营养调控方案，显著提升产蛋率，延长产蛋高峰，改善蛋品品质，创造更高经济价值。',
                 'egg_card1_title': '产蛋率提升',
@@ -1128,7 +1138,7 @@
                 'roi_value': '576%',
                 'roi_desc': '产蛋期每投入1元，创造6.76元净收益｜投资回收期 <15天',
                 'large_scale_label': '万只蛋鸡场年度效益：',
-                'large_scale': '每批蛋鸡净利增加CNY 201,600元｜年更新1.5批次总计增加CNY 302,400元｜饲料添加总成本仅增加CNY 42,336元',
+                'large_scale_text': '每批蛋鸡净利增加{currency1}元｜年更新1.5批次总计增加{currency2}元｜饲料添加总成本仅增加{currency3}元',
                 'image6_alt': '蛋鸡经济效益计算图',
                 'image6_caption': '图6：蛋鸡场经济效益计算 (ROI 580%｜每只净利+9.9元)',
                 'cta_title': '🚀 立即启动蛋鸡性能提升方案',
@@ -1143,13 +1153,15 @@
                 'footer_copyright': '© 2026 首池有限公司 版权所有｜蛋鸡优化技术为商业机密，未经授权禁止转载'
             },
             'en': {
-                // 英文翻譯 (完整對應)
+                // 英文翻譯
                 'title': 'Vitality Layer Performance Enhancement TDS',
                 'subtitle': 'Egg Production Increase · Yolk Quality Optimization · Shell Spots Reduction · Ovulation Inflammation Reduction',
                 'tagline': 'Egg Production Enhancement · Yolk Quality Improvement · Shell Strength Optimization',
                 'highlight': '🥚 +5-8% Egg Production | Yolk Color +3-4 grade | Shell Spots -70-80%',
-                'feature2': 'Dosage: 1 kg/ton feed',
-                'feature3': 'Inflammation Index -40%',
+                'feature1_label': 'Cost: {currency}/kg',
+                'feature2_label': 'Dosage: 1 kg/ton feed',
+                'feature3_label': 'Inflammation Index -40%',
+                'feature4_label': 'ROI: {currency}',
                 'section1_title': '🥚 Egg Production Enhancement',
                 'section1_desc': 'Specially designed nutritional modulation solution for laying hens, significantly increasing egg production rate, extending peak production, and improving egg quality for higher economic value.',
                 'egg_card1_title': 'Egg Production Increase',
@@ -1195,7 +1207,7 @@
                 'spec6_value': 'Whole laying period',
                 'spec6_unit': '18-72 weeks',
                 'usage_label': 'Directions:',
-                'usage_desc': 'Add 1 kg of Vitality Layer专用配方 per ton of complete feed throughout the laying period. No changes to existing management needed.',
+                'usage_desc': 'Add 1 kg of Vitality Layer formula per ton of complete feed throughout the laying period. No changes to existing management needed.',
                 'image2_alt': 'Modern layer farm with Vitality feed additive system',
                 'image2_caption': 'Figure 2: Automated feed additive system in modern layer farm (Vitality module)',
                 'section2_title': '⭐ Egg Quality Improvement',
@@ -1279,7 +1291,7 @@
                 'roi_value': '576%',
                 'roi_desc': 'For every 1 NTD invested, 6.76 NTD net return | Payback period <15 days',
                 'large_scale_label': 'Annual benefit for 10,000-hen farm:',
-                'large_scale': 'Net profit increase per flock USD 6,300｜1.5 flocks/year total increase USD 9,450｜Total additive cost only USD 1,323',
+                'large_scale_text': 'Net profit increase per flock {currency1} NTD｜1.5 flocks/year total increase {currency2} NTD｜Total additive cost only {currency3} NTD',
                 'image6_alt': 'Economic benefit calculation chart',
                 'image6_caption': 'Figure 6: Layer farm economic benefit calculation (ROI 580%｜Net profit +1.45 USD/hen)',
                 'cta_title': '🚀 Start Layer Performance Enhancement Now',
@@ -1298,7 +1310,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 語言按鈕事件
             document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
                     switchLanguage(this.getAttribute('data-lang'));
                 });
             });
@@ -1306,7 +1319,6 @@
             initScrollAnimation();
             // 預設語言
             switchLanguage('zh-TW');
-            // 卡片點擊反饋 (已經內嵌 onclick)
         });
 
         function switchLanguage(lang) {
@@ -1316,74 +1328,100 @@
             });
             currentLang = lang;
             document.documentElement.lang = lang === 'zh-CN' ? 'zh-Hans' : lang;
-            // 更新所有文字
-            updateTextContent(lang);
-            // 更新貨幣數值
-            updateCurrencyValues(lang);
-        }
 
-        function updateCurrencyValues(lang) {
-            const rateInfo = exchangeRates[lang];
-            document.querySelectorAll('.currency').forEach(el => {
-                const base = el.getAttribute('data-base-value');
-                if (base) {
-                    let val = parseFloat(base);
-                    if (!isNaN(val)) {
-                        // 百分比數值(如ROI)雖有.currency但內容為%，此處僅轉換純數字貨幣
-                        if (el.textContent.includes('%')) return; // 略過百分比
-                        const converted = (val * rateInfo.rate).toFixed(2);
-                        el.textContent = rateInfo.format.replace('{value}', addThousandsSeparator(converted));
-                    }
-                }
-            });
-            // 更新表格表頭貨幣單位
-            const header3 = document.querySelector('[data-translate="table_header3"]');
-            if (header3) {
-                if (lang === 'zh-TW') header3.textContent = '每隻蛋雞經濟價值(NTD)';
-                else if (lang === 'zh-CN') header3.textContent = '每只蛋鸡经济价值(CNY)';
-                else if (lang === 'en') header3.textContent = 'Economic Value Per Hen(USD)';
-            }
-            // 更新 CTA 小標貨幣單位
-            const ctaSub = document.querySelector('[data-translate="cta_subtitle1"]');
-            if (ctaSub) {
-                if (lang === 'zh-TW') ctaSub.textContent = '每隻蛋雞淨利潤增加(NTD)';
-                else if (lang === 'zh-CN') ctaSub.textContent = '每只蛋鸡净利润增加(CNY)';
-                else if (lang === 'en') ctaSub.textContent = 'Net Profit Increase Per Hen(USD)';
-            }
-        }
-
-        function addThousandsSeparator(numStr) {
-            let parts = numStr.split('.');
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            return parts.join('.');
-        }
-
-        function updateTextContent(lang) {
+            // 1️⃣ 更新所有 data-translate 文字（但跳過 .currency，避免覆蓋貨幣數字）
             const dict = translations[lang] || translations['zh-TW'];
             document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.getAttribute('data-translate');
-                if (dict[key]) {
-                    // 特殊處理: 保留貨幣標籤內的原始 data-base-value，不覆寫內部HTML結構
-                    if (el.classList.contains('currency') && el.hasAttribute('data-base-value')) {
-                        // 只更新文字節點？簡單處理：跳過，因為貨幣值由 updateCurrencyValues 處理
-                        return;
-                    }
-                    // 避免覆寫掉 .currency 的格式化數字
+                const key = el.dataset.translate;
+                if (dict[key] !== undefined) {
+                    // 如果元素內有 .currency 子元素，需要保留其結構，只替換文字節點？
+                    // 簡單處理：如果沒有 .currency 子元素，直接替換；否則保留 HTML 結構，只替換非 .currency 的文字？
+                    // 但 feature1_label、feature4_label 包含 {currency} 佔位符，稍後由貨幣更新替換
                     if (el.querySelector('.currency')) {
-                        // 複雜結構，只更新文字節點？此處簡化：直接替換非 .currency 子元素的文字
-                        // 為避免破壞貨幣數字，只更新沒有 .currency 的元素
-                        if (!el.querySelector('.currency')) {
-                            el.textContent = dict[key];
-                        } else {
-                            // 保留 .currency 子元素，只替換其他文字節點
-                            // 簡化：僅示範，完整實作可遍歷 childNodes
-                        }
+                        // 複雜結構，使用自定義邏輯：將 dict[key] 中的 {currency} 替換為當前的貨幣符號+值？
+                        // 但貨幣值會由 updateCurrencyValues 獨立更新，所以這裡先保留
+                        // 為避免覆蓋 currency 子元素，我們只替換文本節點，但簡化：不處理，交給 updateCurrencyValues 後續更新 feature-badge 文字？
+                        // 我們直接在更新貨幣時重構 feature-badge 文字。
+                        // 這裡簡單略過，由後續專門處理。
                     } else {
                         el.textContent = dict[key];
                     }
                 }
             });
-            // 手動修正部分已知問題：feature1, feature4 保留貨幣符號
+
+            // 2️⃣ 更新所有貨幣 data-value
+            updateCurrencyValues(lang, dict);
+
+            // 3️⃣ 手動修正 feature-badge 文字，因為它們含有 {currency} 佔位符
+            const rateInfo = exchangeRates[lang];
+            const symbol = rateInfo.symbol;
+            // feature1 成本
+            const feature1 = document.querySelector('[data-translate="feature1_label"]');
+            if (feature1) {
+                const currencySpan = feature1.querySelector('.currency');
+                let currencyText = currencySpan ? currencySpan.textContent : 'NTD 600';
+                feature1.innerHTML = dict['feature1_label'].replace('{currency}', currencyText);
+            }
+            // feature4 ROI
+            const feature4 = document.querySelector('[data-translate="feature4_label"]');
+            if (feature4) {
+                const currencySpan = feature4.querySelector('.currency');
+                let currencyText = currencySpan ? currencySpan.textContent : '580%';
+                feature4.innerHTML = dict['feature4_label'].replace('{currency}', currencyText);
+            }
+
+            // 4️⃣ 更新表格表頭貨幣單位
+            const header3 = document.querySelector('[data-translate="table_header3"]');
+            if (header3) header3.textContent = dict['table_header3'];
+
+            // 5️⃣ 更新 CTA 小標貨幣單位
+            const ctaSub1 = document.querySelector('[data-translate="cta_subtitle1"]');
+            if (ctaSub1) ctaSub1.textContent = dict['cta_subtitle1'];
+
+            // 6️⃣ 更新萬隻蛋雞場年度效益文字（含有貨幣佔位符）
+            const largeScaleSpan = document.querySelector('[data-translate="large_scale_text"]');
+            if (largeScaleSpan) {
+                // 從 currency 元素取得格式化後的金額
+                const cur1 = document.querySelector('.currency[data-value="919800"]')?.textContent || 'NTD 919,800';
+                const cur2 = document.querySelector('.currency[data-value="1379700"]')?.textContent || 'NTD 1,379,700';
+                const cur3 = document.querySelector('.currency[data-value="193200"]')?.textContent || 'NTD 193,200';
+                largeScaleSpan.innerHTML = dict['large_scale_text']
+                    .replace('{currency1}', cur1)
+                    .replace('{currency2}', cur2)
+                    .replace('{currency3}', cur3);
+            }
+
+            // 7️⃣ 更新 ROI 百分比文字（確保顯示正確）
+            const roiValueEl = document.querySelector('[data-translate="roi_value"]');
+            if (roiValueEl && dict['roi_value']) roiValueEl.textContent = dict['roi_value'];
+        }
+
+        function updateCurrencyValues(lang, dict) {
+            const rateInfo = exchangeRates[lang];
+            document.querySelectorAll('.currency[data-value]').forEach(el => {
+                const rawVal = parseFloat(el.dataset.value);
+                if (isNaN(rawVal)) return;
+                const converted = rawVal * rateInfo.rate;
+                // 格式化
+                let formatted = formatCurrency(converted, lang);
+                el.textContent = rateInfo.symbol + formatted;
+            });
+        }
+
+        function formatCurrency(value, lang) {
+            let absVal = Math.abs(value);
+            let formatted;
+            if (absVal === 0) formatted = '0';
+            else if (absVal >= 1) formatted = value.toFixed(2).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1');
+            else if (absVal >= 0.01) formatted = value.toFixed(3).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1');
+            else formatted = value.toFixed(4).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1');
+            // 千分位
+            if (absVal >= 1000) {
+                let parts = formatted.split('.');
+                parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                formatted = parts.join('.');
+            }
+            return formatted;
         }
 
         // 滾動淡入
