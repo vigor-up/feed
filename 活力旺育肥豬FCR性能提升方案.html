@@ -33,7 +33,7 @@
             -webkit-font-smoothing: antialiased;
         }
         html {
-            font-size: 15px;  /* 略小，版面緊湊 */
+            font-size: 15px;
             scroll-behavior: smooth;
         }
         body {
@@ -887,7 +887,7 @@
     </div>
 
     <script>
-        // ========== 🌍 完整多語言翻譯物件（繁體/簡體/英文）- 已刪除所有機密揭露字樣 ==========
+        // ========== 🌍 完整多語言翻譯物件（繁體/簡體/英文）- 已補全所有鍵值 ==========
         const translations = {
             'zh-TW': {
                 'title': '🐗 活力旺®育肥豬 · FCR 2.8→<2.0',
@@ -1024,13 +1024,278 @@
                 'native': '土雞',
                 'broiler': '白肉雞',
             },
-            'zh-CN': { /* 完整翻譯已內嵌，限於篇幅此處僅保留骨架，實際檔案包含完整簡體翻譯 */ },
-            'en': { /* 完整翻譯已內嵌，限於篇幅此處僅保留骨架，實際檔案包含完整英文翻譯 */ }
+            'zh-CN': {
+                'title': '🐗 活力旺®育肥猪 · FCR 2.8→<2.0',
+                'subtitle': '三大机密载体｜重组蛋白酶‧小核酸‧褐藻素 · 50万头实证',
+                'highlight_badge': '🏆 单头净利+2,328元 | ROI 1102% | 50万头实证',
+                'cost_label': '成本',
+                'per_kg': '公斤',
+                'dosage_label': '添加量：1公斤/吨饲料',
+                'verified_heads': '实证头数：50万+',
+                'confidential_title': '🔬 活力旺® 育肥专利配方 – 三大机密载体',
+                'confidential_desc': '',
+                'protease_title': '1. 「重组蛋白酶」—— 长链脂肪醇萃取物',
+                'protease_desc': '<strong>降FCR、能量重分配</strong> · AMPK/mTOR信号轴 · FCR 2.8→<2.0 · 每头省88kg饲料',
+                'protease_caption': '重组蛋白酶 · 长链脂肪醇3D结构示意',
+                'protease_mechanism': '🧬 分子机转：',
+                'protease_mechanism_text': '重组蛋白酶通过激活AMPK通路，上调骨骼肌脂肪酸氧化及葡萄糖摄取；同时通过mTORC1信号促进肌肉蛋白合成。此双重调控机制经Genova等 (2023, PMID:37008356) 证实可于代谢能降低85 kcal/kg下维持增重。活力旺重组蛋白酶将能量由脂肪堆积「重定向」至瘦肉沉积，实现FCR突破2.0。',
+                'rna_title': '2. 「小核酸」—— 非编码RNA片段',
+                'rna_desc': '<strong>背脂率↓30%、出肉率↑</strong> · IGF2基因调控 · 背脂<2.0cm · 出肉率>82%',
+                'rna_caption': '小核酸 · 非编码RNA与DNA结合示意',
+                'rna_mechanism': '🧬 表观遗传调控：',
+                'rna_mechanism_text': '活力旺小核酸片段靶向IGF2基因启动子区域，模拟「A等位基因」优势表现型，显著下调脂肪生成转录因子。Liu等 (2019, PMID:31159441) 证实microRNA可直接调控猪只背脂沉积。Yu等 (2020, PMID:32782789) 指出高直链淀粉比例可上调FAS/SCD基因表现，提高肌内脂肪(IMF)达3.2%以上。活力旺小核酸整合此双重路径：皮下脂肪抑制、肌内脂肪定向沉积，同时达成瘦肉率提升与雪花肉生成。',
+                'fucoxanthin_title': '3. 「褐藻素」—— 藻源性类胡萝卜素',
+                'fucoxanthin_desc': '<strong>抗病毒免疫力、抗应激</strong> · Nrf2路径 · 屠宰失重↓1.2%',
+                'fucoxanthin_caption': '褐藻素 · 天然巨藻萃取来源',
+                'fucoxanthin_mechanism': '🌿 抗氧化与肠道健康：',
+                'fucoxanthin_mechanism_text': '褐藻素通过激活Nrf2/KEAP1抗氧化反应元件，提升SOD、GPx活性，有效清除自由基。Liotta等 (2019, PMID:31861062) 发现多酚类物质可降低背脂厚度、提高MUFA与ω-3 PUFA浓度。Ferrer等 (2022, PMID:36308921) 观察到皮下脂肪MUFA/SFA比例上升。褐藻素凭借独特双亲分子结构，嵌入细胞膜淬灭单重态氧，降低运输紧迫及屠宰失重，同时维护肠道屏障完整性，减少发炎因子IL-6、IL-1β表现。',
+                'benefit_item': '效能项目',
+                'mechanism': '对应载体',
+                'performance': '实证绩效',
+                'literature': '文献来源',
+                'benefit1': '降FCR',
+                'benefit2': '背脂率下降',
+                'benefit3': '出肉率＞80%',
+                'benefit4': '抗病毒・免疫力',
+                'benefit5': '抗应激・耐运输',
+                'carrier1': '重组蛋白酶',
+                'carrier2': '小核酸',
+                'carrier3': '褐藻素',
+                'slaughter_title': '📋 全台三大产区屠宰场实证（2025-2026）',
+                'slaughter_scope': '📍 北部(桃竹苗)·中部(彰云嘉)·南部(屏东) 23场 · 47,826头',
+                'slaughter_caption': '彰化屠宰场屠体评级 · 背脂实测1.9cm (2026.02)',
+                'region': '产区',
+                'yard_count': '场数',
+                'control': '对照组<br>出肉率/背脂',
+                'vitality': '活力旺组<br>出肉率/背脂',
+                'improvement': '改善',
+                'premium': '收购溢价',
+                'north': '北部',
+                'central': '中部',
+                'south': '南部',
+                'slaughter_note': '※ 资料为首池品管部汇整，收购溢价加权平均。',
+                'slaughter_conclusion': '🔬 屠体评级提升1~2等级 · 中部溢价达4.0元/公斤',
+                'spec_title': '⚙️ 育肥规格｜30→140kg 高性能参数',
+                'metric_fcr_title': '饲料转换率 (FCR)',
+                'fcr_new': '<2.0',
+                'fcr_improve': '↓ 28.6%',
+                'fcr_desc': '省88kg/头 · 1,320元',
+                'metric_yield_title': '出肉率',
+                'yield_old': '<80%',
+                'yield_new': '>80%',
+                'yield_improve': '↑ 3.9~5.2%',
+                'yield_desc': '+7kg屠体 · +700元',
+                'metric_bf_title': '背脂厚度',
+                'bf_old': '>2.5cm',
+                'bf_new': '<2.0cm',
+                'bf_improve': '↓ 30%',
+                'bf_desc': '溢价3~5元/kg · +420元',
+                'metric_weight_title': '出栏体重',
+                'weight_old': '<130kg',
+                'weight_new': '>140kg',
+                'weight_improve': '↑ 10kg+',
+                'weight_desc': '雪花溢价2.5元/kg',
+                'heavy_pig_caption': '云林示范场 · 140kg杜洛克 · 背脂1.9cm',
+                'fcr_triptych_caption': '左FCR 2.8 · 中FCR 2.4 · 右FCR <2.0｜台湾现代化猪舍',
+                'fcr_chart_caption': '饲料转换效率对比 · 节省88kg饲料',
+                'profit_title': '💰 单头效益精算｜饲料+屠体+背脂+肉质',
+                'calc_basis': '📐 基准：',
+                'calc_detail': '30→140kg · FCR 2.8→2.0 · 饲料15元/kg · 屠体100元/kg · 背脂溢价3元/kg · 品牌溢价100元/头',
+                'profit_item': '效益项目',
+                'improvement_range': '改善幅度',
+                'value_ntd': '价值（NTD/头）',
+                'feed_saving': '饲料节省',
+                'fcr_saving_detail': 'FCR 2.8→2.0 · 省88kg',
+                'carcass_gain': '屠体增重',
+                'yield_gain_detail': '出肉率77%→81% · +7kg',
+                'bf_premium': '背脂溢价',
+                'bf_premium_detail': '背脂2.5→1.8cm · A级',
+                'quality_premium': '肉质溢价',
+                'quality_detail': '肌间脂肪3.2%',
+                'total_benefit': '总效益',
+                'add_cost': '添加成本',
+                'add_cost_detail': '220kg × 0.96元',
+                'net_profit': '每头净利',
+                'roi_title': 'ROI —— 1102%',
+                'roi_desc': '💰 每投入1元，回收12元 · 回收期4.2天',
+                'video_title': '🎥 屠体评级实录｜背脂与瘦肉实测',
+                'video_caption': '屠体分级现场 · 背脂厚度1.8cm · 瘦肉率>68%',
+                'marbling_caption': '肌内脂肪达3.2% · 大理石纹明显 · 品牌猪口感',
+                'roi_caption_new': '📊 1元→12元 · 4.2天回本 · 日增重950g · FCR 2.8→2.0',
+                'product_spec_title': '📋 产品规格｜每吨全价饲料添加1kg',
+                'spec_dosage_label': '添加量',
+                'spec_dosage_note': '强化1.5kg',
+                'spec_price_label': '单价',
+                'spec_cost_label': '饲料成本增',
+                'spec_stage_label': '适用阶段',
+                'spec_stage_value': '育肥全程',
+                'spec_feed_label': '每头耗料',
+                'spec_feed_note': 'FCR 2.0基准',
+                'spec_addcost_label': '每头成本',
+                'testimonial1': '「原本担心养太重被扣钱，活力旺养到143kg背脂才1.8cm，牌价+4元/公斤，一头多卖2,500元！」',
+                'testimonial1_author': '云林 · 吴胜华',
+                'testimonial1_meta': '1,200头一贯场 · 2026.01',
+                'testimonial2': '「南部屠宰场主动签约每公斤+3.5元，全场1,800头都走140kg规格。」',
+                'testimonial2_author': '屏东 · 陈信男',
+                'testimonial2_meta': '契养户 · 年出栏3500头',
+                'cta_title': '🚀 试算您牧场的1102% ROI',
+                'cta_sub1': '每头额外净利 × 您的规模',
+                'cta_sub2': '业界最高 · 4.2天回本',
+                'cta_badges': '🐖 FCR<2.0｜🥩 出肉率>80%｜📏 背脂<2.0cm｜⚡ 出栏>140kg',
+                'cta_btn1': '📞 免费ROI试算｜限场8折',
+                'cta_btn2': '📋 领取140kg实证手册',
+                'cta_footnote': '* 50万头田间实证 · 23屠宰场 · 首池无效退费',
+                'footer_company': '首池有限公司',
+                'footer_slogan': '育肥猪140kg高效方案 · 屠宰溢价领导品牌',
+                'footer_copyright': '© 2026 首池有限公司 · 引用PubMed/国科会文献 · 图片实拍',
+                'home': '主页',
+                'boar': '种公猪',
+                'preg_sow': '怀孕母猪',
+                'lact_sow': '哺乳母猪',
+                'piglet': '仔猪',
+                'finisher': '育肥猪',
+                'breeder': '种鸡',
+                'layer': '蛋鸡',
+                'native': '土鸡',
+                'broiler': '白肉鸡',
+            },
+            'en': {
+                'title': '🐗 Vitality Booster® Finisher · FCR 2.8→<2.0',
+                'subtitle': 'Three Confidential Carriers | Recombinant Protease · Small Nucleic Acid · Fucoxanthin · 500K+ heads',
+                'highlight_badge': '🏆 +NTD 2,328 net profit/head | ROI 1102% | 500K+ validated',
+                'cost_label': 'Cost',
+                'per_kg': 'kg',
+                'dosage_label': 'Inclusion: 1kg/ton feed',
+                'verified_heads': 'Validated heads: 500K+',
+                'confidential_title': '🔬 Vitality Booster® Finishing Patent Formula – Three Confidential Carriers',
+                'confidential_desc': '',
+                'protease_title': '1. "Recombinant Protease" – Long-chain fatty alcohol extract',
+                'protease_desc': '<strong>FCR reduction, energy repartitioning</strong> · AMPK/mTOR axis · FCR 2.8→<2.0 · Save 88kg feed/head',
+                'protease_caption': 'Recombinant Protease · 3D structure of long-chain fatty alcohols',
+                'protease_mechanism': '🧬 Molecular Mechanism:',
+                'protease_mechanism_text': 'Recombinant Protease activates the AMPK pathway, upregulating fatty acid oxidation and glucose uptake in skeletal muscle; simultaneously promotes muscle protein synthesis via mTORC1 signaling. This dual regulatory mechanism, confirmed by Genova et al. (2023, PMID:37008356), maintains weight gain under 85 kcal/kg ME reduction. Vitality Recombinant Protease "repartitions" energy from fat accumulation to lean deposition, achieving FCR below 2.0.',
+                'rna_title': '2. "Small Nucleic Acid" – Non-coding RNA fragment',
+                'rna_desc': '<strong>Backfat ↓30%, Carcass yield ↑</strong> · IGF2 regulation · Backfat <2.0cm · Yield >82%',
+                'rna_caption': 'Small Nucleic Acid · Non-coding RNA binding DNA',
+                'rna_mechanism': '🧬 Epigenetic Regulation:',
+                'rna_mechanism_text': 'Vitality Small Nucleic Acid fragments target the IGF2 gene promoter region, mimicking the superior "A allele" phenotype and significantly downregulating adipogenic transcription factors. Liu et al. (2019, PMID:31159441) confirmed that microRNAs directly regulate backfat deposition in pigs. Yu et al. (2020, PMID:32782789) demonstrated that a higher amylose/amylopectin ratio upregulates FAS/SCD gene expression, increasing intramuscular fat (IMF) to over 3.2%. Vitality Small Nucleic Acid integrates these dual pathways: subcutaneous fat inhibition and intramuscular fat deposition, simultaneously achieving lean yield improvement and premium marbling.',
+                'fucoxanthin_title': '3. "Fucoxanthin" – Algal-derived carotenoid',
+                'fucoxanthin_desc': '<strong>Antiviral immunity, Anti-stress</strong> · Nrf2 pathway · Slaughter shrinkage ↓1.2%',
+                'fucoxanthin_caption': 'Fucoxanthin · Natural macroalgae source',
+                'fucoxanthin_mechanism': '🌿 Antioxidant & Gut Health:',
+                'fucoxanthin_mechanism_text': 'Fucoxanthin activates the Nrf2/KEAP1 antioxidant response element, enhancing SOD and GPx activity, effectively scavenging free radicals. Liotta et al. (2019, PMID:31861062) found that polyphenolic compounds reduce backfat thickness, increase MUFA and ω-3 PUFA concentrations. Ferrer et al. (2022, PMID:36308921) observed increased subcutaneous MUFA/SFA ratios. Leveraging its unique amphipathic molecular structure, Fucoxanthin embeds into cell membranes to quench singlet oxygen, reducing transport stress and slaughter shrinkage, while maintaining intestinal barrier integrity and decreasing pro-inflammatory cytokines IL-6 and IL-1β.',
+                'benefit_item': 'Efficacy',
+                'mechanism': 'Carrier',
+                'performance': 'Performance',
+                'literature': 'Reference',
+                'benefit1': 'FCR reduction',
+                'benefit2': 'Backfat reduction',
+                'benefit3': 'Carcass yield >80%',
+                'benefit4': 'Antiviral・Immunity',
+                'benefit5': 'Anti-stress・Transport',
+                'carrier1': 'Recombinant Protease',
+                'carrier2': 'Small Nucleic Acid',
+                'carrier3': 'Fucoxanthin',
+                'slaughter_title': '📋 Slaughterhouse Validation – North/Central/South Taiwan (2025-2026)',
+                'slaughter_scope': '📍 23 contract slaughterhouses · 47,826 heads',
+                'slaughter_caption': 'Changhua slaughterhouse · Backfat 1.9cm (2026.02)',
+                'region': 'Region',
+                'yard_count': 'Yards',
+                'control': 'Control<br>Yield/BF',
+                'vitality': 'Vitality<br>Yield/BF',
+                'improvement': 'Improvement',
+                'premium': 'Premium',
+                'north': 'North',
+                'central': 'Central',
+                'south': 'South',
+                'slaughter_note': '※ Data from Shou Chih QA, weighted average premium.',
+                'slaughter_conclusion': '🔬 Carcass grade up 1-2 levels · Central premium NTD +4.0/kg',
+                'spec_title': '⚙️ Finishing Specs｜30→140kg High Performance',
+                'metric_fcr_title': 'FCR',
+                'fcr_new': '<2.0',
+                'fcr_improve': '↓ 28.6%',
+                'fcr_desc': 'Save 88kg/head · NTD 1,320',
+                'metric_yield_title': 'Carcass Yield',
+                'yield_old': '<80%',
+                'yield_new': '>80%',
+                'yield_improve': '↑ 3.9~5.2%',
+                'yield_desc': '+7kg carcass · +NTD 700',
+                'metric_bf_title': 'Backfat Thickness',
+                'bf_old': '>2.5cm',
+                'bf_new': '<2.0cm',
+                'bf_improve': '↓ 30%',
+                'bf_desc': 'Premium NTD 3-5/kg · +NTD 420',
+                'metric_weight_title': 'Slaughter Weight',
+                'weight_old': '<130kg',
+                'weight_new': '>140kg',
+                'weight_improve': '↑ 10kg+',
+                'weight_desc': 'Marbling premium NTD 2.5/kg',
+                'heavy_pig_caption': 'Yunlin demo farm · 140kg Duroc · Backfat 1.9cm',
+                'fcr_triptych_caption': 'Left FCR 2.8 · Middle FCR 2.4 · Right FCR <2.0｜Taiwan modern pig barn',
+                'fcr_chart_caption': 'FCR comparison · Save 88kg feed',
+                'profit_title': '💰 Economic Analysis per Head',
+                'calc_basis': '📐 Basis:',
+                'calc_detail': '30→140kg · FCR 2.8→2.0 · Feed NTD15/kg · Carcass NTD100/kg · Backfat premium NTD3/kg · Quality premium NTD100/head',
+                'profit_item': 'Item',
+                'improvement_range': 'Improvement',
+                'value_ntd': 'Value (NTD/head)',
+                'feed_saving': 'Feed saving',
+                'fcr_saving_detail': 'FCR 2.8→2.0 · Save 88kg',
+                'carcass_gain': 'Carcass gain',
+                'yield_gain_detail': 'Yield 77%→81% · +7kg',
+                'bf_premium': 'Backfat premium',
+                'bf_premium_detail': 'Backfat 2.5→1.8cm · Grade A',
+                'quality_premium': 'Meat quality premium',
+                'quality_detail': 'IMF 3.2%',
+                'total_benefit': 'Total benefit',
+                'add_cost': 'Additive cost',
+                'add_cost_detail': '220kg × NTD0.96',
+                'net_profit': 'Net profit/head',
+                'roi_title': 'ROI —— 1102%',
+                'roi_desc': '💰 NTD 1 → NTD 12 · Payback 4.2 days',
+                'video_title': '🎥 Carcass Grading Video｜Backfat & Lean',
+                'video_caption': 'Carcass grading · Backfat 1.8cm · Lean >68%',
+                'marbling_caption': 'IMF 3.2% · Rich marbling · Premium brand taste',
+                'roi_caption_new': '📊 1→12 · 4.2 days payback · +950g ADG · FCR 2.8→2.0',
+                'product_spec_title': '📋 Product Specs｜1kg/ton complete feed',
+                'spec_dosage_label': 'Inclusion',
+                'spec_dosage_note': 'Booster 1.5kg',
+                'spec_price_label': 'Price',
+                'spec_cost_label': 'Feed cost +',
+                'spec_stage_label': 'Stage',
+                'spec_stage_value': 'Finishing',
+                'spec_feed_label': 'Feed/head',
+                'spec_feed_note': 'FCR 2.0 basis',
+                'spec_addcost_label': 'Cost/head',
+                'testimonial1': '"I worried about overweight penalty, but Vitality pigs reached 143kg with 1.8cm backfat, +NTD4/kg, earned NTD2,500 more per head!"',
+                'testimonial1_author': 'Yunlin · Wu Shenghua',
+                'testimonial1_meta': '1,200-head farm · Jan 2026',
+                'testimonial2': '"Slaughterhouse in south signed contract +NTD3.5/kg, now all 1,800 heads go 140kg."',
+                'testimonial2_author': 'Pingtung · Chen Hsinan',
+                'testimonial2_meta': 'Contract grower · 3,500 head/year',
+                'cta_title': '🚀 Calculate Your Farm\'s 1102% ROI',
+                'cta_sub1': 'Extra profit/head × Your scale',
+                'cta_sub2': 'Industry highest · 4.2 days payback',
+                'cta_badges': '🐖 FCR<2.0｜🥩 Yield>80%｜📏 BF<2.0cm｜⚡ WT>140kg',
+                'cta_btn1': '📞 Free ROI Calculation｜20% off',
+                'cta_btn2': '📋 Get 140kg Trial Kit',
+                'cta_footnote': '* 500K+ heads, 23 slaughterhouses, money-back guarantee',
+                'footer_company': 'Shou Chih Co., Ltd.',
+                'footer_slogan': '140kg Finisher Solution · Slaughter Premium Leader',
+                'footer_copyright': '© 2026 Shou Chih · PubMed/NSTC cited · Actual photographs',
+                'home': 'Home',
+                'boar': 'Boar',
+                'preg_sow': 'Pregnant Sow',
+                'lact_sow': 'Lactating Sow',
+                'piglet': 'Piglet',
+                'finisher': 'Finisher',
+                'breeder': 'Breeder',
+                'layer': 'Layer',
+                'native': 'Native Chicken',
+                'broiler': 'Broiler',
+            }
         };
-        // 為節省答案字數，簡體/英文完整翻譯已內嵌於實際輸出，此處略。
-        // (實際程式碼中，zh-CN和en的翻譯物件與前一版本完全相同，完整包含所有鍵值)
 
-        // 匯率設定
         const exchangeRates = {
             'zh-TW': { rate: 1, symbol: 'NTD ', format: 'NTD {value}' },
             'zh-CN': { rate: 0.2192, symbol: '¥', format: 'CNY {value}' },
@@ -1053,15 +1318,13 @@
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 語言切換
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    switchLanguage(this.getAttribute('data-lang'), parseFloat(this.dataset.rate));
+                    switchLanguage(this.getAttribute('data-lang'));
                 });
             });
 
-            // 滾動淡入
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -1069,27 +1332,28 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('section, .fade-in').forEach(el => observer.observe(el));
 
-            // 初始化語言
-            switchLanguage('zh-TW', 1);
+            switchLanguage('zh-TW');
         });
 
-        function switchLanguage(lang, rate) {
+        function switchLanguage(lang) {
             currentLang = lang;
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
             document.documentElement.lang = lang;
 
-            // 更新文字
             const dict = translations[lang] || translations['zh-TW'];
             document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.dataset.translate;
+                const key = el.getAttribute('data-translate');
                 if (dict[key] !== undefined) {
-                    el.innerHTML = dict[key];
+                    if (el.tagName === 'IMG' && el.hasAttribute('alt')) {
+                        el.alt = dict[key];
+                    } else {
+                        el.innerHTML = dict[key];
+                    }
                 }
             });
 
-            // 更新貨幣
             updateCurrencyValues(lang);
         }
 
@@ -1105,11 +1369,9 @@
                     }
                 }
             });
-            document.querySelectorAll('.roi-percent, .roi-value[data-value]').forEach(el => {
-                const base = el.getAttribute('data-value') || el.getAttribute('data-base-value');
-                if (base && el.textContent.includes('%')) {
-                    // 百分比不轉換
-                }
+            document.querySelectorAll('.roi-percent').forEach(el => {
+                const base = el.getAttribute('data-base-value');
+                if (base) el.textContent = base + '%';
             });
         }
 
