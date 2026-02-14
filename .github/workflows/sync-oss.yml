@@ -1,30 +1,63 @@
+# .github/workflows/sync-oss.yml
+# 將 GitHub Pages 內容增量同步至阿里雲 OSS 的自動化工作流
+
 name: 增量同步至阿里雲 OSS
 
 on:
   push:
-    branches: [ main ]  # ⚠️ 若你用 master 請修改
+    branches:
+      - main            # ⚠️ 若你的默認分支是 master，請改為 master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: 檢出程式碼
+      # 1. 檢出代碼
+      - name: 檢出代碼
         uses: actions/checkout@v4
 
-      # --- 如果你的 GitHub Pages 需要編譯（Jekyll/Hugo），在此插入建置步驟 ---
-      # 例如 Jekyll： bundle exec jekyll build
-      # 輸出目錄通常是 _site （請確認）
-      # ------------------------------------------------------------
+      # 2. （可選）如果你的網站需要編譯（如 Jekyll、Hugo、Hexo 等），請在此添加構建步驟
+      # 示例 1：Jekyll
+      # - name: 安裝 Jekyll 並構建
+      #   run: |
+      #     gem install bundler jekyll
+      #     bundle install
+      #     bundle exec jekyll build
+      #   輸出目錄通常為 ./_site
+      #
+      # 示例 2：Hugo
+      # - name: 安裝 Hugo 並構建
+      #   run: |
+      #     wget https://github.com/gohugoio/hugo/releases/download/v0.121.2/hugo_extended_0.121.2_Linux-64bit.tar.gz
+      #     tar -xzf hugo_extended_0.121.2_Linux-64bit.tar.gz
+      #     ./hugo
+      #   輸出目錄通常為 ./public
+      #
+      # 如果使用純靜態 HTML（無需構建），請註釋或刪除本步驟，並將下方的 local-path 改為 ./
 
-  - name: 增量上傳至 OSS
-  uses: Menci/upload-to-oss@beta-v3
-  with:
-    access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
-    access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
-    bucket: ${{ secrets.OSS_BUCKET }}
-    endpoint: ${{ secrets.OSS_ENDPOINT }}
-    local-path: ./_site        # 確認你的輸出目錄
-    remote-path: /             # 若要上傳至子目錄，如 /blog/
-    # ⚠️ 移除了 increment 參數（不再需要）
-    no-delete-remote-files: true    # 保留，作用同增量
-    delay-html-file-upload: true    # 保留
+      # 3. 增量上傳至阿里雲 OSS
+      - name: 增量上傳至 OSS
+        uses: Menci/upload-to-oss@beta-v3
+        with:
+          # 以下 Secrets 必須在 GitHub 倉庫 Settings → Secrets and variables → Actions 中設定
+          access-key-id: ${{ secrets.OSS_ACCESS_KEY_ID }}
+          access-key-secret: ${{ secrets.OSS_ACCESS_KEY_SECRET }}
+          bucket: ${{ secrets.OSS_BUCKET }}                 # 例如 richtrong-site
+          endpoint: ${{ secrets.OSS_ENDPOINT }}             # 例如 oss-cn-hangzhou.aliyuncs.com
+
+          # 本地路徑：需要上傳的目錄
+          # 若純靜態（無構建步驟）：local-path: ./
+          # 若有構建步驟且輸出到 _site：local-path: ./_site
+          # 若有構建步驟且輸出到 public：local-path: ./public
+          local-path: ./_site      # ⚠️ 根據你的實際輸出目錄修改
+
+          # 遠程路徑：上傳到 Bucket 的哪個目錄（通常為根目錄 /）
+          remote-path: /
+
+          # 增量模式參數
+          no-delete-remote-files: true   # 保留 OSS 中已有的檔案（不會刪除）
+          delay-html-file-upload: true    # HTML 文件最後上傳，減少用戶看到不完整頁面的機率
+
+          # （可選）若需過濾特定文件，可使用 include-regex / exclude-regex
+          # include-regex: '\.(html|css|js|png|jpg|svg|ico)$'   # 僅上傳指定後綴文件
+          # exclude-regex: '^temp/|\.tmp$'                      # 排除某些文件
