@@ -1,0 +1,226 @@
+{
+  "source_site": "https://v.feed-pet.com/",
+  "public_r2_base": "https://media.feed-pet.com/",
+  "brand": {
+    "watch_page": "https://v.feed-pet.com/v/brand-v05/",
+    "video": "https://media.feed-pet.com/brand-v05-v3-h.mp4"
+  },
+  "science": [
+    {
+      "name": "sci-v02",
+      "video": "https://media.feed-pet.com/sci-v02.mp4",
+      "poster": "https://v.feed-pet.com/assets/t/sci-v02.jpg"
+    },
+    {
+      "name": "sci-v03-r2",
+      "video": "https://media.feed-pet.com/sci-v03-r2.mp4",
+      "poster": "https://v.feed-pet.com/assets/t/sci-v03-r2.jpg"
+    }
+  ],
+  "products": [
+    {
+      "slug": "junzaiwang",
+      "name": "均仔旺",
+      "source_page": "https://v.feed-pet.com/p/junzaiwang/",
+      "videos": [
+        {
+          "watch_page": "https://v.feed-pet.com/v/p1-v01/",
+          "r2_video": "https://media.feed-pet.com/p1-v01-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p1-v01-v1.jpg",
+          "topic": "同一窩仔豬有胖有瘦？"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p1-v02/",
+          "r2_video": "https://media.feed-pet.com/p1-v02-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p1-v02-v1.jpg",
+          "topic": "母豬年產斷奶仔豬的營養管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p1-v03/",
+          "r2_video": "https://media.feed-pet.com/p1-v03-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p1-v03-v1.jpg",
+          "topic": "母豬蹄部與骨架的營養支持"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p1-v04/",
+          "r2_video": "https://media.feed-pet.com/p1-v04-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p1-v04-v1.jpg",
+          "topic": "弱仔與整窩離乳管理"
+        }
+      ]
+    },
+    {
+      "slug": "keliwang",
+      "name": "殼力旺",
+      "source_page": "https://v.feed-pet.com/p/keliwang/",
+      "videos": [
+        {
+          "watch_page": "https://v.feed-pet.com/v/p2-v01/",
+          "r2_video": "https://media.feed-pet.com/p2-v01-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p2-v01-v2.jpg",
+          "topic": "蛋殼品質與破損管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p2-v02/",
+          "r2_video": "https://media.feed-pet.com/p2-v02-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p2-v02-v2.jpg",
+          "topic": "產蛋高峰期的營養支持"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p2-v03/",
+          "r2_video": "https://media.feed-pet.com/p2-v03-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p2-v03-v2.jpg",
+          "topic": "蛋黃與產蛋表現"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p2-v04/",
+          "r2_video": "https://media.feed-pet.com/p2-v04-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p2-v04-v2.jpg",
+          "topic": "老母雞穩產管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p2-v06/",
+          "r2_video": "https://media.feed-pet.com/p2-v06-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p2-v06-v2.jpg",
+          "topic": "蛋品營養與賣相"
+        }
+      ]
+    },
+    {
+      "slug": "duoluanzhuang",
+      "name": "多卵壯",
+      "source_page": "https://v.feed-pet.com/p/duoluanzhuang/",
+      "videos": [
+        {
+          "watch_page": "https://v.feed-pet.com/v/p3-v01/",
+          "r2_video": "https://media.feed-pet.com/p3-v01-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p3-v01-v1.jpg",
+          "topic": "親本受精率的管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p3-v02/",
+          "r2_video": "https://media.feed-pet.com/p3-v02-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p3-v02-v1.jpg",
+          "topic": "種苗整齊度"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p3-v03/",
+          "r2_video": "https://media.feed-pet.com/p3-v03-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p3-v03-v2.jpg",
+          "topic": "親魚繁殖週期"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p3-v04/",
+          "r2_video": "https://media.feed-pet.com/p3-v04-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p3-v04-v1.jpg",
+          "topic": "高值魚苗受精管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p3-v05/",
+          "r2_video": "https://media.feed-pet.com/p3-v05-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p3-v05-v1.jpg",
+          "topic": "孵化與苗期活力"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p3-v06/",
+          "r2_video": "https://media.feed-pet.com/p3-v06-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p3-v06-v1.jpg",
+          "topic": "種苗存活管理"
+        }
+      ]
+    },
+    {
+      "slug": "zhangbiaowang",
+      "name": "長膘旺",
+      "source_page": "https://v.feed-pet.com/p/zhangbiaowang/",
+      "videos": [
+        {
+          "watch_page": "https://v.feed-pet.com/v/p4-v01/",
+          "r2_video": "https://media.feed-pet.com/p4-v01-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p4-v01-v1.jpg",
+          "topic": "背膘與腰肌眼的管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p4-v02/",
+          "r2_video": "https://media.feed-pet.com/p4-v02-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p4-v02-v1.jpg",
+          "topic": "從糞篩觀察飼料利用"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p4-v03/",
+          "r2_video": "https://media.feed-pet.com/p4-v03-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p4-v03-v1.jpg",
+          "topic": "骨架與生長節奏"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p4-v04/",
+          "r2_video": "https://media.feed-pet.com/p4-v04-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p4-v04-v1.jpg",
+          "topic": "瘦肉率與肉質"
+        }
+      ]
+    },
+    {
+      "slug": "zujinwang",
+      "name": "足斤旺",
+      "source_page": "https://v.feed-pet.com/p/zujinwang/",
+      "videos": [
+        {
+          "watch_page": "https://v.feed-pet.com/v/p5-v01/",
+          "r2_video": "https://media.feed-pet.com/p5-v01-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p5-v01-v1.jpg",
+          "topic": "料肉比與利潤"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p5-v02/",
+          "r2_video": "https://media.feed-pet.com/p5-v02-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p5-v02-v1.jpg",
+          "topic": "肉雞出欄體重"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p5-v03/",
+          "r2_video": "https://media.feed-pet.com/p5-v03-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p5-v03-v1.jpg",
+          "topic": "胸肉產量"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p5-v04/",
+          "r2_video": "https://media.feed-pet.com/p5-v04-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p5-v04-v1.jpg",
+          "topic": "豆粕蛋白與抗營養因子"
+        }
+      ]
+    },
+    {
+      "slug": "baomiaowang",
+      "name": "保苗旺",
+      "source_page": "https://v.feed-pet.com/p/baomiaowang/",
+      "videos": [
+        {
+          "watch_page": "https://v.feed-pet.com/v/p6-v01/",
+          "r2_video": "https://media.feed-pet.com/p6-v01-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p6-v01-v2.jpg",
+          "topic": "苗期育成管理"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p6-v02/",
+          "r2_video": "https://media.feed-pet.com/p6-v02-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p6-v02-v1.jpg",
+          "topic": "蝦苗規格整齊度"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p6-v03/",
+          "r2_video": "https://media.feed-pet.com/p6-v03-v2.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p6-v03-v2.jpg",
+          "topic": "脫殼與礦化"
+        },
+        {
+          "watch_page": "https://v.feed-pet.com/v/p6-v04/",
+          "r2_video": "https://media.feed-pet.com/p6-v04-v1.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p6-v04-v1.jpg",
+          "topic": "魚苗存活與生長"
+        }
+      ]
+    }
+  ]
+}
