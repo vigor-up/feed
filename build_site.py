@@ -8,12 +8,14 @@ from pathlib import Path
 from urllib.parse import quote
 import json
 import re
+from opencc import OpenCC
 
 ROOT = Path(__file__).resolve().parent
 SITE = "https://richtrong.com"
 VIDEO = "https://v.feed-pet.com"
 MEDIA = "https://media.feed-pet.com"
 TODAY = date.today().isoformat()
+TO_SIMPLIFIED = OpenCC("t2s")
 
 # Titles and immutable R2 object names were read from the published video site.
 PRODUCTS = [
@@ -80,15 +82,27 @@ def science_card(slug: str, title: str) -> str:
 def page(path: str, title: str, description: str, body: str, image: str = f"{VIDEO}/assets/p/brand-v05-v3-h.jpg") -> None:
     canonical_path = path.removesuffix("index.html")
     canonical = f"{SITE}/{canonical_path}" if canonical_path else f"{SITE}/"
+    simplified_canonical = f"{SITE}/zh-cn/{canonical_path}"
     active = "products" if path.startswith("products/") else path.split(".")[0]
     nav = "".join(f'<a href="/{href}"{(" aria-current=\"page\"" if active == key else "")}>{label}</a>' for key, href, label in [
         ("index", "", "首頁"), ("technology", "technology.html", "核心技術"), ("products", "products/", "產品線"), ("stories", "stories.html", "影音故事")
     ])
     schema = json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title, "url": canonical, "description": description, "isPartOf": {"@type": "WebSite", "name": "活力得®", "url": SITE + "/"}}, ensure_ascii=False)
-    html = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:site_name" content="活力得®"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image}"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="{VIDEO}/assets/logo.png"><link rel="stylesheet" href="/assets/site.css"><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">跳至主要內容</a><header class="site-header"><a class="brand" href="/" aria-label="活力得首頁"><span class="brand-mark">H<span>·</span></span><span>活力得<sup>®</sup><small>HUOLIDE</small></span></a><nav aria-label="主要導覽">{nav}</nav><a class="header-video" href="{VIDEO}/">進入影音館 <span aria-hidden="true">↗</span></a></header><main id="main">{body}</main><footer><div><strong>活力得<sup>®</sup></strong><p>重組蛋白酶與活性游離硅的複合功能材料</p></div><div class="footer-links"><a href="/technology.html">核心技術</a><a href="/products/">產品線</a><a href="/stories.html">影音故事</a><a href="{VIDEO}/">完整影音館</a></div><p class="legal">活力得® 為註冊商標（第 36751031 號）。</p></footer></body></html>'''
+    html = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-Hant" href="{canonical}"><link rel="alternate" hreflang="zh-Hans" href="{simplified_canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:site_name" content="活力得®"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image}"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="{VIDEO}/assets/logo.png"><link rel="stylesheet" href="/assets/site.css"><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">跳至主要內容</a><header class="site-header"><a class="brand" href="/" aria-label="活力得首頁"><span class="brand-mark">H<span>·</span></span><span>活力得<sup>®</sup><small>HUOLIDE</small></span></a><nav aria-label="主要導覽">{nav}</nav><a class="header-video" href="{VIDEO}/">進入影音館 <span aria-hidden="true">↗</span></a></header><main id="main">{body}</main><footer><div><strong>活力得<sup>®</sup></strong><p>重組蛋白酶與活性游離硅的複合功能材料</p></div><div class="footer-links"><a href="/technology.html">核心技術</a><a href="/products/">產品線</a><a href="/stories.html">影音故事</a><a href="{VIDEO}/">完整影音館</a><a href="{simplified_canonical}" lang="zh-Hans">简体中文</a></div><p class="legal">活力得® 為註冊商標（第 36751031 號）。</p></footer></body></html>'''
     out = ROOT / path if path else ROOT / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html, encoding="utf-8")
+    simplified = TO_SIMPLIFIED.convert(html)
+    simplified = simplified.replace('lang="zh-Hant"', 'lang="zh-Hans"', 1)
+    simplified = simplified.replace(f'<link rel="canonical" href="{canonical}">', f'<link rel="canonical" href="{simplified_canonical}">', 1)
+    simplified = simplified.replace(f'<meta property="og:url" content="{canonical}">', f'<meta property="og:url" content="{simplified_canonical}">', 1)
+    simplified = simplified.replace('content="zh_TW"', 'content="zh_CN"', 1)
+    simplified = simplified.replace(f'"url": "{canonical}"', f'"url": "{simplified_canonical}"', 1)
+    simplified = simplified.replace(f'<a href="{simplified_canonical}" lang="zh-Hans">简体中文</a>', f'<a href="{canonical}" lang="zh-Hant">繁體中文</a>')
+    simplified = re.sub(r'href="/(?!assets/|zh-cn/)', 'href="/zh-cn/', simplified)
+    simplified_out = ROOT / "zh-cn" / (path or "index.html")
+    simplified_out.parent.mkdir(parents=True, exist_ok=True)
+    simplified_out.write_text(simplified, encoding="utf-8")
 
 
 def build() -> None:
@@ -127,7 +141,8 @@ def build() -> None:
         (ROOT / old).write_text(f'<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={target}"><link rel="canonical" href="{target}"><title>頁面已移至活力得®新站</title></head><body><p>此內容已更新。<a href="{target}">前往新版頁面</a></p></body></html>', encoding="utf-8")
 
     routes = ["", "technology.html", "products/", "stories.html", "products/ruminants.html"] + [f"products/{p[0]}.html" for p in PRODUCTS]
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{route}</loc><lastmod>{TODAY}</lastmod></url>\n" for route in routes) + "</urlset>\n"
+    all_routes = routes + [f"zh-cn/{route}" for route in routes]
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{route}</loc><lastmod>{TODAY}</lastmod></url>\n" for route in all_routes) + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     media_sources = {
@@ -147,7 +162,7 @@ def build() -> None:
         ],
     }
     (ROOT / "media-sources.json").write_text(json.dumps(media_sources, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"BUILD OK pages={len(routes)} legacy_redirects={len(OLD_ROUTES)} sitemap_urls={len(routes)}")
+    print(f"BUILD OK pages={len(all_routes)} legacy_redirects={len(OLD_ROUTES)} sitemap_urls={len(all_routes)}")
 
 
 if __name__ == "__main__":
