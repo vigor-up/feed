@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from datetime import date
+from collections import Counter
 from html import escape
+from html.parser import HTMLParser
 from pathlib import Path
 import json
 import re
@@ -107,6 +109,33 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
     return f"background-image:url('/assets/scenes/p{product}.webp');background-size:{size};background-position:{x}% {y}%"
 
 
+class VisibleImages(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.paths: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        a = dict(attrs)
+        if tag == "img" and a.get("src"):
+            self.paths.append(a["src"])
+        if tag == "video" and a.get("poster"):
+            self.paths.append(a["poster"])
+        if a.get("style"):
+            self.paths.extend(re.findall(r"background-image:url\('([^']+)'\)", a["style"]))
+
+
+def verify_unique_visible_images(routes: list[str]) -> None:
+    for route in routes:
+        path = ROOT / route / "index.html" if route.endswith("/") or not route else ROOT / route
+        parser = VisibleImages()
+        parser.feed(path.read_text(encoding="utf-8"))
+        counts = Counter(x for x in parser.paths if "logo" not in x and "36751031" not in x)
+        duplicate = {image: n for image, n in counts.items() if n > 1}
+        if duplicate:
+            raise ValueError(f"Repeated visible image on {route or '/'}: {duplicate}")
+    print(f"DEDUP PASS pages={len(routes)} duplicate_visible_images=0")
+
+
 def hero_video(object_name: str, label: str, watch: str, brand: bool = False, brand_image: str = "brand") -> str:
     preview = f"{MEDIA}/{object_name}-hero-h.mp4"
     if brand:
@@ -117,7 +146,10 @@ def hero_video(object_name: str, label: str, watch: str, brand: bool = False, br
 def video_card(video_slug: str, object_name: str, title: str) -> str:
     preview = f"{MEDIA}/{object_name}-hero-h.mp4"
     watch = f"{VIDEO}/tech/" if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
-    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" style="{poster_style(object_name)}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片重點 ↗</a></div></article>'''
+    # Each card uses the actual released clip's own frame. The page Hero and
+    # nearby cards otherwise reuse panels of the same scene board.
+    poster = f"{VIDEO}/assets/t/{object_name}.jpg"
+    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" poster="{poster}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片重點 ↗</a></div></article>'''
 
 
 def hero_carousel() -> str:
@@ -232,7 +264,7 @@ def build() -> None:
         f'<a href="/products/{slug}.html"><span>{escape(PRODUCT_STORIES[slug]["metric"])}</span><strong>{escape(PRODUCT_STORIES[slug]["value"])}</strong></a>'
         for slug in ("junzaiwang", "zhangbiaowang", "zujinwang", "baomiaowang")
     )
-    home = f'''{hero_carousel()}<section class="section-products wrap"><div class="section-head inline"><div><p class="kicker">六條產品線 / 對應六類現場問題</p><h2>看痛點，<br>找能改變的指標。</h2></div><a class="text-link" href="/products/">依物種瀏覽 ↗</a></div><div class="product-grid">{product_cards}</div></section>{species_gallery()}<section class="tech-feature"><div class="wrap"><div><p class="kicker">材料技術</p><h2>蛋白質利用 ×<br>結構營養。</h2><p>重組蛋白酶與活性游離硅，連接飼料利用與骨、蹄、殼的結構支持。</p><a class="button outline" href="/technology.html">看技術與製程 ↗</a></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</div></section>{value_story()}'''
+    home = f'''{hero_carousel()}<section class="section-products wrap"><div class="section-head inline"><div><p class="kicker">六條產品線 / 對應六類現場問題</p><h2>看痛點，<br>找能改變的指標。</h2></div><a class="text-link" href="/products/">依物種瀏覽 ↗</a></div><div class="product-grid">{product_cards}</div></section>{species_gallery()}<section class="tech-feature"><div class="wrap"><div><p class="kicker">材料技術</p><h2>蛋白質利用 ×<br>結構營養。</h2><p>重組蛋白酶與活性游離硅，連接飼料利用與骨、蹄、殼的結構支持。</p><a class="button outline" href="/technology.html">看技術與製程 ↗</a></div>{hero_video('sci-v03-r2', '游離硅與結構營養', VIDEO+'/tech/')}</div></section>{value_story()}'''
     page("", "活力得®｜重組蛋白酶與游離硅飼料添加劑・產品數據與 ROI", "活力得®動物營養材料：從生產指標、六條產品線與影片，了解母豬、蛋雞、育肥豬、肉雞、魚蝦的生產指標與經營價值。", home)
 
     tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</section><section class="tech-panes wrap"><article><span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article><span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}</div></section>'''
@@ -280,6 +312,7 @@ def build() -> None:
         raise ValueError("Homepage hero playlist missing")
     media_sources["hero_carousel"] = json.loads(playlist_match.group(1))
     (ROOT / "media-sources.json").write_text(json.dumps(media_sources, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    verify_unique_visible_images(all_routes)
     print(f"BUILD OK pages={len(all_routes)} legacy_redirects={len(data.OLD_ROUTES)} sitemap_urls={len(all_routes)} logo=huolide-36751031.png")
 
 
