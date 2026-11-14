@@ -1,0 +1,233 @@
+{
+  "created": "2026-11-14",
+  "generator": "OpenAI GPT Image via Codex image_gen",
+  "usage": "Static video card art; live clips remain on R2",
+  "assets": [
+    {
+      "file": "cards/p1-v01.webp",
+      "sha256": "62182f5bf5319c231e9c0fa127771a3f9f116a0157947d7c85eec7cc5af63a3a",
+      "bytes": 271836,
+      "type": "new_gpt_image",
+      "source": "exec-ccb82941-90e4-4254-8ce0-5580e6e2aa24.png"
+    },
+    {
+      "file": "cards/p1-v02.webp",
+      "sha256": "483fb4ec0a1d77a34dce18ac544689dd7ff946fc6b4fe93d9752b402ec0ef6d4",
+      "bytes": 80920,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p1.webp",
+      "panel_index_zero_based": 0
+    },
+    {
+      "file": "cards/p1-v03.webp",
+      "sha256": "5a929533983d2c65bfd0cbd6085e134b0213049547a05ef124be3ba76190dd92",
+      "bytes": 62612,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p1.webp",
+      "panel_index_zero_based": 2
+    },
+    {
+      "file": "cards/p1-v04.webp",
+      "sha256": "57ea56fb745d30176e0074b7d1178c98cb5c490f5ec12a1aac019d55865150ab",
+      "bytes": 75774,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p1.webp",
+      "panel_index_zero_based": 3
+    },
+    {
+      "file": "cards/p2-v01.webp",
+      "sha256": "4954a3db403a4ceb7590498e11ed3d273bf972cc0745aa5354de4842d8321c57",
+      "bytes": 162504,
+      "type": "new_gpt_image",
+      "source": "exec-2eb6bd39-2298-4f8b-94b2-4a97d0a6675d.png"
+    },
+    {
+      "file": "cards/p2-v02.webp",
+      "sha256": "87476694a9d70d14ced9b25c09bae337018df0549b0546fea76acc94cf533094",
+      "bytes": 26300,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p2.webp",
+      "panel_index_zero_based": 0
+    },
+    {
+      "file": "cards/p2-v03.webp",
+      "sha256": "b82e149ad24ab1c6987d7c065d42d579ab33d8c329f78dc02b68bd8aa8e9e9aa",
+      "bytes": 30562,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p2.webp",
+      "panel_index_zero_based": 2
+    },
+    {
+      "file": "cards/p2-v04.webp",
+      "sha256": "c5c52997755cee07b923bcfe8154b43d68fbb3b546d6343e5736c1ccb9b30268",
+      "bytes": 40576,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p2.webp",
+      "panel_index_zero_based": 3
+    },
+    {
+      "file": "cards/p2-v06.webp",
+      "sha256": "07425a0e90b982c95e85e546654bbd76592d56a4ce71800051b5bf6e07965741",
+      "bytes": 30920,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p2.webp",
+      "panel_index_zero_based": 4
+    },
+    {
+      "file": "cards/p3-v01.webp",
+      "sha256": "d718fe58f30116275aedb07852f282927bc0dd1abb5c3e8c5be87980bd2d29ca",
+      "bytes": 214086,
+      "type": "new_gpt_image",
+      "source": "exec-232da445-d255-4297-ad36-938702e07ad2.png"
+    },
+    {
+      "file": "cards/p3-v02.webp",
+      "sha256": "63bee0259e6edebba4df78fd3fd1da6094ae4f2d66aae7a90d69feb3bfaf005b",
+      "bytes": 17208,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p3.webp",
+      "panel_index_zero_based": 1
+    },
+    {
+      "file": "cards/p3-v03.webp",
+      "sha256": "466e18b9a954d954e52f70375d5cb7dddc89fe5d78a75012e3f63f917cdb4310",
+      "bytes": 63114,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p3.webp",
+      "panel_index_zero_based": 2
+    },
+    {
+      "file": "cards/p3-v04.webp",
+      "sha256": "d38d50d3cfc805f564674271043dc866bf3f6500c7fe43b2f2adb084e4ac7085",
+      "bytes": 37166,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p3.webp",
+      "panel_index_zero_based": 3
+    },
+    {
+      "file": "cards/p3-v05.webp",
+      "sha256": "0a3c327a1ee474134050fc65c72f8efb56dcb55732e096d9bd587178fd6a45ed",
+      "bytes": 55316,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p3.webp",
+      "panel_index_zero_based": 4
+    },
+    {
+      "file": "cards/p3-v06.webp",
+      "sha256": "a531e28801221d1a90f96f3ae7ee94ee43256f1637b8df6da22890ba5e896f1a",
+      "bytes": 31838,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p3.webp",
+      "panel_index_zero_based": 5
+    },
+    {
+      "file": "cards/p4-v01.webp",
+      "sha256": "91113994d90a681897ef8ed3e7a885a274b4d223acfd17050fd9095c9da052e5",
+      "bytes": 193660,
+      "type": "new_gpt_image",
+      "source": "exec-b6328b9c-f01e-439c-8fe5-bcd2b0990b18.png"
+    },
+    {
+      "file": "cards/p4-v02.webp",
+      "sha256": "1f1e5dc18fc29bc53dd615699f609e6e8a8981fbd826dc3cb6e1a45cd23fed7c",
+      "bytes": 45790,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p4.webp",
+      "panel_index_zero_based": 1
+    },
+    {
+      "file": "cards/p4-v03.webp",
+      "sha256": "ad86bc6d1024b09e0db2a049d3cc9716c7ca033d2f2440eb0adbd245d358367d",
+      "bytes": 42598,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p4.webp",
+      "panel_index_zero_based": 2
+    },
+    {
+      "file": "cards/p4-v04.webp",
+      "sha256": "0f9f3811427641037c9d0e0807542f14a77b8d84dfc371c7b5a298f32009243f",
+      "bytes": 42402,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p4.webp",
+      "panel_index_zero_based": 3
+    },
+    {
+      "file": "cards/p5-v01.webp",
+      "sha256": "1899d8783d6d6ef3a98c3646a624e46039a7b0f3299bb68cb63852c1ca1d2bd4",
+      "bytes": 272984,
+      "type": "new_gpt_image",
+      "source": "exec-075d9f5c-a27f-4706-a3e6-153184bbf6de.png"
+    },
+    {
+      "file": "cards/p5-v02.webp",
+      "sha256": "6c2c3945bc3fa5ec8c53bfe50c1ab68ad95c998b4d8156fadb66c15751dfa4f2",
+      "bytes": 75192,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p5.webp",
+      "panel_index_zero_based": 0
+    },
+    {
+      "file": "cards/p5-v03.webp",
+      "sha256": "4569f6337ead506bdd1d34821b3fd45c4e47b5da9e6029ca0e6e2164db576112",
+      "bytes": 37128,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p5.webp",
+      "panel_index_zero_based": 2
+    },
+    {
+      "file": "cards/p5-v04.webp",
+      "sha256": "974836142a45703b2c3da1bd079305f6aae66f1a172fcfdbfd813b370b81566c",
+      "bytes": 66392,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p5.webp",
+      "panel_index_zero_based": 3
+    },
+    {
+      "file": "cards/p6-v01.webp",
+      "sha256": "f3f40328df722e16c51b8993d889e54c6a77206fbb7953fa311ee363c8b28960",
+      "bytes": 206480,
+      "type": "new_gpt_image",
+      "source": "exec-ec379e86-d00f-4a1c-9336-43465c0220be.png"
+    },
+    {
+      "file": "cards/p6-v02.webp",
+      "sha256": "314f0772a21b7539f8773fac09447ac9b5b2458aa36ba04d8c708208c0f0c9ee",
+      "bytes": 66048,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p6.webp",
+      "panel_index_zero_based": 0
+    },
+    {
+      "file": "cards/p6-v03.webp",
+      "sha256": "7919a7ab45469d66372137b84ae13bb324d7a8c261e34e6463fa1eef348e4a7a",
+      "bytes": 43398,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p6.webp",
+      "panel_index_zero_based": 2
+    },
+    {
+      "file": "cards/p6-v04.webp",
+      "sha256": "329fe7ab149aefe71ce52d8e70ba56b6005712a2b669559b11934136dae154bc",
+      "bytes": 41662,
+      "type": "crop_from_gpt_scene_board",
+      "source": "p6.webp",
+      "panel_index_zero_based": 3
+    },
+    {
+      "file": "cards/sci-v02.webp",
+      "sha256": "f9423d0851aba152829c6070094f41ca1d33018bbbafb25ed45e7d27735a65db",
+      "bytes": 32800,
+      "type": "crop_from_gpt_scene_board",
+      "source": "science.webp",
+      "panel_index_zero_based": 1
+    },
+    {
+      "file": "cards/sci-v03-r2.webp",
+      "sha256": "b70e525bd7a1ecf89b8b63e0da77607a46ef9540a9ec522c15dc023eca74a000",
+      "bytes": 30646,
+      "type": "crop_from_gpt_scene_board",
+      "source": "science.webp",
+      "panel_index_zero_based": 3
+    }
+  ]
+}

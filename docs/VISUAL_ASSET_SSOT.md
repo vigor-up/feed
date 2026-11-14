@@ -1,12 +1,13 @@
 # 活力得官網視覺素材 SSOT
 
-更新：2026-11-14。權威來源為本檔與 `assets/species/provenance.json`；公開站使用 `assets/species/*.webp` 及 `assets/scenes/*.webp`。生成來源、SHA256 與封存位置見 JSON 清單。影片仍由既有 R2 URL 播放，場景圖只在影片載入前顯示。
+更新：2026-11-14。權威來源為本檔、`assets/species/provenance.json` 與 `assets/cards/provenance.json`。公開站使用 `assets/species/*.webp`、`assets/scenes/*.webp` 及 `assets/cards/*.webp`。生成來源與 SHA256 見 JSON 清單。影片仍由既有 R2 URL 播放；首頁輪播的場景圖在切換、載入與播放失敗時持續顯示，只有影片真正播放後才由影片層覆蓋。
 
 ## 採用與去重
 
 - 4 張物種照片：母豬、肉牛、肉雞、養殖蝦。
 - 8 張影片場景板：品牌、六條產品線、材料科學。每張場景板依影片物件位置裁切顯示不同畫面。
 - 12 張公開 WebP 的 SHA256 均不同。產品與物種圖不交叉重用同一素材；商標使用已註冊原檔，不使用生成圖替代。
+- 29 張影片卡片配圖：六張為本輪新生成 GPT Image，另 23 張取自已選定 GPT Image 場景板的不同鏡位。卡片以靜圖連到對應影片，不以影片截圖作封面，也不自動播放覆蓋配圖。29 張卡片 SHA256 全數不同，同頁不得重複使用同一圖片 URL。
 - 圖片是頁面視覺素材。產量、FCR、肉質與收益等數字由各自產品資料與行銷 SSOT 管理，不能從生成圖片反推。
 
 ## 永久拒用規則
@@ -38,4 +39,4 @@
 
 ## 網站使用方式
 
-`build_site.py` 的 `poster_style()` 對照 R2 影片物件名稱選圖。所有新圖以 WebP 儲存於本 repo，隨 GitHub Pages 版本發佈。生成來源清單僅供內部追溯，不放入公開頁面的視覺文案。更換圖時同步更新 JSON 清單、此規則及 PG RAG 索引。
+`build_site.py` 的 `poster_style()` 對照 R2 影片物件名稱選首頁輪播場景圖；`video_card()` 用每支影片獨立的 `assets/cards/{video_slug}.webp`。所有新圖以 WebP 儲存於本 repo，隨 GitHub Pages 版本發佈。生成來源清單僅供素材追溯，不放入公開頁面的視覺文案。更換圖時同步更新 JSON 清單、此規則及 PG RAG 索引。
