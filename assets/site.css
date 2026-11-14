@@ -78,3 +78,13 @@ footer{background:#061a22}
 .market-chips>a:hover{background:#caeae3}
 .market-chips>span{color:#4d6769}
 @media(max-width:600px){.market-taxonomy{padding:70px 24px}.market-groups{grid-template-columns:1fr}.market-groups article{padding:23px}}
+.field-focus{max-width:var(--max);margin:auto;padding:100px 30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:65px}
+.field-focus h2{font-size:clamp(2rem,3.2vw,3.7rem)}
+.field-focus>div:first-child>p:last-child{color:#415f65}
+.field-focus-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.field-focus-grid article{background:#fff;border-top:3px solid #2e8c87;padding:25px 20px}
+.field-focus-grid span{font-size:.7rem;letter-spacing:.1em;color:#287e7d}
+.field-focus-grid h3{margin:20px 0 10px}
+.field-focus-grid p{color:#415f65;font-size:.9rem}
+@media(max-width:900px){.field-focus{grid-template-columns:1fr;gap:25px}.field-focus-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.field-focus{padding:70px 24px}.field-focus-grid{grid-template-columns:1fr}}

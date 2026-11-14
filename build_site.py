@@ -48,6 +48,41 @@ SPECIES = {
     "baomiaowang": ("蝦苗", "養殖蝦", "養殖魚"),
 }
 
+# Product-specific editorial content distilled from the current D1-D6 PPT
+# themes and old site headings. These are measurement topics, not efficacy data.
+FIELD_FOCUS = {
+    "junzaiwang": (
+        ("產房", "記錄母豬採食、哺乳狀態與同窩仔豬初生重差異。"),
+        ("保育", "追蹤離乳重、均勻度、日糧攝取與保育階段增重。"),
+        ("比較", "用同一農場、胎次與離乳日齡建立批次比較口徑。"),
+    ),
+    "keliwang": (
+        ("蛋殼", "追蹤蛋殼厚度、破損率與商品蛋分級。"),
+        ("產蛋", "分別記錄產蛋高峰及後期的產蛋率和蛋重。"),
+        ("日糧", "同步記錄採食量、鈣磷來源與飼養週齡。"),
+    ),
+    "duoluanzhuang": (
+        ("親本", "按魚種及繁殖週期記錄親魚體況與產卵批次。"),
+        ("孵化", "分開追蹤受精率、孵化率與苗期規格整齊度。"),
+        ("水質", "同步保存水溫、溶氧與放養密度等養殖條件。"),
+    ),
+    "zhangbiaowang": (
+        ("育肥", "以入欄重、出欄重、育肥天數與日增重建立批次紀錄。"),
+        ("料效", "FCR 需配合飼料投入、活重增量及死亡淘汰口徑解讀。"),
+        ("肉質", "依同一屠宰與測量方式記錄背膘和胴體指標。"),
+    ),
+    "zujinwang": (
+        ("出欄", "按白羽與黃羽肉雞的品系和日齡分開追蹤體重。"),
+        ("料效", "記錄各批次採食、增重與料肉比，避免跨品系直接比較。"),
+        ("胴體", "依同一屠宰規格記錄胸肉與腿部表現。"),
+    ),
+    "baomiaowang": (
+        ("苗期", "按魚種或蝦種記錄放苗規格、密度和存活率。"),
+        ("養成", "追蹤日糧投入、規格分布與收成重量。"),
+        ("環境", "把水質、鹽度及脫殼週期與生產紀錄一起檢視。"),
+    ),
+}
+
 OLD_ROUTES = {
     "feed/fcr/index.html": "products/",
     "swine-breeding.html": "products/junzaiwang.html",
@@ -122,6 +157,14 @@ def market_taxonomy() -> str:
     return '<section class="market-taxonomy"><p class="eyebrow">中國市場 / 物種與階段索引</p><h2>按養殖對象找內容</h2><div class="market-groups">' + "".join(sections) + '</div></section>'
 
 
+def field_focus(slug: str) -> str:
+    cards = "".join(
+        f'<article><span>0{index} / {escape(label)}</span><h3>{escape(label)}</h3><p>{escape(detail)}</p></article>'
+        for index, (label, detail) in enumerate(FIELD_FOCUS[slug], 1)
+    )
+    return '<section class="field-focus"><div><p class="eyebrow">田間紀錄 / 產品專題</p><h2>從同批次的數據，看見管理變化</h2><p>依物種、生產階段與日糧條件記錄，再閱讀對應影片的技術背景。</p></div><div class="field-focus-grid">' + cards + '</div></section>'
+
+
 def page(path: str, title: str, description: str, body: str, image: str = f"{VIDEO}/assets/p/brand-v05-v3-h.jpg") -> None:
     canonical_path = path.removesuffix("index.html")
     canonical = f"{SITE}/{canonical_path}" if canonical_path else f"{SITE}/"
@@ -191,6 +234,7 @@ def build() -> None:
         cards = "".join(video_card(*item) for item in videos)
         species = "".join(f"<span>{escape(label)}</span>" for label in SPECIES[slug])
         body = f'''<section class="page-intro"><p class="eyebrow"><a href="/products/">物種應用</a> / {escape(audience)}</p><h1>{escape(name)}<em>｜{escape(audience)}</em></h1><p>{escape(description)}活力得®以重組蛋白酶與活性游離硅為共同材料軸心，依生產階段展開應用。</p><div class="species-list" aria-label="對應物種與階段">{species}</div><div class="actions"><a class="button primary" href="{VIDEO}/p/{slug}/">進入{escape(name)}影音專頁 ↗</a><a class="button quiet" href="/technology.html">閱讀核心技術</a></div></section><section class="media-block"><div><p class="eyebrow">{len(videos)} 部已發布影片</p><h2>從現場問題開始看</h2><p>每支影片的完整版與旁白，均保存在活力得®影音館的獨立頁面。</p></div><div class="video-grid">{cards}</div></section><section class="next"><p>繼續探索</p><a href="/products/">其他物種與產品 ↗</a><a href="/technology.html">材料技術 ↗</a></section>'''
+        body += field_focus(slug)
         page(f"products/{slug}.html", f"{name}｜{audience}營養｜活力得®", f"{name}聚焦{audience}。閱讀活力得®重組蛋白酶與活性游離硅的材料背景，觀看{len(videos)}部已發布產品影片。", body, f"{VIDEO}/assets/t/{videos[0][1]}.jpg")
 
     featured = [PRODUCTS[0][5][0], PRODUCTS[1][5][0], PRODUCTS[3][5][1], PRODUCTS[4][5][3], PRODUCTS[5][5][2]]
