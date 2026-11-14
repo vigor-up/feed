@@ -6,20 +6,6 @@
     "video": "https://media.feed-pet.com/brand-v05-v3-h.mp4",
     "preview": "https://media.feed-pet.com/brand-v05-v3-hero-h.mp4"
   },
-  "science": [
-    {
-      "name": "sci-v02",
-      "video": "https://media.feed-pet.com/sci-v02.mp4",
-      "preview": "https://media.feed-pet.com/sci-v02-hero-h.mp4",
-      "poster": "https://v.feed-pet.com/assets/t/sci-v02.jpg"
-    },
-    {
-      "name": "sci-v03-r2",
-      "video": "https://media.feed-pet.com/sci-v03-r2.mp4",
-      "preview": "https://media.feed-pet.com/sci-v03-r2-hero-h.mp4",
-      "poster": "https://v.feed-pet.com/assets/t/sci-v03-r2.jpg"
-    }
-  ],
   "products": [
     {
       "slug": "junzaiwang",
