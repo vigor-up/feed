@@ -252,7 +252,7 @@
       ],
       "src": "https://media.feed-pet.com/sci-v02.mp4",
       "watch": "https://v.feed-pet.com/tech/",
-      "poster": "background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/science-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "sci-v03-r2",
@@ -323,7 +323,7 @@
       "src": "https://media.feed-pet.com/p1-v01-v1.mp4",
       "watch": "https://v.feed-pet.com/v/p1-v01/",
       "product": "均仔旺",
-      "poster": "background-image:url('/assets/scenes/p1.webp');background-size:auto 200%;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/p1-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "p1-v02",
@@ -383,7 +383,7 @@
       "src": "https://media.feed-pet.com/p2-v01-v2.mp4",
       "watch": "https://v.feed-pet.com/v/p2-v01/",
       "product": "殼力旺",
-      "poster": "background-image:url('/assets/scenes/p2.webp');background-size:200% auto;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/p2-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "p2-v02",
@@ -458,7 +458,7 @@
       "src": "https://media.feed-pet.com/p3-v01-v1.mp4",
       "watch": "https://v.feed-pet.com/v/p3-v01/",
       "product": "多卵壯",
-      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/p3-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "p3-v02",
@@ -548,7 +548,7 @@
       "src": "https://media.feed-pet.com/p4-v01-v1.mp4",
       "watch": "https://v.feed-pet.com/v/p4-v01/",
       "product": "長膘旺",
-      "poster": "background-image:url('/assets/scenes/p4.webp');background-size:auto 200%;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/p4-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "p4-v02",
@@ -608,7 +608,7 @@
       "src": "https://media.feed-pet.com/p5-v01-v1.mp4",
       "watch": "https://v.feed-pet.com/v/p5-v01/",
       "product": "足斤旺",
-      "poster": "background-image:url('/assets/scenes/p5.webp');background-size:auto 200%;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/p5-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "p5-v02",
@@ -668,7 +668,7 @@
       "src": "https://media.feed-pet.com/p6-v01-v2.mp4",
       "watch": "https://v.feed-pet.com/v/p6-v01/",
       "product": "保苗旺",
-      "poster": "background-image:url('/assets/scenes/p6.webp');background-size:auto 200%;background-position:0% 0%"
+      "poster": "background-image:url('/assets/scenes/p6-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "p6-v02",
