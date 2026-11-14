@@ -16,3 +16,126 @@ if (!reducedMotion.matches && 'IntersectionObserver' in window) {
     if (document.hidden) previews.forEach((video) => video.pause());
   });
 }
+
+// Homepage hero: one title from every published R2 film per round; 20 of 32
+// picks are science, mechanism, brand, manufacturing, or technical content.
+const playlistNode = document.querySelector('#hero-playlist');
+if (playlistNode) {
+  const playlist = JSON.parse(playlistNode.textContent);
+  const hero = document.querySelector('.hero-cinema');
+  const video = hero.querySelector('.hero-reel');
+  const title = hero.querySelector('#hero-title');
+  const category = hero.querySelector('#hero-category');
+    const points = hero.querySelector('#hero-points');
+  const watch = hero.querySelector('#hero-watch');
+  const counter = hero.querySelector('#hero-index');
+  const sound = hero.querySelector('#hero-sound');
+  const priority = playlist.filter((item) => item.priority);
+  const product = playlist.filter((item) => !item.priority);
+  const priorityRatio = priority.length / playlist.length;
+  if (playlist.length !== 32 || priorityRatio <= 0.5) throw new Error('Hero carousel needs all films and a priority share above 50%.');
+
+  const shuffle = (items) => {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  };
+  const newRound = () => {
+    const high = shuffle(priority);
+    const low = shuffle(product);
+    const round = [];
+    for (let i = 0; i < playlist.length; i += 1) {
+      const needsHigh = Math.floor(((i + 1) * priority.length) / playlist.length) > Math.floor((i * priority.length) / playlist.length);
+      round.push(needsHigh ? high.shift() : low.shift());
+    }
+    return round;
+  };
+
+  let round = newRound();
+  let position = 0;
+  let timer = 0;
+  let soundEnabled = false;
+  const dwellMs = 10000;
+
+  const setSoundState = (enabled) => {
+    soundEnabled = enabled;
+    sound.setAttribute('aria-pressed', String(enabled));
+    sound.textContent = enabled ? '關閉聲音' : '播放旁白';
+    video.muted = !enabled;
+  };
+  const scheduleAdvance = () => {
+    window.clearTimeout(timer);
+    if (document.hidden || reducedMotion.matches || soundEnabled) return;
+    timer = window.setTimeout(() => move(1), dwellMs);
+  };
+  const show = () => {
+    const item = round[position];
+    window.clearTimeout(timer);
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    video.style.cssText = item.poster;
+    title.textContent = item.title;
+    category.textContent = item.category;
+    points.replaceChildren(...item.points.map((point) => {
+      const li = document.createElement('li');
+      li.textContent = point;
+      return li;
+    }));
+    watch.href = item.watch;
+    watch.textContent = `觀看完整影片 ↗`;
+    counter.textContent = `${String(position + 1).padStart(2, '0')} / ${playlist.length}`;
+    setSoundState(false);
+    video.src = item.src;
+    video.load();
+    if (!reducedMotion.matches && !document.hidden) video.play().catch(() => {});
+    scheduleAdvance();
+  };
+  const move = (step) => {
+    position += step;
+    if (position >= round.length) {
+      round = newRound();
+      position = 0;
+    } else if (position < 0) {
+      round = newRound();
+      position = round.length - 1;
+    }
+    show();
+  };
+
+  hero.querySelector('#hero-prev').addEventListener('click', () => move(-1));
+  hero.querySelector('#hero-next').addEventListener('click', () => move(1));
+  sound.addEventListener('click', () => {
+    if (!soundEnabled) {
+      window.clearTimeout(timer);
+      setSoundState(true);
+      const startAudio = () => {
+        try { video.currentTime = 0; } catch {}
+        video.play().catch(() => setSoundState(false));
+      };
+      if (video.readyState >= 1) startAudio();
+      else video.addEventListener('loadedmetadata', startAudio, { once: true });
+    } else {
+      setSoundState(false);
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      scheduleAdvance();
+    }
+  });
+  video.addEventListener('ended', () => {
+    if (soundEnabled) move(1);
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      window.clearTimeout(timer);
+      video.pause();
+    } else {
+      if (!reducedMotion.matches) video.play().catch(() => {});
+      scheduleAdvance();
+    }
+  });
+  show();
+}

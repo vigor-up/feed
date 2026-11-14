@@ -112,7 +112,45 @@ def hero_video(object_name: str, label: str, watch: str, brand: bool = False, br
 
 def video_card(video_slug: str, object_name: str, title: str) -> str:
     preview = f"{MEDIA}/{object_name}-hero-h.mp4"
-    return f'''<article class="video-card"><a class="video-thumb" href="{VIDEO}/v/{video_slug}/" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" style="{poster_style(object_name)}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{VIDEO}/v/{video_slug}/">影片與旁白 ↗</a></div></article>'''
+    watch = f"{VIDEO}/tech/" if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
+    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" style="{poster_style(object_name)}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片與旁白 ↗</a></div></article>'''
+
+
+def hero_carousel() -> str:
+    mechanism_clips = {
+        "p1-v01", "p1-v03", "p1-v04", "p2-v01", "p2-v02", "p2-v04",
+        "p3-v01", "p3-v03", "p3-v04", "p3-v05", "p4-v02", "p4-v03",
+        "p5-v04", "p6-v01", "p6-v03",
+    }
+    clips = [
+        {"id":"sci-v02","object":"sci-v02","title":"每一批，都從製程穩定開始","category":"製程研發・技術壁壘","priority":True,"points":["批次穩定，從製程控制開始","重組蛋白酶 × 活性游離硅"],"src":f"{MEDIA}/sci-v02.mp4","watch":f"{VIDEO}/tech/"},
+        {"id":"sci-v03-r2","object":"sci-v03-r2","title":"游離硅，從原料到結構營養","category":"科普・材料技術","priority":True,"points":["游離硅，連接結構營養","骨・蹄・殼，回到生產指標"],"src":f"{MEDIA}/sci-v03-r2.mp4","watch":f"{VIDEO}/tech/"},
+        {"id":"sci-v01","object":"sci-v01","title":"看懂重組蛋白酶的作用路徑","category":"科普・生物機轉","priority":True,"points":["重組蛋白酶，聚焦蛋白質利用","從作用路徑，看到日糧效率"],"src":f"{MEDIA}/sci-v01.mp4","watch":f"{VIDEO}/tech/"},
+        {"id":"sci-mech-r2","object":"sci-mech-r2","title":"從分子作用到飼料利用","category":"科普・生物機轉","priority":True,"points":["從分子作用，回到飼料利用","蛋白利用 × 結構營養"],"src":f"{MEDIA}/sci-mech-r2.mp4","watch":f"{VIDEO}/tech/"},
+        {"id":"brand-v05","object":"brand-v05-v3-h","title":"同樣的料，為什麼隔壁欄賺更多？","category":"品牌精神","priority":True,"points":["別只看投入；更要看可售產出","6 條產品線，對應現場痛點"],"src":f"{MEDIA}/brand-v05-v3-h.mp4","watch":f"{VIDEO}/v/brand-v05/"},
+    ]
+    for product_index, product in enumerate(data.PRODUCTS, 1):
+        slug, name, audience, _, _, videos = product
+        story = PRODUCT_STORIES[slug]
+        for video_slug, object_name, title in videos:
+            priority = video_slug in mechanism_clips
+            clips.append({
+                "id":video_slug, "object":object_name, "title":title,
+                "category":"科普・生物機轉" if priority else f"{audience}・生產痛點",
+                "priority":priority,
+                "points":[f"{story['value']} {story['unit']}｜{story['metric']}", f"聚焦 {title.rstrip('？?。')}｜回到每批可售產出"],
+                "src":f"{MEDIA}/{object_name}.mp4",
+                "watch":f"{VIDEO}/v/{video_slug}/", "product":name,
+                "poster":poster_style(object_name),
+            })
+    for clip in clips:
+        clip.setdefault("poster", poster_style(clip["object"], clip["id"].startswith("brand-")))
+    preferred = sum(1 for clip in clips if clip["priority"])
+    if len(clips) != 32 or preferred <= len(clips) / 2:
+        raise ValueError(f"Hero carousel gate failed: {preferred}/{len(clips)} priority videos")
+    playlist = escape(json.dumps(clips, ensure_ascii=False, separators=(",", ":")), quote=False)
+    first = next(clip for clip in clips if clip["priority"])
+    return f'''<section class="hero hero-cinema" id="top" data-priority-count="{preferred}" data-total-count="{len(clips)}"><video class="hero-reel" muted autoplay playsinline preload="metadata" style="{poster_style(first['object'], first['id'].startswith('brand-'))}" aria-label="活力得®產品與技術影片輪播"></video><div class="hero-copy wrap"><p class="kicker">活力得® / 飼料添加劑・單一複合材料</p><h1>同一批料，<br><em>利潤差在哪？</em></h1><p class="hero-current"><span id="hero-category">{escape(first['category'])}</span><strong id="hero-title">{escape(first['title'])}</strong></p><ul class="hero-points" id="hero-points" aria-label="影片重點"><li>{escape(first['points'][0])}</li><li>{escape(first['points'][1])}</li></ul><div class="hero-metrics"><b>21–22 → &gt;28 <small>PSY</small></b><b>2.0 <small>FCR目標</small></b><b>+15.24% <small>胸肉</small></b><b>60% → 80% <small>育成率</small></b></div><div class="hero-actions"><a class="button solid" id="hero-watch" href="{first['watch']}">觀看完整影片 ↗</a><button class="button outline" id="hero-sound" type="button" aria-pressed="false">播放旁白</button></div><div class="hero-controls"><button type="button" id="hero-prev" aria-label="上一支影片">←</button><span id="hero-index" aria-live="polite">01 / {len(clips)}</span><button type="button" id="hero-next" aria-label="下一支影片">→</button><span class="hero-audience">獸醫師 / 飼料配方師 / 農場經營者</span></div></div><div class="film-bar"><span>活力得® · 影音精選</span><a href="{VIDEO}/">全部影音 ↗</a></div><script type="application/json" id="hero-playlist">{playlist}</script></section>'''
 
 
 def value_story() -> str:
@@ -190,10 +228,10 @@ def build() -> None:
         f'<a href="/products/{slug}.html"><span>{escape(PRODUCT_STORIES[slug]["metric"])}</span><strong>{escape(PRODUCT_STORIES[slug]["value"])}</strong></a>'
         for slug in ("junzaiwang", "zhangbiaowang", "zujinwang", "baomiaowang")
     )
-    home = f'''<section class="hero hero-cinema"><div class="hero-copy wrap"><p class="kicker">活力得® / 飼料添加劑 · 單一複合材料</p><h1>飼料吃下去，<br><em>利潤留下來了嗎？</em></h1><p>弱仔、破蛋、背膘、胸肉與育成率，正在決定每一批的可售產出。活力得®從蛋白利用與結構營養切入，把飼料投入轉成看得見的生產數字。</p><div class="hero-actions"><a class="button solid" href="/products/">看六條產品線 ↗</a><a class="button outline" href="#value">看經營價值 ↘</a></div><p class="hero-audience">獸醫師 / 飼料配方師 / 農場經營者</p></div>{hero_video('brand-v05-v3-h', '活力得品牌故事', VIDEO+'/v/brand-v05/', True)}</section><section class="proof-strip"><div class="wrap"><div class="proof-heading"><p class="kicker">從生產數字，走向經營價值</p><h2>數字要能回到<br>物種與批次。</h2></div><div class="proof-grid">{stats}</div></div></section><section class="section-products wrap"><div class="section-head inline"><div><p class="kicker">六條產品線 / 從現場痛點出發</p><h2>少一頭弱仔、少一顆破蛋，<br>每一批都能多留一分價值。</h2></div><a class="text-link" href="/products/">按物種與階段瀏覽 ↗</a></div><div class="product-grid">{product_cards}</div></section>{species_gallery()}<section class="tech-feature"><div class="wrap"><div><p class="kicker">材料技術</p><h2>以單一複合材料軸心，<br>串連蛋白利用與結構營養。</h2><p>重組 C 系絲氨酸蛋白酶處理飼料蛋白；游離硅相關組分對應膠原、骨與殼的結構營養。從連續流反應器到逐批品質紀錄，讓配方判斷有清楚的技術脈絡。</p><a class="button outline" href="/technology.html">閱讀技術與製程 ↗</a></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/v/sci-v02/')}</div></section>{value_story()}'''
+    home = f'''{hero_carousel()}<section class="section-products wrap"><div class="section-head inline"><div><p class="kicker">六條產品線 / 對應六類現場問題</p><h2>看痛點，<br>找能改變的指標。</h2></div><a class="text-link" href="/products/">依物種瀏覽 ↗</a></div><div class="product-grid">{product_cards}</div></section>{species_gallery()}<section class="tech-feature"><div class="wrap"><div><p class="kicker">材料技術</p><h2>蛋白質利用 ×<br>結構營養。</h2><p>重組蛋白酶與活性游離硅，連接飼料利用與骨、蹄、殼的結構支持。</p><a class="button outline" href="/technology.html">看技術與製程 ↗</a></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</div></section>{value_story()}'''
     page("", "活力得®｜重組蛋白酶與游離硅飼料添加劑・產品數據與 ROI", "活力得®動物營養材料：從生產指標、六條產品線與影片，了解母豬、蛋雞、育肥豬、肉雞、魚蝦的生產指標與經營價值。", home)
 
-    tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/v/sci-v02/')}</section><section class="tech-panes wrap"><article><span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article><span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}</div></section>'''
+    tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</section><section class="tech-panes wrap"><article><span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article><span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}</div></section>'''
     page("technology.html", "活力得®核心技術｜重組蛋白酶與游離硅複合材料", "閱讀活力得®重組 C 系絲氨酸蛋白酶、游離硅材料與連續流製程，並觀看已發布技術影片。", tech)
 
     listing = f'''<section class="inner-title wrap"><p class="kicker">中國市場 / 依物種與階段</p><h1>六條產品，<em>對應不同生產帳。</em></h1><p>先找物種，再看 PSY、FCR、蛋殼、胸肉、育成率與可售苗量；每條產品都回到自身的批次與收益口徑。</p></section><section class="section-products wrap tight"><div class="product-grid">{product_cards}</div></section>{market_taxonomy()}{value_story()}'''
@@ -232,6 +270,11 @@ def build() -> None:
                                    "videos": [{"watch_page": f"{VIDEO}/v/{video_slug}/", "r2_video": f"{MEDIA}/{object_name}.mp4", "preview": f"{MEDIA}/{object_name}-hero-h.mp4", "poster": f"{VIDEO}/assets/t/{object_name}.jpg", "topic": title}
                                               for video_slug, object_name, title in videos]}
                                   for slug, name, _, _, _, videos in data.PRODUCTS]}
+    home_html = (ROOT / "index.html").read_text(encoding="utf-8")
+    playlist_match = re.search(r'<script type="application/json" id="hero-playlist">(.*?)</script>', home_html, re.S)
+    if not playlist_match:
+        raise ValueError("Homepage hero playlist missing")
+    media_sources["hero_carousel"] = json.loads(playlist_match.group(1))
     (ROOT / "media-sources.json").write_text(json.dumps(media_sources, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"BUILD OK pages={len(all_routes)} legacy_redirects={len(data.OLD_ROUTES)} sitemap_urls={len(all_routes)} logo=huolide-36751031.png")
 
