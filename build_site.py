@@ -144,12 +144,11 @@ def hero_video(object_name: str, label: str, watch: str, brand: bool = False, br
 
 
 def video_card(video_slug: str, object_name: str, title: str) -> str:
-    preview = f"{MEDIA}/{object_name}-hero-h.mp4"
     watch = f"{VIDEO}/tech/" if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
-    # Each card uses the actual released clip's own frame. The page Hero and
-    # nearby cards otherwise reuse panels of the same scene board.
-    poster = f"{VIDEO}/assets/t/{object_name}.jpg"
-    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" poster="{poster}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片重點 ↗</a></div></article>'''
+    poster = f"/assets/cards/{video_slug}.webp"
+    if not (ROOT / poster.lstrip("/")).is_file():
+        raise FileNotFoundError(f"Missing GPT Image card art: {poster}")
+    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><img src="{poster}" alt="{escape(title, quote=True)}" loading="lazy" decoding="async"><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片重點 ↗</a></div></article>'''
 
 
 def hero_carousel() -> str:
@@ -186,7 +185,7 @@ def hero_carousel() -> str:
         raise ValueError(f"Hero carousel gate failed: {preferred}/{len(clips)} priority videos")
     playlist = escape(json.dumps(clips, ensure_ascii=False, separators=(",", ":")), quote=False)
     first = next(clip for clip in clips if clip["priority"])
-    return f'''<section class="hero hero-cinema" id="top" data-priority-count="{preferred}" data-total-count="{len(clips)}"><video class="hero-reel" muted autoplay playsinline preload="metadata" style="{poster_style(first['object'], first['id'].startswith('brand-'))}" aria-label="活力得®產品與技術影片輪播"></video><div class="hero-copy wrap"><p class="kicker">活力得® / 飼料添加劑・單一複合材料</p><h1>同一批料，<br><em>利潤差在哪？</em></h1><p class="hero-current"><span id="hero-category">{escape(first['category'])}</span><strong id="hero-title">{escape(first['title'])}</strong></p><ul class="hero-points" id="hero-points" aria-label="影片重點"><li>{escape(first['points'][0])}</li><li>{escape(first['points'][1])}</li></ul><div class="hero-metrics"><b>21–22 → &gt;28 <small>PSY</small></b><b>2.0 <small>FCR目標</small></b><b>+15.24% <small>胸肉</small></b><b>60% → 80% <small>育成率</small></b></div><div class="hero-actions"><a class="button solid" id="hero-watch" href="{first['watch']}">觀看完整影片 ↗</a><button class="button outline" id="hero-sound" type="button" aria-pressed="false">播放旁白</button></div><div class="hero-controls"><button type="button" id="hero-prev" aria-label="上一支影片">←</button><span id="hero-index" aria-live="polite">01 / {len(clips)}</span><button type="button" id="hero-next" aria-label="下一支影片">→</button><span class="hero-audience">獸醫師 / 飼料配方師 / 農場經營者</span></div></div><div class="film-bar"><span>活力得® · 影音精選</span><a href="{VIDEO}/">全部影音 ↗</a></div><script type="application/json" id="hero-playlist">{playlist}</script></section>'''
+    return f'''<section class="hero hero-cinema" id="top" data-priority-count="{preferred}" data-total-count="{len(clips)}"><div class="hero-fallback" style="{poster_style(first['object'], first['id'].startswith('brand-'))}" aria-hidden="true"></div><video class="hero-reel" muted autoplay playsinline preload="metadata" aria-label="活力得®產品與技術影片輪播"></video><div class="hero-copy wrap"><p class="kicker">活力得® / 飼料添加劑・單一複合材料</p><h1>同一批料，<br><em>利潤差在哪？</em></h1><p class="hero-current"><span id="hero-category">{escape(first['category'])}</span><strong id="hero-title">{escape(first['title'])}</strong></p><ul class="hero-points" id="hero-points" aria-label="影片重點"><li>{escape(first['points'][0])}</li><li>{escape(first['points'][1])}</li></ul><div class="hero-metrics"><b>21–22 → &gt;28 <small>PSY</small></b><b>2.0 <small>FCR目標</small></b><b>+15.24% <small>胸肉</small></b><b>60% → 80% <small>育成率</small></b></div><div class="hero-actions"><a class="button solid" id="hero-watch" href="{first['watch']}">觀看完整影片 ↗</a><button class="button outline" id="hero-sound" type="button" aria-pressed="false">播放旁白</button></div><div class="hero-controls"><button type="button" id="hero-prev" aria-label="上一支影片">←</button><span id="hero-index" aria-live="polite">01 / {len(clips)}</span><button type="button" id="hero-next" aria-label="下一支影片">→</button><span class="hero-audience">獸醫師 / 飼料配方師 / 農場經營者</span></div></div><div class="film-bar"><span>活力得® · 影音精選</span><a href="{VIDEO}/">全部影音 ↗</a></div><script type="application/json" id="hero-playlist">{playlist}</script></section>'''
 
 
 def value_story() -> str:

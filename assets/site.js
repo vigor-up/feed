@@ -24,6 +24,7 @@ if (playlistNode) {
   const playlist = JSON.parse(playlistNode.textContent);
   const hero = document.querySelector('.hero-cinema');
   const video = hero.querySelector('.hero-reel');
+  const fallback = hero.querySelector('.hero-fallback');
   const title = hero.querySelector('#hero-title');
   const category = hero.querySelector('#hero-category');
     const points = hero.querySelector('#hero-points');
@@ -74,10 +75,11 @@ if (playlistNode) {
   const show = () => {
     const item = round[position];
     window.clearTimeout(timer);
+    video.classList.remove('is-playing');
     video.pause();
     video.removeAttribute('src');
     video.load();
-    video.style.cssText = item.poster;
+    fallback.style.cssText = item.poster;
     title.textContent = item.title;
     category.textContent = item.category;
     points.replaceChildren(...item.points.map((point) => {
@@ -94,6 +96,14 @@ if (playlistNode) {
     if (!reducedMotion.matches && !document.hidden) video.play().catch(() => {});
     scheduleAdvance();
   };
+  video.addEventListener('playing', () => {
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && video.currentSrc === round[position].src) {
+      video.classList.add('is-playing');
+    }
+  });
+  for (const eventName of ['error', 'stalled', 'waiting', 'emptied']) {
+    video.addEventListener(eventName, () => video.classList.remove('is-playing'));
+  }
   const move = (step) => {
     position += step;
     if (position >= round.length) {
