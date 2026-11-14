@@ -1,11 +1,135 @@
 {
-  "generator": "OpenAI GPT Image via Codex image_gen",
-  "purpose": "Website species atmosphere imagery; not source material for production or efficacy claims",
   "created": "2026-11-14",
+  "generator": "OpenAI GPT Image via Codex image_gen",
+  "usage": "Website visual assets and video loading covers",
   "assets": [
-    {"file": "sow.webp", "scene": "sow nursing piglets", "original": "exec-ff5df4c2-24b9-4057-b063-f09f89139afa.png"},
-    {"file": "cattle.webp", "scene": "beef cattle feeding", "original": "exec-7193fbc2-7f91-4707-bf86-5d9fc397c4a1.png"},
-    {"file": "broiler.webp", "scene": "white broiler flock", "original": "exec-b24b3589-2a3d-4f1f-96ec-2d31839a0fb6.png"},
-    {"file": "shrimp.webp", "scene": "shrimp pond harvest", "original": "exec-39f21d91-3110-4cbf-be72-635a66b0a918.png"}
+    {
+      "file": "species/sow.webp",
+      "scene": "母豬哺乳：群體自然錯落",
+      "generated_source": "exec-0880d409-94e9-4e23-960d-b1050e5ecc26.png",
+      "sha256": "0b48e4121df7033b07d1ae7a2dfb6c75c84b9b1fd31f3d263df70eb7bcbc8d6e",
+      "bytes": 253250
+    },
+    {
+      "file": "species/cattle.webp",
+      "scene": "肉牛與反芻：牛舍自然採食",
+      "generated_source": "exec-64381aff-9bbe-4ed4-aa9a-33b869ea29f1.png",
+      "sha256": "6e321732849d36e79917954de7009399fcb9fc25ed0ec38ce4f83a60056f8634",
+      "bytes": 280080
+    },
+    {
+      "file": "species/broiler.webp",
+      "scene": "肉雞：群體自然間距",
+      "generated_source": "exec-84f51da3-f4d2-4954-864d-f9661c375705.png",
+      "sha256": "e81eeb4ff16cee9ea7fcddbe7e599186bbe1d6a281928aecb09696114c8411c2",
+      "bytes": 252972
+    },
+    {
+      "file": "species/shrimp.webp",
+      "scene": "養殖蝦：池塘作業",
+      "generated_source": "exec-20d82427-8454-4914-8c60-fcbf50ec93c7.png",
+      "sha256": "4512cf6ac55a032b125d0c4246af79b29ab7a72cff5cc2cb6aedbe17ec4d347a",
+      "bytes": 186036
+    },
+    {
+      "file": "scenes/brand.webp",
+      "scene": "品牌影片靜態封面",
+      "generated_source": "exec-2804d015-a66a-4488-8bae-f751b382ac0a.png",
+      "sha256": "e9a4f799c0d5dd836aea71be5f56a1acf05bbd0a10b5687f8a97b0c32de6b944",
+      "bytes": 291504
+    },
+    {
+      "file": "scenes/p1.webp",
+      "scene": "均仔旺影片場景板",
+      "generated_source": "exec-ee014fa5-cd2c-4235-8599-e1b864086665.png",
+      "sha256": "da0246bad30e0c29464c452ab538345e0055ce6697b149fdce08d3c2b7eea06b",
+      "bytes": 273708
+    },
+    {
+      "file": "scenes/p2.webp",
+      "scene": "殼力旺影片場景板",
+      "generated_source": "exec-7a22371c-65de-47ef-bd2d-6fb74a85291e.png",
+      "sha256": "d70bf729390c6cbd436401cbce360ee0dc26a7dcb0310cee95b05450760d4238",
+      "bytes": 202548
+    },
+    {
+      "file": "scenes/p3.webp",
+      "scene": "多卵壯影片場景板",
+      "generated_source": "exec-c4282486-9a88-4747-8a96-c1cdad159495.png",
+      "sha256": "b27a2585756f7749ad78d5af3a45a73e6bb8feda9e7cf60d329266cceb4053bf",
+      "bytes": 221834
+    },
+    {
+      "file": "scenes/p4.webp",
+      "scene": "長膘旺影片場景板",
+      "generated_source": "exec-c54310c3-afbd-4fba-8000-f7e0b4e494e8.png",
+      "sha256": "a38f06ab7eec63973473e489d1764cf50270a8f95b05a92e1564c17658260dbc",
+      "bytes": 189182
+    },
+    {
+      "file": "scenes/p5.webp",
+      "scene": "足斤旺影片場景板，雞胸肉比例已縮小",
+      "generated_source": "exec-521b493a-73a0-4372-8152-36eb33f4d2f4.png",
+      "sha256": "ee818da2241e2a87011e8141025259ce44a5c809bbb57c27a6b7aa8eb73d3ca4",
+      "bytes": 214076
+    },
+    {
+      "file": "scenes/p6.webp",
+      "scene": "保苗旺影片場景板",
+      "generated_source": "exec-5ba69430-e56c-40ea-8e4f-0dd16f06e4c5.png",
+      "sha256": "913aa5d19fd24ec67866e18e334f7dc8d082f9742bdb49255b7b80db1ef06560",
+      "bytes": 199550
+    },
+    {
+      "file": "scenes/science.webp",
+      "scene": "科學製程影片場景板",
+      "generated_source": "exec-d2b484cd-52b4-4444-81c9-a034e4b04378.png",
+      "sha256": "03c927f660afecae755471ccc6851cba17705629fbb08ee40d60d6c0b32d5823",
+      "bytes": 152242
+    }
+  ],
+  "rejected": [
+    {
+      "file": "exec-ff5df4c2-24b9-4057-b063-f09f89139afa.png",
+      "reason": "豬舍過度乾淨，構圖過於規整",
+      "sha256": "66af35431ff5e78ccc4d428bd0d51c9e0a25351f545000f04455e582c6096b78",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-ff5df4c2-24b9-4057-b063-f09f89139afa.png"
+    },
+    {
+      "file": "exec-e394eb84-1149-4922-a166-b60b581f5b15.png",
+      "reason": "水產排列與動作過度整齊",
+      "sha256": "fa8382773b1d46ab8c71ba3aff3c0b61f6dd795ccd094756a4b74892c5889ed9",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-e394eb84-1149-4922-a166-b60b581f5b15.png"
+    },
+    {
+      "file": "exec-fb1986aa-15c1-4c0a-9e4b-f32b68b16240.png",
+      "reason": "魚群排列過度整齊",
+      "sha256": "f449b7d351bad079be0409e8d545d11ca69cd0db98e6ec34b02a665d658730df",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-fb1986aa-15c1-4c0a-9e4b-f32b68b16240.png"
+    },
+    {
+      "file": "exec-fe6b6bf6-4a79-4fe2-823b-ba7ae2716a29.png",
+      "reason": "雞蛋場景過度乾淨規整",
+      "sha256": "7c35aa0320d2c7fc7d13942d398087c8d3981cd69e492b51e9015924c8d72676",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-fe6b6bf6-4a79-4fe2-823b-ba7ae2716a29.png"
+    },
+    {
+      "file": "exec-b100c921-bb56-476a-b1cb-e647b11d28de.png",
+      "reason": "賽博龐克色光與不自然科技感",
+      "sha256": "7d17ea69b380f434fea3962e6f8c2e0d276497cb3e8ccef880f3a4b158263c59",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-b100c921-bb56-476a-b1cb-e647b11d28de.png"
+    },
+    {
+      "file": "exec-5cf6beec-0d69-4648-a627-0ca0f101c805.png",
+      "reason": "雞胸肉與雞隻比例失真",
+      "sha256": "f9a4c673dc86fcc33ff68ee96efbc5d70baa7413a6b9b8d79acbd17149bd32db",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-5cf6beec-0d69-4648-a627-0ca0f101c805.png"
+    },
+    {
+      "file": "exec-9e7ac513-8224-412d-af17-27104ecb34bf.png",
+      "reason": "豬舍過度乾淨，強弱仔體型差異失真",
+      "sha256": "1bff7a990a7b3c945a363c06ae09f5cc67f4026320bb3f32bbcbde89b5cf2829",
+      "archive": "D:\\LLM\\_archive\\richtrong-image-rejects-20261114\\exec-9e7ac513-8224-412d-af17-27104ecb34bf.png"
+    }
   ]
 }
