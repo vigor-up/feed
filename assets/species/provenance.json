@@ -1,0 +1,11 @@
+{
+  "generator": "OpenAI GPT Image via Codex image_gen",
+  "purpose": "Website species atmosphere imagery; not source material for production or efficacy claims",
+  "created": "2026-11-14",
+  "assets": [
+    {"file": "sow.webp", "scene": "sow nursing piglets", "original": "exec-ff5df4c2-24b9-4057-b063-f09f89139afa.png"},
+    {"file": "cattle.webp", "scene": "beef cattle feeding", "original": "exec-7193fbc2-7f91-4707-bf86-5d9fc397c4a1.png"},
+    {"file": "broiler.webp", "scene": "white broiler flock", "original": "exec-b24b3589-2a3d-4f1f-96ec-2d31839a0fb6.png"},
+    {"file": "shrimp.webp", "scene": "shrimp pond harvest", "original": "exec-39f21d91-3110-4cbf-be72-635a66b0a918.png"}
+  ]
+}
