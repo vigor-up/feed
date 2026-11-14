@@ -88,6 +88,8 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
         image = "/assets/species/cattle.webp" if brand_image == "cattle" else "/assets/scenes/brand.webp"
         return f"background-image:url('{image}');background-size:cover;background-position:center"
     if object_name.startswith("sci-"):
+        if object_name == "sci-v02":
+            return "background-image:url('/assets/scenes/science-hero.png');background-size:cover;background-position:center"
         index = 0 if object_name == "sci-v02" else 1
         return f"background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:{index * 100}% 0%"
     match = re.match(r"p([1-6])-v(\d+)", object_name)
@@ -96,6 +98,8 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
     product, number = int(match.group(1)), int(match.group(2))
     order = [video[1] for video in data.PRODUCTS[product - 1][5]]
     index = order.index(object_name)
+    if index == 0:
+        return f"background-image:url('/assets/scenes/p{product}-hero.png');background-size:cover;background-position:center"
     rows = 3 if product in (2, 3) else 2
     x = 100 if index % 2 else 0
     y = (index // 2) * (100 if rows == 2 else 50)
@@ -113,7 +117,7 @@ def hero_video(object_name: str, label: str, watch: str, brand: bool = False, br
 def video_card(video_slug: str, object_name: str, title: str) -> str:
     preview = f"{MEDIA}/{object_name}-hero-h.mp4"
     watch = f"{VIDEO}/tech/" if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
-    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" style="{poster_style(object_name)}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片與旁白 ↗</a></div></article>'''
+    return f'''<article class="video-card"><a class="video-thumb" href="{watch}" aria-label="觀看影片：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" style="{poster_style(object_name)}" data-preview="{preview}" aria-hidden="true"></video><span class="play">▶</span></a><div class="video-meta"><h3>{escape(title)}</h3><a href="{watch}">影片重點 ↗</a></div></article>'''
 
 
 def hero_carousel() -> str:
@@ -250,7 +254,7 @@ def build() -> None:
         page(f"products/{slug}.html", f"{name}｜{audience}生產數據與 ROI｜活力得®", f"{name}對應{audience}。閱讀{story['metric']}、場域比較口徑、獸醫與配方視角，觀看已發布影片與經營價值。", body, f"{SITE}/assets/scenes/p{slug_to_number(slug)}.webp")
 
     featured = [data.PRODUCTS[0][5][0], data.PRODUCTS[1][5][0], data.PRODUCTS[3][5][1], data.PRODUCTS[4][5][2], data.PRODUCTS[5][5][0]]
-    stories = f'''<section class="inner-title wrap"><p class="kicker">活力得® / 影音故事</p><h1>每個數字背後，<em>都有一個現場問題。</em></h1><p>從產房、蛋雞舍、育肥場到養殖池，影片以生產問題連接技術與產品。完整版、旁白和更多分類都在影音館。</p><a class="button solid" href="{VIDEO}/">進入影音館 ↗</a></section><section class="section-videos wrap"><div class="video-grid">{''.join(video_card(*video) for video in featured)}</div></section>'''
+    stories = f'''<section class="inner-title wrap"><p class="kicker">活力得® / 影音故事</p><h1>每個數字背後，<em>都有一個現場問題。</em></h1><p>從產房、蛋雞舍、育肥場到養殖池，影片以生產問題連接技術與產品。完整版與分段重點都在影音館。</p><a class="button solid" href="{VIDEO}/">進入影音館 ↗</a></section><section class="section-videos wrap"><div class="video-grid">{''.join(video_card(*video) for video in featured)}</div></section>'''
     page("stories.html", "活力得®影音故事｜豬禽水產產品影片", "觀看活力得®豬禽水產產品影片、現場問題與技術故事。", stories)
 
     for old, destination in data.OLD_ROUTES.items():
