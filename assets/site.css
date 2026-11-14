@@ -66,3 +66,15 @@
 footer{background:#061a22}
 @media(max-width:900px){.video-hero{min-height:680px}.video-hero .hero-copy{min-height:680px;padding:100px 30px 80px}.hero-watch{right:30px;bottom:24px}.page-intro.has-video{min-height:510px}}
 @media(max-width:600px){.video-hero{min-height:690px}.video-hero .hero-copy{min-height:690px;padding:90px 24px 100px}.video-hero h1{font-size:clamp(3.25rem,13vw,5rem)}.hero-watch{right:auto;left:24px;bottom:28px}.product-section,.media-block{padding-left:24px;padding-right:24px}.page-intro.has-video{min-height:550px}.video-tile .tile-copy,.product-tile.video-tile{min-height:225px}}
+.market-taxonomy{max-width:var(--max);margin:auto;padding:100px 30px}
+.market-taxonomy h2{max-width:800px}
+.market-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:35px}
+.market-groups article{background:#fff;border:1px solid #c9dfe1;border-top:3px solid #2e8c87;padding:28px;scroll-margin-top:30px}
+.market-groups h3{font-size:1.55rem;color:#0a4149;margin-bottom:20px}
+.market-groups p{color:#415f65}
+.market-chips{display:flex;flex-wrap:wrap;gap:9px}
+.market-chips>a,.market-chips>span{border:1px solid #b4d2d0;border-radius:30px;padding:9px 13px;font-size:.86rem;line-height:1.4}
+.market-chips>a{background:#e6f5f2;color:#07524e;font-weight:700}
+.market-chips>a:hover{background:#caeae3}
+.market-chips>span{color:#4d6769}
+@media(max-width:600px){.market-taxonomy{padding:70px 24px}.market-groups{grid-template-columns:1fr}.market-groups article{padding:23px}}
