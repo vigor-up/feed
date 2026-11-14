@@ -9,6 +9,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 import json
 import re
+import hashlib
+import subprocess
 
 from opencc import OpenCC
 import site_data as data
@@ -18,6 +20,46 @@ SITE = "https://richtrong.com"
 VIDEO = "https://v.feed-pet.com"
 MEDIA = "https://media.feed-pet.com"
 TO_SIMPLIFIED = OpenCC("t2s")
+
+# --- SEO (2026-11-14): stable sitemap lastmod + OG variants -----------------
+PAGE_META: dict[str, dict[str, str]] = {}
+DESC_BOOST = ("活力得®以重組蛋白酶與活性游離硅為單一複合功能材料，整理母豬、蛋雞、育肥豬、肉雞與魚蝦的"
+              "生產指標、比較口徑與技術影音，供獸醫師、飼料配方師與農場經營者評估。")
+
+
+def og_variant(image: str) -> str:
+    stem = Path(image.rsplit("/", 1)[-1]).stem
+    f = ROOT / "assets" / "og" / (stem + "-1200x630.webp")
+    return SITE + "/assets/og/" + stem + "-1200x630.webp" if f.exists() else image
+
+
+def body_key(html: str) -> str:
+    m = re.search(r'<main id="main">(.*?)</main>', html, re.S)
+    return hashlib.sha256((m.group(1) if m else html).encode("utf-8")).hexdigest()[:16]
+
+
+def git_file_date(rel_path: str) -> str | None:
+    if not rel_path:
+        return None
+    try:
+        r = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel_path],
+                           cwd=ROOT, capture_output=True, text=True, timeout=15)
+        return r.stdout.strip() or None
+    except Exception:
+        return None
+
+
+def load_sitemap_dates() -> dict:
+    try:
+        return json.loads((ROOT / "sitemap_dates.json").read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def save_sitemap_dates(d: dict) -> None:
+    (ROOT / "sitemap_dates.json").write_text(
+        json.dumps(d, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+# ---------------------------------------------------------------------------
 
 # Numbers and wording are transcribed from the current 2026 PPT manifests and
 # the published video site's config. A target is labelled as a target.
@@ -197,20 +239,33 @@ def page(path: str, title: str, description: str, body: str, image: str | None =
     canonical = SITE + "/" + rel
     simplified_url = SITE + "/zh-cn/" + rel
     image = image or SITE + "/assets/species/sow.webp"
+    og_image = og_variant(image)
+    if len(description) < 70:
+        description = description.rstrip("。") + "。" + DESC_BOOST
     nav = '<a href="/">首頁</a><a href="/technology.html">核心技術</a><a href="/products/">產品線</a><a href="/stories.html">影音故事</a>'
-    schema = json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title,
-                         "url": canonical, "description": description,
-                         "isPartOf": {"@type": "WebSite", "name": "活力得®", "url": SITE + "/"}}, ensure_ascii=False)
-    html = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-Hant" href="{canonical}"><link rel="alternate" hreflang="zh-Hans" href="{simplified_url}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:site_name" content="活力得®"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image}"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/png" href="/assets/huolide-36751031.png"><link rel="apple-touch-icon" href="/assets/huolide-36751031.png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">跳至內容</a><header class="site-header"><a class="brand" href="/" aria-label="活力得®首頁"><img src="/assets/huolide-36751031.png" alt="活力得®註冊圖形商標"><span>活力得<sup>®</sup><small>HUOLIDE · ANIMAL NUTRITION</small></span></a><nav aria-label="主要導覽">{nav}</nav><a class="header-action" href="/#value">經營價值 ↗</a></header><main id="main">{body}</main><footer><div class="footer-top"><div class="footer-brand"><img src="/assets/huolide-36751031.png" alt="活力得®圖形商標"><div><strong>活力得<sup>®</sup></strong><p>重組蛋白酶與活性游離硅的單一複合功能材料</p></div></div><div class="footer-links"><a href="/technology.html">材料技術</a><a href="/products/">六條產品線</a><a href="/stories.html">影音故事</a><a href="{VIDEO}/">完整影音館</a><a href="{simplified_url}" lang="zh-Hans">简体中文</a></div></div><div class="footer-bottom"><span>活力得® 註冊商標 · 第 36751031 號</span><span>獸醫師 · 飼料配方師 · 農場經營者</span></div></footer></body></html>'''
+    crumbs = [{"@type": "ListItem", "position": 1, "name": "首頁", "item": SITE + "/"}]
+    if rel:
+        crumbs.append({"@type": "ListItem", "position": 2, "name": title.split("｜")[0], "item": canonical})
+    schema = json.dumps({"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "name": title, "url": canonical, "description": description,
+         "isPartOf": {"@type": "WebSite", "name": "活力得®", "url": SITE + "/"}},
+        {"@type": "Organization", "name": "活力得®", "url": SITE + "/",
+         "logo": {"@type": "ImageObject", "url": SITE + "/assets/huolide-36751031.png"},
+         "sameAs": [VIDEO + "/"]},
+        {"@type": "WebSite", "name": "活力得®", "url": SITE + "/", "inLanguage": ["zh-Hant", "zh-Hans"]},
+        {"@type": "BreadcrumbList", "itemListElement": crumbs}]}, ensure_ascii=False)
+    html = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-Hant" href="{canonical}"><link rel="alternate" hreflang="zh-Hans" href="{simplified_url}"><link rel="alternate" hreflang="x-default" href="{canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:site_name" content="活力得®"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{og_image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="活力得®動物營養材料"><meta name="twitter:card" content="summary_large_image"><link rel="icon" type="image/png" href="/assets/huolide-36751031.png"><link rel="apple-touch-icon" href="/assets/huolide-36751031.png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">跳至內容</a><header class="site-header"><a class="brand" href="/" aria-label="活力得®首頁"><img src="/assets/huolide-36751031.png" alt="活力得®註冊圖形商標"><span>活力得<sup>®</sup><small>HUOLIDE · ANIMAL NUTRITION</small></span></a><nav aria-label="主要導覽">{nav}</nav><a class="header-action" href="/#value">經營價值 ↗</a></header><main id="main">{body}</main><footer><div class="footer-top"><div class="footer-brand"><img src="/assets/huolide-36751031.png" alt="活力得®圖形商標"><div><strong>活力得<sup>®</sup></strong><p>重組蛋白酶與活性游離硅的單一複合功能材料</p></div></div><div class="footer-links"><a href="/technology.html">材料技術</a><a href="/products/">六條產品線</a><a href="/stories.html">影音故事</a><a href="{VIDEO}/">完整影音館</a><a href="{simplified_url}" lang="zh-Hans">简体中文</a></div></div><div class="footer-bottom"><span>活力得® 註冊商標 · 第 36751031 號</span><span>獸醫師 · 飼料配方師 · 農場經營者</span></div></footer></body></html>'''
     out = ROOT / (path or "index.html")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html, encoding="utf-8")
+    PAGE_META[rel] = {"key": body_key(html), "path": str(out.relative_to(ROOT))}
     simplified = TO_SIMPLIFIED.convert(html)
     simplified = simplified.replace('lang="zh-Hant"', 'lang="zh-Hans"', 1)
     simplified = simplified.replace(f'<link rel="canonical" href="{canonical}">', f'<link rel="canonical" href="{simplified_url}">', 1)
     simplified = simplified.replace(f'<meta property="og:url" content="{canonical}">', f'<meta property="og:url" content="{simplified_url}">', 1)
     simplified = simplified.replace('content="zh_TW"', 'content="zh_CN"', 1)
     simplified = simplified.replace(f'"url": "{canonical}"', f'"url": "{simplified_url}"', 1)
+    simplified = simplified.replace(f'"item": "{canonical}"', f'"item": "{simplified_url}"', 1)
     simplified = simplified.replace(f'<a href="{simplified_url}" lang="zh-Hans">简体中文</a>', f'<a href="{canonical}" lang="zh-Hant">繁體中文</a>')
     simplified = re.sub(r'href="/(?!assets/|zh-cn/)', 'href="/zh-cn/', simplified)
     simplified_out = ROOT / "zh-cn" / (path or "index.html")
@@ -296,7 +351,25 @@ def build() -> None:
     routes = ["", "technology.html", "products/", "stories.html", "products/ruminants.html"] + [f"products/{p[0]}.html" for p in data.PRODUCTS]
     all_routes = routes + [f"zh-cn/{route}" for route in routes]
     today = date.today().isoformat()
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{route}</loc><lastmod>{today}</lastmod></url>\n" for route in all_routes) + "</urlset>\n"
+    dates = load_sitemap_dates()
+    for route in routes:
+        meta = PAGE_META.get(route.removesuffix("index.html"), {})
+        key = meta.get("key", "")
+        cur = dates.get(route, {})
+        if not cur:
+            cur = {"date": git_file_date(meta.get("path", "")) or today, "key": key}
+        elif cur.get("key") and key and cur["key"] != key:
+            cur = {"date": today, "key": key}
+        else:
+            cur["key"] = key
+        dates[route] = cur
+    save_sitemap_dates(dates)
+
+    def lastmod(route: str) -> str:
+        base = route[len("zh-cn/"):] if route.startswith("zh-cn/") else route
+        return dates.get(base, {}).get("date", today)
+
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{route}</loc><lastmod>{lastmod(route)}</lastmod></url>\n" for route in all_routes) + "</urlset>\n"
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     media_sources = {"source_site": VIDEO + "/", "public_r2_base": MEDIA + "/",
