@@ -1,6 +1,6 @@
 # richtrong.com 活力得® 品牌站
 
-此 repo 的 `main` 分支由 GitHub Pages 提供 `richtrong.com`。`v.feed-pet.com` 是獨立的正式影音館，影片由公開 R2 網域 `media.feed-pet.com` 提供；本站只引用已發布網址，不修改影音館或 R2 物件。
+此 repo 的 `main` 分支由 GitHub Pages 提供 `richtrong.com`。`v.feed-pet.com` 是獨立的正式影音館，影片由公開 R2 網域 `media.feed-pet.com` 提供；本站只引用已發布網址，不修改影音館或 R2 物件。頁面以無聲短預覽為主視覺，文字作導覽與搜尋索引。
 
 ## 網站架構
 
@@ -22,4 +22,4 @@
 python -X utf8 D:\LLM\sites\feed\build_site.py
 ```
 
-產物含繁簡 HTML、sitemap、robots 與 `media-sources.json`（公開來源頁、R2 影片及海報圖完整網址）。發佈前檢查舊品牌字樣、繁簡互鏈、連結 HTTP 狀態、手機橫向溢出及正式站發布閘；`main` 分支推送會更新 GitHub Pages。
+產物含繁簡 HTML、sitemap、robots 與 `media-sources.json`（公開來源頁、R2 正片／短預覽及海報圖完整網址）。`assets/site.js` 只在影片進入畫面時載入預覽，離開畫面暫停；偏好減少動態效果時只顯示海報。發佈前檢查舊品牌字樣、繁簡互鏈、連結 HTTP 狀態、手機橫向溢出及正式站發布閘；`main` 分支推送會更新 GitHub Pages。

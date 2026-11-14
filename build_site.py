@@ -70,9 +70,16 @@ def tag(title: str, text: str, href: str, cls: str = "") -> str:
     return f'<a class="{cls}" href="{escape(href, quote=True)}"><span>{escape(title)}</span><small>{escape(text)}</small><b aria-hidden="true">↗</b></a>'
 
 
+def product_tile(slug: str, name: str, audience: str, first_object: str) -> str:
+    poster = f"{VIDEO}/assets/t/{first_object}.jpg"
+    preview = f"{MEDIA}/{first_object}-hero-h.mp4"
+    return f'''<a class="product-tile video-tile" href="/products/{slug}.html"><video class="motion-preview" muted loop playsinline preload="none" poster="{poster}" data-preview="{preview}" aria-hidden="true"></video><span class="tile-copy"><strong>{escape(name)}</strong><small>{escape(audience)}</small></span><b aria-hidden="true">↗</b></a>'''
+
+
 def video_card(slug: str, object_name: str, title: str) -> str:
     poster = f"{VIDEO}/assets/t/{object_name}.jpg"
-    return f'''<article class="video-card"><a href="{VIDEO}/v/{slug}/" aria-label="觀看：{escape(title, quote=True)}"><img src="{poster}" alt="{escape(title, quote=True)}" loading="lazy" width="640" height="360"><span class="play" aria-hidden="true">▶</span></a><div><h3>{escape(title)}</h3><a class="text-link" href="{VIDEO}/v/{slug}/">觀看影片與旁白 <span aria-hidden="true">↗</span></a></div></article>'''
+    preview = f"{MEDIA}/{object_name}-hero-h.mp4"
+    return f'''<article class="video-card"><a href="{VIDEO}/v/{slug}/" aria-label="觀看：{escape(title, quote=True)}"><video class="motion-preview" muted loop playsinline preload="none" poster="{poster}" data-preview="{preview}" aria-label="{escape(title, quote=True)}"></video><span class="play" aria-hidden="true">▶</span></a><div><h3>{escape(title)}</h3><a class="text-link" href="{VIDEO}/v/{slug}/">觀看影片與旁白 <span aria-hidden="true">↗</span></a></div></article>'''
 
 
 def science_card(slug: str, title: str) -> str:
@@ -83,12 +90,25 @@ def page(path: str, title: str, description: str, body: str, image: str = f"{VID
     canonical_path = path.removesuffix("index.html")
     canonical = f"{SITE}/{canonical_path}" if canonical_path else f"{SITE}/"
     simplified_canonical = f"{SITE}/zh-cn/{canonical_path}"
+    if path.startswith("products/") and path.endswith(".html") and not path.endswith("index.html") and not path.endswith("ruminants.html"):
+        slug = Path(path).stem
+        first_video = next(p[5][0][1] for p in PRODUCTS if p[0] == slug)
+        ambient_source = f"{MEDIA}/{first_video}-hero-h.mp4"
+        ambient_poster = f"{VIDEO}/assets/t/{first_video}.jpg"
+    elif path.startswith("products/") or path == "technology.html":
+        ambient_source = f"{MEDIA}/sci-v02-hero-h.mp4"
+        ambient_poster = f"{VIDEO}/assets/t/sci-v02.jpg"
+    else:
+        ambient_source = f"{MEDIA}/brand-v05-v3-hero-h.mp4"
+        ambient_poster = f"{VIDEO}/assets/p/brand-v05-v3-h.jpg"
+    ambient_markup = f'<video class="ambient-video motion-preview" muted loop playsinline preload="none" poster="{ambient_poster}" data-preview="{ambient_source}" aria-hidden="true"></video>'
+    body = body.replace('<section class="page-intro">', f'<section class="page-intro has-video">{ambient_markup}', 1)
     active = "products" if path.startswith("products/") else path.split(".")[0]
     nav = "".join(f'<a href="/{href}"{(" aria-current=\"page\"" if active == key else "")}>{label}</a>' for key, href, label in [
         ("index", "", "首頁"), ("technology", "technology.html", "核心技術"), ("products", "products/", "產品線"), ("stories", "stories.html", "影音故事")
     ])
     schema = json.dumps({"@context": "https://schema.org", "@type": "WebPage", "name": title, "url": canonical, "description": description, "isPartOf": {"@type": "WebSite", "name": "活力得®", "url": SITE + "/"}}, ensure_ascii=False)
-    html = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-Hant" href="{canonical}"><link rel="alternate" hreflang="zh-Hans" href="{simplified_canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:site_name" content="活力得®"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image}"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="{VIDEO}/assets/logo.png"><link rel="stylesheet" href="/assets/site.css"><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">跳至主要內容</a><header class="site-header"><a class="brand" href="/" aria-label="活力得首頁"><span class="brand-mark">H<span>·</span></span><span>活力得<sup>®</sup><small>HUOLIDE</small></span></a><nav aria-label="主要導覽">{nav}</nav><a class="header-video" href="{VIDEO}/">進入影音館 <span aria-hidden="true">↗</span></a></header><main id="main">{body}</main><footer><div><strong>活力得<sup>®</sup></strong><p>重組蛋白酶與活性游離硅的複合功能材料</p></div><div class="footer-links"><a href="/technology.html">核心技術</a><a href="/products/">產品線</a><a href="/stories.html">影音故事</a><a href="{VIDEO}/">完整影音館</a><a href="{simplified_canonical}" lang="zh-Hans">简体中文</a></div><p class="legal">活力得® 為註冊商標（第 36751031 號）。</p></footer></body></html>'''
+    html = f'''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="{canonical}"><link rel="alternate" hreflang="zh-Hant" href="{canonical}"><link rel="alternate" hreflang="zh-Hans" href="{simplified_canonical}"><meta property="og:type" content="website"><meta property="og:locale" content="zh_TW"><meta property="og:site_name" content="活力得®"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{image}"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="{VIDEO}/assets/logo.png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script><script type="application/ld+json">{schema}</script></head><body><a class="skip" href="#main">跳至主要內容</a><header class="site-header"><a class="brand" href="/" aria-label="活力得首頁"><span class="brand-mark">H<span>·</span></span><span>活力得<sup>®</sup><small>HUOLIDE</small></span></a><nav aria-label="主要導覽">{nav}</nav><a class="header-video" href="{VIDEO}/">進入影音館 <span aria-hidden="true">↗</span></a></header><main id="main">{body}</main><footer><div><strong>活力得<sup>®</sup></strong><p>重組蛋白酶與活性游離硅的複合功能材料</p></div><div class="footer-links"><a href="/technology.html">核心技術</a><a href="/products/">產品線</a><a href="/stories.html">影音故事</a><a href="{VIDEO}/">完整影音館</a><a href="{simplified_canonical}" lang="zh-Hans">简体中文</a></div><p class="legal">活力得® 為註冊商標（第 36751031 號）。</p></footer></body></html>'''
     out = ROOT / path if path else ROOT / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html, encoding="utf-8")
@@ -106,9 +126,9 @@ def page(path: str, title: str, description: str, body: str, image: str = f"{VID
 
 
 def build() -> None:
-    product_links = "".join(tag(name, audience, f"/products/{slug}.html", "product-tile") for slug, name, audience, *_ in PRODUCTS)
-    hero = f'''<section class="hero"><div class="hero-copy"><p class="eyebrow">HUOLIDE · 動物營養材料</p><h1>把營養的利用，<em>做進結構裡。</em></h1><p class="lead">活力得®以重組蛋白酶與活性游離硅構成複合功能材料，從蛋白質利用到組織結構支持，連接豬、禽與水產的營養需求。</p><div class="actions"><a class="button primary" href="/technology.html">了解核心技術 <span aria-hidden="true">↗</span></a><a class="button quiet" href="{VIDEO}/v/brand-v05/">觀看品牌故事 ▶</a></div><div class="hero-caption"><span>01 / 蛋白質利用</span><span>02 / 結構支持</span><span>03 / 物種應用</span></div></div><div class="hero-media"><video controls playsinline preload="none" poster="{VIDEO}/assets/p/brand-v05-v3-h.jpg" aria-label="活力得品牌故事"><source src="{MEDIA}/brand-v05-v3-h.mp4" type="video/mp4">您的瀏覽器不支援影片播放。</video><a href="{VIDEO}/v/brand-v05/">觀看完整影片與旁白 ↗</a></div></section>'''
-    home = hero + f'''<section class="statement"><p class="eyebrow">同一材料 · 兩條作用路徑</p><h2>一端處理蛋白質，<br>一端支持組織構造。</h2><div class="path-grid"><article><span class="path-number">A</span><h3>重組蛋白酶</h3><p>以絲氨酸蛋白酶的催化結構為技術核心，聚焦飼料蛋白的水解與利用。</p></article><article><span class="path-number">B</span><h3>活性游離硅</h3><p>以可利用單體硅為材料方向，連接膠原與骨、殼等結構的營養支持。</p></article></div><a class="text-link" href="/technology.html">閱讀技術脈絡 ↗</a></section><section class="product-section"><div class="section-heading"><div><p class="eyebrow">依物種與生產階段尋找</p><h2>六條產品線</h2></div><a class="text-link" href="/products/">查看全部產品 ↗</a></div><div class="product-grid">{product_links}</div></section><section class="feature"><div><p class="eyebrow">影像與文字，同一個故事</p><h2>從製程到田間，<br>看見每個問題怎麼被拆解。</h2><p>已發布影片有逐片獨立頁、字幕與旁白。從一個生產問題開始，閱讀技術背景，再觀看對應的產品故事。</p><a class="button primary" href="/stories.html">探索影音故事 ↗</a></div><img src="{VIDEO}/assets/t/sci-v02.jpg" alt="活力得技術科普影片畫面" loading="lazy" width="720" height="405"></section>'''
+    product_links = "".join(product_tile(slug, name, audience, videos[0][1]) for slug, name, audience, _, _, videos in PRODUCTS)
+    hero = f'''<section class="hero video-hero"><video class="ambient-video motion-preview" muted loop playsinline preload="none" poster="{VIDEO}/assets/p/brand-v05-v3-h.jpg" data-preview="{MEDIA}/brand-v05-v3-hero-h.mp4" aria-hidden="true"></video><div class="hero-copy"><p class="eyebrow">HUOLIDE · 動物營養材料</p><h1>把營養的利用，<em>做進結構裡。</em></h1><p class="lead">活力得®以重組蛋白酶與活性游離硅構成複合功能材料，從蛋白質利用到組織結構支持，連接豬、禽與水產的營養需求。</p><div class="actions"><a class="button primary" href="{VIDEO}/v/brand-v05/">觀看品牌故事 <span aria-hidden="true">▶</span></a><a class="button quiet" href="/technology.html">了解核心技術 ↗</a></div><div class="hero-caption"><span>01 / 蛋白質利用</span><span>02 / 結構支持</span><span>03 / 物種應用</span></div></div><a class="hero-watch" href="{VIDEO}/v/brand-v05/">觀看完整影片與旁白 ↗</a></section>'''
+    home = hero + f'''<section class="statement"><p class="eyebrow">同一材料 · 兩條作用路徑</p><h2>一端處理蛋白質，<br>一端支持組織構造。</h2><div class="path-grid"><article><span class="path-number">A</span><h3>重組蛋白酶</h3><p>以絲氨酸蛋白酶的催化結構為技術核心，聚焦飼料蛋白的水解與利用。</p></article><article><span class="path-number">B</span><h3>活性游離硅</h3><p>以可利用單體硅為材料方向，連接膠原與骨、殼等結構的營養支持。</p></article></div><a class="text-link" href="/technology.html">閱讀技術脈絡 ↗</a></section><section class="product-section"><div class="section-heading"><div><p class="eyebrow">依物種與生產階段尋找</p><h2>六條產品線</h2></div><a class="text-link" href="/products/">查看全部產品 ↗</a></div><div class="product-grid">{product_links}</div></section><section class="feature"><div><p class="eyebrow">影像與文字，同一個故事</p><h2>從製程到田間，<br>看見每個問題怎麼被拆解。</h2><p>已發布影片有逐片獨立頁、字幕與旁白。從一個生產問題開始，閱讀技術背景，再觀看對應的產品故事。</p><a class="button primary" href="/stories.html">探索影音故事 ↗</a></div><video class="feature-video motion-preview" muted loop playsinline preload="none" poster="{VIDEO}/assets/t/sci-v02.jpg" data-preview="{MEDIA}/sci-v02-hero-h.mp4" aria-label="活力得製程技術影片預覽"></video></section>'''
     page("", "活力得®｜重組蛋白酶與活性游離硅的動物營養材料", "活力得®以重組蛋白酶與活性游離硅為核心，介紹豬、禽、水產的產品線、技術脈絡與已發布影音故事。", home)
 
     tech = f'''<section class="page-intro"><p class="eyebrow">材料科學 / 核心技術</p><h1>從蛋白質利用，<br><em>走向組織結構。</em></h1><p>活力得®的複合材料軸心結合重組 C-鑒系絲氨酸蛋白酶與活性游離硅。科學總論從兩條路徑說明材料設計，再延伸到不同物種的營養場景。</p></section><section class="science-layout"><article><span>01 / ENZYME</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白質水解。產品敘事聚焦大分子蛋白、小肽與氨基酸的利用路徑。</p></article><article><span>02 / SILICON</span><h2>活性游離硅</h2><p>游離硅相關組分對應結構營養方向；科學總論將其與膠原基質、骨礦化及殼部結構連結。</p></article><article><span>03 / COMPLEX</span><h2>複合材料軸心</h2><p>以同一材料設計連結軟組織的營養利用與硬組織的結構支持，並按物種和生產階段呈現應用。</p></article></section><section class="media-block"><div><p class="eyebrow">技術影片</p><h2>看見材料的工作方式</h2><p>觀看反應器與機轉的已發布科普影片，或前往影音館閱讀完整內容。</p><a class="text-link" href="{VIDEO}/">瀏覽全部技術影片 ↗</a></div><div class="video-grid">{science_card('sci-v02','連續流反應器與製程')}{science_card('sci-v03-r2','科學機轉與材料設計')}</div></section>'''
@@ -148,14 +168,14 @@ def build() -> None:
     media_sources = {
         "source_site": VIDEO + "/",
         "public_r2_base": MEDIA + "/",
-        "brand": {"watch_page": VIDEO + "/v/brand-v05/", "video": MEDIA + "/brand-v05-v3-h.mp4"},
+        "brand": {"watch_page": VIDEO + "/v/brand-v05/", "video": MEDIA + "/brand-v05-v3-h.mp4", "preview": MEDIA + "/brand-v05-v3-hero-h.mp4"},
         "science": [
-            {"name": slug, "video": f"{MEDIA}/{slug}.mp4", "poster": f"{VIDEO}/assets/t/{slug}.jpg"}
+            {"name": slug, "video": f"{MEDIA}/{slug}.mp4", "preview": f"{MEDIA}/{slug}-hero-h.mp4", "poster": f"{VIDEO}/assets/t/{slug}.jpg"}
             for slug in ("sci-v02", "sci-v03-r2")
         ],
         "products": [
             {"slug": slug, "name": name, "source_page": f"{VIDEO}/p/{slug}/", "videos": [
-                {"watch_page": f"{VIDEO}/v/{video_slug}/", "r2_video": f"{MEDIA}/{object_name}.mp4", "poster": f"{VIDEO}/assets/t/{object_name}.jpg", "topic": title}
+                {"watch_page": f"{VIDEO}/v/{video_slug}/", "r2_video": f"{MEDIA}/{object_name}.mp4", "preview": f"{MEDIA}/{object_name}-hero-h.mp4", "poster": f"{VIDEO}/assets/t/{object_name}.jpg", "topic": title}
                 for video_slug, object_name, title in videos
             ]}
             for slug, name, _, _, _, videos in PRODUCTS
