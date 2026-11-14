@@ -22,4 +22,4 @@
 python -X utf8 D:\LLM\sites\feed\build_site.py
 ```
 
-產物含繁簡 HTML、sitemap、robots 與 `media-sources.json`（公開來源頁、R2 正片／短預覽及海報圖完整網址）。`assets/site.js` 只在影片進入畫面時載入預覽，離開畫面暫停；偏好減少動態效果時只顯示海報。發佈前檢查舊品牌字樣、繁簡互鏈、連結 HTTP 狀態、手機橫向溢出及正式站發布閘；`main` 分支推送會更新 GitHub Pages。
+產物含繁簡 HTML、sitemap、robots 與 `media-sources.json`（影音來源與 R2 正片／短預覽網址）。新選圖片的採用清單、拒用案例與去重規範見 [視覺素材 SSOT](docs/VISUAL_ASSET_SSOT.md)；完整 SHA256 見 `assets/species/provenance.json`。`assets/site.js` 只在影片進入畫面時載入預覽，離開畫面暫停；影片尚未載入時顯示對應的 GPT Image 場景圖。發佈前檢查舊品牌字樣、繁簡互鏈、連結 HTTP 狀態、手機橫向溢出及正式站發布閘；`main` 分支推送會更新 GitHub Pages。
