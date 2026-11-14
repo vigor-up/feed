@@ -238,5 +238,482 @@
         }
       ]
     }
+  ],
+  "hero_carousel": [
+    {
+      "id": "sci-v02",
+      "object": "sci-v02",
+      "title": "每一批，都從製程穩定開始",
+      "category": "製程研發・技術壁壘",
+      "priority": true,
+      "points": [
+        "批次穩定，從製程控制開始",
+        "重組蛋白酶 × 活性游離硅"
+      ],
+      "src": "https://media.feed-pet.com/sci-v02.mp4",
+      "watch": "https://v.feed-pet.com/tech/",
+      "poster": "background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:0% 0%"
+    },
+    {
+      "id": "sci-v03-r2",
+      "object": "sci-v03-r2",
+      "title": "游離硅，從原料到結構營養",
+      "category": "科普・材料技術",
+      "priority": true,
+      "points": [
+        "游離硅，連接結構營養",
+        "骨・蹄・殼，回到生產指標"
+      ],
+      "src": "https://media.feed-pet.com/sci-v03-r2.mp4",
+      "watch": "https://v.feed-pet.com/tech/",
+      "poster": "background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "sci-v01",
+      "object": "sci-v01",
+      "title": "看懂重組蛋白酶的作用路徑",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "重組蛋白酶，聚焦蛋白質利用",
+        "從作用路徑，看到日糧效率"
+      ],
+      "src": "https://media.feed-pet.com/sci-v01.mp4",
+      "watch": "https://v.feed-pet.com/tech/",
+      "poster": "background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "sci-mech-r2",
+      "object": "sci-mech-r2",
+      "title": "從分子作用到飼料利用",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "從分子作用，回到飼料利用",
+        "蛋白利用 × 結構營養"
+      ],
+      "src": "https://media.feed-pet.com/sci-mech-r2.mp4",
+      "watch": "https://v.feed-pet.com/tech/",
+      "poster": "background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "brand-v05",
+      "object": "brand-v05-v3-h",
+      "title": "同樣的料，為什麼隔壁欄賺更多？",
+      "category": "品牌精神",
+      "priority": true,
+      "points": [
+        "別只看投入；更要看可售產出",
+        "6 條產品線，對應現場痛點"
+      ],
+      "src": "https://media.feed-pet.com/brand-v05-v3-h.mp4",
+      "watch": "https://v.feed-pet.com/v/brand-v05/",
+      "poster": "background-image:url('/assets/scenes/brand.webp');background-size:cover;background-position:center"
+    },
+    {
+      "id": "p1-v01",
+      "object": "p1-v01-v1",
+      "title": "同一窩仔豬有胖有瘦？",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "21–22 → &gt;28 PSY｜每頭母豬年斷奶仔豬數",
+        "聚焦 同一窩仔豬有胖有瘦｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p1-v01-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p1-v01/",
+      "product": "均仔旺",
+      "poster": "background-image:url('/assets/scenes/p1.webp');background-size:auto 200%;background-position:0% 0%"
+    },
+    {
+      "id": "p1-v02",
+      "object": "p1-v02-v1",
+      "title": "母豬年產斷奶仔豬的營養管理",
+      "category": "母豬與仔豬・生產痛點",
+      "priority": false,
+      "points": [
+        "21–22 → &gt;28 PSY｜每頭母豬年斷奶仔豬數",
+        "聚焦 母豬年產斷奶仔豬的營養管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p1-v02-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p1-v02/",
+      "product": "均仔旺",
+      "poster": "background-image:url('/assets/scenes/p1.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "p1-v03",
+      "object": "p1-v03-v1",
+      "title": "母豬蹄部與骨架的營養支持",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "21–22 → &gt;28 PSY｜每頭母豬年斷奶仔豬數",
+        "聚焦 母豬蹄部與骨架的營養支持｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p1-v03-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p1-v03/",
+      "product": "均仔旺",
+      "poster": "background-image:url('/assets/scenes/p1.webp');background-size:auto 200%;background-position:0% 100%"
+    },
+    {
+      "id": "p1-v04",
+      "object": "p1-v04-v1",
+      "title": "弱仔與整窩離乳管理",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "21–22 → &gt;28 PSY｜每頭母豬年斷奶仔豬數",
+        "聚焦 弱仔與整窩離乳管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p1-v04-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p1-v04/",
+      "product": "均仔旺",
+      "poster": "background-image:url('/assets/scenes/p1.webp');background-size:auto 200%;background-position:100% 100%"
+    },
+    {
+      "id": "p2-v01",
+      "object": "p2-v01-v2",
+      "title": "蛋殼品質與破損管理",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "+12–15% 厚度｜蛋殼厚度的比較值",
+        "聚焦 蛋殼品質與破損管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p2-v01-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p2-v01/",
+      "product": "殼力旺",
+      "poster": "background-image:url('/assets/scenes/p2.webp');background-size:200% auto;background-position:0% 0%"
+    },
+    {
+      "id": "p2-v02",
+      "object": "p2-v02-v2",
+      "title": "產蛋高峰期的營養支持",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "+12–15% 厚度｜蛋殼厚度的比較值",
+        "聚焦 產蛋高峰期的營養支持｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p2-v02-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p2-v02/",
+      "product": "殼力旺",
+      "poster": "background-image:url('/assets/scenes/p2.webp');background-size:200% auto;background-position:100% 0%"
+    },
+    {
+      "id": "p2-v03",
+      "object": "p2-v03-v2",
+      "title": "蛋黃與產蛋表現",
+      "category": "蛋雞與蛋殼・生產痛點",
+      "priority": false,
+      "points": [
+        "+12–15% 厚度｜蛋殼厚度的比較值",
+        "聚焦 蛋黃與產蛋表現｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p2-v03-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p2-v03/",
+      "product": "殼力旺",
+      "poster": "background-image:url('/assets/scenes/p2.webp');background-size:200% auto;background-position:0% 50%"
+    },
+    {
+      "id": "p2-v04",
+      "object": "p2-v04-v2",
+      "title": "老母雞穩產管理",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "+12–15% 厚度｜蛋殼厚度的比較值",
+        "聚焦 老母雞穩產管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p2-v04-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p2-v04/",
+      "product": "殼力旺",
+      "poster": "background-image:url('/assets/scenes/p2.webp');background-size:200% auto;background-position:100% 50%"
+    },
+    {
+      "id": "p2-v06",
+      "object": "p2-v06-v2",
+      "title": "蛋品營養與賣相",
+      "category": "蛋雞與蛋殼・生產痛點",
+      "priority": false,
+      "points": [
+        "+12–15% 厚度｜蛋殼厚度的比較值",
+        "聚焦 蛋品營養與賣相｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p2-v06-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p2-v06/",
+      "product": "殼力旺",
+      "poster": "background-image:url('/assets/scenes/p2.webp');background-size:200% auto;background-position:0% 100%"
+    },
+    {
+      "id": "p3-v01",
+      "object": "p3-v01-v1",
+      "title": "親本受精率的管理",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "85%+ 目標｜高值海水魚親本受精率管理目標",
+        "聚焦 親本受精率的管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p3-v01-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p3-v01/",
+      "product": "多卵壯",
+      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:0% 0%"
+    },
+    {
+      "id": "p3-v02",
+      "object": "p3-v02-v1",
+      "title": "種苗整齊度",
+      "category": "水產親本與種苗・生產痛點",
+      "priority": false,
+      "points": [
+        "85%+ 目標｜高值海水魚親本受精率管理目標",
+        "聚焦 種苗整齊度｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p3-v02-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p3-v02/",
+      "product": "多卵壯",
+      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:100% 0%"
+    },
+    {
+      "id": "p3-v03",
+      "object": "p3-v03-v2",
+      "title": "親魚繁殖週期",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "85%+ 目標｜高值海水魚親本受精率管理目標",
+        "聚焦 親魚繁殖週期｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p3-v03-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p3-v03/",
+      "product": "多卵壯",
+      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:0% 50%"
+    },
+    {
+      "id": "p3-v04",
+      "object": "p3-v04-v1",
+      "title": "高值魚苗受精管理",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "85%+ 目標｜高值海水魚親本受精率管理目標",
+        "聚焦 高值魚苗受精管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p3-v04-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p3-v04/",
+      "product": "多卵壯",
+      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:100% 50%"
+    },
+    {
+      "id": "p3-v05",
+      "object": "p3-v05-v1",
+      "title": "孵化與苗期活力",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "85%+ 目標｜高值海水魚親本受精率管理目標",
+        "聚焦 孵化與苗期活力｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p3-v05-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p3-v05/",
+      "product": "多卵壯",
+      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:0% 100%"
+    },
+    {
+      "id": "p3-v06",
+      "object": "p3-v06-v1",
+      "title": "種苗存活管理",
+      "category": "水產親本與種苗・生產痛點",
+      "priority": false,
+      "points": [
+        "85%+ 目標｜高值海水魚親本受精率管理目標",
+        "聚焦 種苗存活管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p3-v06-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p3-v06/",
+      "product": "多卵壯",
+      "poster": "background-image:url('/assets/scenes/p3.webp');background-size:200% auto;background-position:100% 100%"
+    },
+    {
+      "id": "p4-v01",
+      "object": "p4-v01-v1",
+      "title": "背膘與腰肌眼的管理",
+      "category": "育肥豬・生產痛點",
+      "priority": false,
+      "points": [
+        "2.0 FCR 管理目標｜育肥豬料肉比目標",
+        "聚焦 背膘與腰肌眼的管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p4-v01-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p4-v01/",
+      "product": "長膘旺",
+      "poster": "background-image:url('/assets/scenes/p4.webp');background-size:auto 200%;background-position:0% 0%"
+    },
+    {
+      "id": "p4-v02",
+      "object": "p4-v02-v1",
+      "title": "從糞篩觀察飼料利用",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "2.0 FCR 管理目標｜育肥豬料肉比目標",
+        "聚焦 從糞篩觀察飼料利用｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p4-v02-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p4-v02/",
+      "product": "長膘旺",
+      "poster": "background-image:url('/assets/scenes/p4.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "p4-v03",
+      "object": "p4-v03-v1",
+      "title": "骨架與生長節奏",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "2.0 FCR 管理目標｜育肥豬料肉比目標",
+        "聚焦 骨架與生長節奏｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p4-v03-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p4-v03/",
+      "product": "長膘旺",
+      "poster": "background-image:url('/assets/scenes/p4.webp');background-size:auto 200%;background-position:0% 100%"
+    },
+    {
+      "id": "p4-v04",
+      "object": "p4-v04-v1",
+      "title": "瘦肉率與肉質",
+      "category": "育肥豬・生產痛點",
+      "priority": false,
+      "points": [
+        "2.0 FCR 管理目標｜育肥豬料肉比目標",
+        "聚焦 瘦肉率與肉質｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p4-v04-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p4-v04/",
+      "product": "長膘旺",
+      "poster": "background-image:url('/assets/scenes/p4.webp');background-size:auto 200%;background-position:100% 100%"
+    },
+    {
+      "id": "p5-v01",
+      "object": "p5-v01-v1",
+      "title": "料肉比與利潤",
+      "category": "肉雞・生產痛點",
+      "priority": false,
+      "points": [
+        "+15.24% 胸肉｜肉雞胸肉產量比較",
+        "聚焦 料肉比與利潤｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p5-v01-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p5-v01/",
+      "product": "足斤旺",
+      "poster": "background-image:url('/assets/scenes/p5.webp');background-size:auto 200%;background-position:0% 0%"
+    },
+    {
+      "id": "p5-v02",
+      "object": "p5-v02-v1",
+      "title": "肉雞出欄體重",
+      "category": "肉雞・生產痛點",
+      "priority": false,
+      "points": [
+        "+15.24% 胸肉｜肉雞胸肉產量比較",
+        "聚焦 肉雞出欄體重｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p5-v02-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p5-v02/",
+      "product": "足斤旺",
+      "poster": "background-image:url('/assets/scenes/p5.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "p5-v03",
+      "object": "p5-v03-v1",
+      "title": "胸肉產量",
+      "category": "肉雞・生產痛點",
+      "priority": false,
+      "points": [
+        "+15.24% 胸肉｜肉雞胸肉產量比較",
+        "聚焦 胸肉產量｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p5-v03-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p5-v03/",
+      "product": "足斤旺",
+      "poster": "background-image:url('/assets/scenes/p5.webp');background-size:auto 200%;background-position:0% 100%"
+    },
+    {
+      "id": "p5-v04",
+      "object": "p5-v04-v1",
+      "title": "豆粕蛋白與抗營養因子",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "+15.24% 胸肉｜肉雞胸肉產量比較",
+        "聚焦 豆粕蛋白與抗營養因子｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p5-v04-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p5-v04/",
+      "product": "足斤旺",
+      "poster": "background-image:url('/assets/scenes/p5.webp');background-size:auto 200%;background-position:100% 100%"
+    },
+    {
+      "id": "p6-v01",
+      "object": "p6-v01-v2",
+      "title": "苗期育成管理",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "60% → 80% 育成｜場域幼蝦育成率對照",
+        "聚焦 苗期育成管理｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p6-v01-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p6-v01/",
+      "product": "保苗旺",
+      "poster": "background-image:url('/assets/scenes/p6.webp');background-size:auto 200%;background-position:0% 0%"
+    },
+    {
+      "id": "p6-v02",
+      "object": "p6-v02-v1",
+      "title": "蝦苗規格整齊度",
+      "category": "魚蝦養殖・生產痛點",
+      "priority": false,
+      "points": [
+        "60% → 80% 育成｜場域幼蝦育成率對照",
+        "聚焦 蝦苗規格整齊度｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p6-v02-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p6-v02/",
+      "product": "保苗旺",
+      "poster": "background-image:url('/assets/scenes/p6.webp');background-size:auto 200%;background-position:100% 0%"
+    },
+    {
+      "id": "p6-v03",
+      "object": "p6-v03-v2",
+      "title": "脫殼與礦化",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "60% → 80% 育成｜場域幼蝦育成率對照",
+        "聚焦 脫殼與礦化｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p6-v03-v2.mp4",
+      "watch": "https://v.feed-pet.com/v/p6-v03/",
+      "product": "保苗旺",
+      "poster": "background-image:url('/assets/scenes/p6.webp');background-size:auto 200%;background-position:0% 100%"
+    },
+    {
+      "id": "p6-v04",
+      "object": "p6-v04-v1",
+      "title": "魚苗存活與生長",
+      "category": "魚蝦養殖・生產痛點",
+      "priority": false,
+      "points": [
+        "60% → 80% 育成｜場域幼蝦育成率對照",
+        "聚焦 魚苗存活與生長｜回到每批可售產出"
+      ],
+      "src": "https://media.feed-pet.com/p6-v04-v1.mp4",
+      "watch": "https://v.feed-pet.com/v/p6-v04/",
+      "product": "保苗旺",
+      "poster": "background-image:url('/assets/scenes/p6.webp');background-size:auto 200%;background-position:100% 100%"
+    }
   ]
 }
