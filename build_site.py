@@ -91,7 +91,7 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
         if object_name == "sci-v02":
             return "background-image:url('/assets/scenes/science-hero.png');background-size:cover;background-position:center"
         index = 0 if object_name == "sci-v02" else 1
-        return f"background-image:url('/assets/scenes/science.webp');background-size:auto 200%;background-position:{index * 100}% 0%"
+        return f"background-image:url('/assets/scenes/science.webp');background-size:200% auto;background-position:{index * 100}% 0%"
     match = re.match(r"p([1-6])-v(\d+)", object_name)
     if not match:
         raise ValueError(f"No generated poster mapping for {object_name}")
@@ -103,7 +103,7 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
     rows = 3 if product in (2, 3) else 2
     x = 100 if index % 2 else 0
     y = (index // 2) * (100 if rows == 2 else 50)
-    size = "200% auto" if rows == 3 else "auto 200%"
+    size = "auto 300%" if rows == 3 else "200% auto"
     return f"background-image:url('/assets/scenes/p{product}.webp');background-size:{size};background-position:{x}% {y}%"
 
 
