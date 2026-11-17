@@ -76,8 +76,10 @@ if (playlistNode) {
   };
   const show = () => {
     const item = round[position];
+    const canAutoPlay = !reducedMotion.matches && !document.hidden && !motionPaused;
     window.clearTimeout(timer);
     video.classList.remove('is-playing');
+    video.autoplay = canAutoPlay;
     video.pause();
     video.removeAttribute('src');
     video.load();
@@ -95,7 +97,7 @@ if (playlistNode) {
     setSoundState(false);
     video.src = item.src;
     video.load();
-    if (!reducedMotion.matches && !document.hidden && !motionPaused) video.play().catch(() => {});
+    if (canAutoPlay) video.play().catch(() => {});
     scheduleAdvance();
   };
   video.addEventListener('playing', () => {
@@ -126,9 +128,12 @@ if (playlistNode) {
     motion.setAttribute('aria-label', motionPaused ? '繼續影片輪播' : '暫停影片輪播');
     if (motionPaused) {
       window.clearTimeout(timer);
+      video.autoplay = false;
       video.pause();
     } else {
-      if (!reducedMotion.matches && !document.hidden) video.play().catch(() => {});
+      const canAutoPlay = !reducedMotion.matches && !document.hidden;
+      video.autoplay = canAutoPlay;
+      if (canAutoPlay) video.play().catch(() => {});
       scheduleAdvance();
     }
   });
@@ -155,9 +160,12 @@ if (playlistNode) {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       window.clearTimeout(timer);
+      video.autoplay = false;
       video.pause();
     } else {
-      if (!reducedMotion.matches && !motionPaused) video.play().catch(() => {});
+      const canAutoPlay = !reducedMotion.matches && !motionPaused;
+      video.autoplay = canAutoPlay;
+      if (canAutoPlay) video.play().catch(() => {});
       scheduleAdvance();
     }
   });
