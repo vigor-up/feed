@@ -76,3 +76,29 @@ footer{background:#071a23;color:#d6e5e3;padding:38px max(32px,calc((100vw - var(
 @media(max-width:800px){.hero-cinema{min-height:740px;padding:62px 24px 102px}.hero-cinema::before{background:linear-gradient(90deg,rgba(4,23,30,.83),rgba(4,23,30,.35)),linear-gradient(0deg,rgba(4,23,30,.78),transparent 54%)}.hero-cinema .hero-copy h1{font-size:clamp(3.4rem,8vw,5.5rem)}.hero-metrics b{padding-right:15px;margin-right:15px}.hero-cinema .film-bar{right:24px;left:24px;bottom:16px}.hero-audience{margin-left:auto}}
 @media(max-width:540px){.hero-cinema{min-height:760px;padding:52px 20px 104px}.hero-cinema .hero-copy h1{font-size:clamp(3.1rem,12vw,4.25rem)}.hero-current{align-items:flex-start;flex-direction:column;gap:8px}.hero-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:18px 0 0}.hero-metrics b{font-size:1.25rem;padding:12px 8px 10px 0;margin:0;border-bottom:1px solid rgba(221,241,237,.18)}.hero-controls{gap:8px}.hero-audience{font-size:.6rem;margin-left:auto}.hero-cinema .film-bar{left:20px;right:20px}}
 @media(prefers-reduced-motion:reduce){.hero-cinema .hero-reel{visibility:hidden}}
+
+/* Refinement pass: tighter editorial rhythm, legible motion controls, responsive metric alignment. */
+html{scroll-padding-top:92px}
+h1,h2,h3{text-wrap:balance}
+.site-header{backdrop-filter:blur(14px) saturate(1.12)}
+.hero-cinema{min-height:clamp(650px,min(86svh,820px),820px);padding-block:clamp(64px,8svh,92px) 92px}
+.hero-cinema::before{background:linear-gradient(90deg,rgba(4,21,28,.93) 0%,rgba(4,23,30,.73) 42%,rgba(4,25,32,.2) 100%),linear-gradient(0deg,rgba(3,19,26,.72),transparent 48%)}
+.hero-cinema .hero-copy h1{font-size:clamp(3.45rem,6.7vw,7.1rem);max-width:10ch}
+.hero-current{margin-bottom:16px!important}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:min(100%,800px);margin-top:21px}
+.hero-metrics b{min-width:0;margin:0;padding:13px 12px 13px 0;white-space:nowrap;font-size:clamp(1.05rem,1.9vw,1.58rem)}
+.hero-controls{gap:9px;margin-top:15px}
+.hero-controls button{border-radius:999px}
+.hero-controls #hero-motion{width:auto;min-width:72px;padding-inline:11px;font-size:.7rem;font-weight:800}
+.section-products,.section-videos,.audience-section,.field-section,.market-taxonomy{padding-block:58px}
+.section-head{margin-bottom:23px}
+.product-grid,.video-grid{gap:13px}
+.product-card-copy{min-height:190px;padding:18px}
+.tech-feature{padding-block:58px}
+.proof-strip{padding-block:31px 35px}
+.value-section{padding-block:56px 60px}
+.value-grid a{min-height:184px;padding:22px}
+.button:focus-visible,.hero-controls button:focus-visible,.product-card:focus-visible,.video-card a:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+@media(max-width:800px){.hero-cinema{min-height:720px;padding-block:60px 96px}.hero-cinema .hero-copy h1{max-width:11ch}.section-products,.section-videos,.audience-section,.field-section,.market-taxonomy{padding-block:48px}.product-card-copy{min-height:180px}}
+@media(max-width:540px){.hero-cinema{min-height:760px;padding-block:48px 100px}.hero-metrics{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}.hero-metrics b{padding:11px 8px 10px 0;font-size:1.22rem}.hero-controls #hero-motion{min-width:62px;padding-inline:8px}.section-products,.section-videos,.audience-section,.field-section,.market-taxonomy{padding-block:40px}.product-grid,.video-grid{gap:10px}}
+@media(prefers-reduced-motion:reduce){.hero-controls #hero-motion{display:none}.hero-cinema .hero-reel{transition:none}.button:hover,.product-card:hover{transform:none}}
