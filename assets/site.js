@@ -31,6 +31,7 @@ if (playlistNode) {
   const watch = hero.querySelector('#hero-watch');
   const counter = hero.querySelector('#hero-index');
   const sound = hero.querySelector('#hero-sound');
+  const motion = hero.querySelector('#hero-motion');
   const priority = playlist.filter((item) => item.priority);
   const product = playlist.filter((item) => !item.priority);
   const priorityRatio = priority.length / playlist.length;
@@ -59,6 +60,7 @@ if (playlistNode) {
   let position = 0;
   let timer = 0;
   let soundEnabled = false;
+  let motionPaused = false;
   const dwellMs = 10000;
 
   const setSoundState = (enabled) => {
@@ -69,7 +71,7 @@ if (playlistNode) {
   };
   const scheduleAdvance = () => {
     window.clearTimeout(timer);
-    if (document.hidden || reducedMotion.matches || soundEnabled) return;
+    if (document.hidden || reducedMotion.matches || soundEnabled || motionPaused) return;
     timer = window.setTimeout(() => move(1), dwellMs);
   };
   const show = () => {
@@ -93,7 +95,7 @@ if (playlistNode) {
     setSoundState(false);
     video.src = item.src;
     video.load();
-    if (!reducedMotion.matches && !document.hidden) video.play().catch(() => {});
+    if (!reducedMotion.matches && !document.hidden && !motionPaused) video.play().catch(() => {});
     scheduleAdvance();
   };
   video.addEventListener('playing', () => {
@@ -118,13 +120,25 @@ if (playlistNode) {
 
   hero.querySelector('#hero-prev').addEventListener('click', () => move(-1));
   hero.querySelector('#hero-next').addEventListener('click', () => move(1));
+  motion.addEventListener('click', () => {
+    motionPaused = !motionPaused;
+    motion.textContent = motionPaused ? '繼續' : '暫停';
+    motion.setAttribute('aria-label', motionPaused ? '繼續影片輪播' : '暫停影片輪播');
+    if (motionPaused) {
+      window.clearTimeout(timer);
+      video.pause();
+    } else {
+      if (!reducedMotion.matches && !document.hidden) video.play().catch(() => {});
+      scheduleAdvance();
+    }
+  });
   sound.addEventListener('click', () => {
     if (!soundEnabled) {
       window.clearTimeout(timer);
       setSoundState(true);
       const startAudio = () => {
         try { video.currentTime = 0; } catch {}
-        video.play().catch(() => setSoundState(false));
+        if (!motionPaused) video.play().catch(() => setSoundState(false));
       };
       if (video.readyState >= 1) startAudio();
       else video.addEventListener('loadedmetadata', startAudio, { once: true });
@@ -143,7 +157,7 @@ if (playlistNode) {
       window.clearTimeout(timer);
       video.pause();
     } else {
-      if (!reducedMotion.matches) video.play().catch(() => {});
+      if (!reducedMotion.matches && !motionPaused) video.play().catch(() => {});
       scheduleAdvance();
     }
   });
