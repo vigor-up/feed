@@ -263,6 +263,13 @@
    "bytes": 33364,
    "type": "new_gpt_image",
    "source": "gptimg_cards_20261118/sci-v08.png (Codex GPT Image, 2026-11-18)"
+  },
+  {
+   "file": "cards/sci-v08-r2.webp",
+   "sha256": "5f82a01bcb42f4e57431233bc01c0f7a6ed80468ba71f8582255030745f95c56",
+   "bytes": 33364,
+   "type": "copy_of_sci-v08.webp",
+   "source": "same GPT Image card as sci-v08 (new object name for re-encoded V08)"
   }
  ]
 }
