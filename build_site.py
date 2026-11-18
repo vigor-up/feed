@@ -137,6 +137,7 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
     if brand:
         image = "/assets/species/cattle.webp" if brand_image == "cattle" else "/assets/scenes/brand.webp"
         return f"background-image:url('{image}');background-size:cover;background-position:center"
+    object_name = SCI_REV.get(object_name, object_name)   # 新媒體檔名 → 原代號(卡片圖/場景圖以原代號命名)
     if object_name in {s[0] for s in SCI_NEW}:   # 新科普片:輪播底圖用各自的 GPT Image 卡片圖
         return f"background-image:url('/assets/cards/{object_name}.webp');background-size:cover;background-position:center"
     if object_name.startswith("sci-"):
@@ -189,7 +190,7 @@ def verify_unique_visible_images(routes: list[str]) -> None:
 def hero_video(object_name: str, label: str, watch: str, brand: bool = False, brand_image: str = "brand") -> str:
     preview = f"{MEDIA}/{object_name}-hero-h.mp4"
     if brand:
-        preview = f"{MEDIA}/brand-v05-v3-hero-h.mp4"
+        preview = f"{MEDIA}/brand-v05-v5-hero-h.mp4"
     return f'''<div class="film-stage"><video class="motion-preview hero-film" muted loop playsinline preload="none" style="{poster_style(object_name, brand, brand_image)}" data-preview="{preview}" aria-label="{escape(label, quote=True)}"></video><div class="film-bar"><span>活力得® · 影音紀錄</span><a href="{watch}">觀看完整影片 <span aria-hidden="true">↗</span></a></div></div>'''
 
 
@@ -202,10 +203,16 @@ SCI_NEW = [
     ("sci-v08-r2", "細菌也當工人？枯草桿菌的蛋白酶", "科普・生物機轉", ["土壤篩選的枯草桿菌", "把蛋白酶分泌到細胞外"]),
 ]
 SCI_WATCH = {"sci-v01", "sci-v02", "sci-v03-r2", "sci-mech-r2"} | {s[0] for s in SCI_NEW}
+# 2026-11-18 讀音修正後科普片換新音軌:R2 媒體檔不可覆寫,改用新檔名;影音館觀看頁同名(舊網址 301)。
+# 卡片圖仍以原代號命名,這裡只換媒體/觀看頁名稱。
+SCI_MEDIA = {"sci-v01": "sci-v01-r2", "sci-v02": "sci-v02-r2", "sci-v03-r2": "sci-v03-r3", "sci-mech-r2": "sci-mech-r3",
+             "sci-v04": "sci-v04-r2", "sci-v05": "sci-v05-r2", "sci-v06": "sci-v06-r2", "sci-v07": "sci-v07-r2", "sci-v08-r2": "sci-v08-r3"}
+SCI_REV = {v: k for k, v in SCI_MEDIA.items()}
+BRAND_OBJ = "brand-v05-v5-h"   # 品牌片 v4(讀音修正後新版次)
 
 
 def video_card(video_slug: str, object_name: str, title: str) -> str:
-    watch = (f"{VIDEO}/s/{video_slug}/" if video_slug in SCI_WATCH else f"{VIDEO}/tech/") if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
+    watch = (f"{VIDEO}/s/{SCI_MEDIA.get(video_slug, video_slug)}/" if video_slug in SCI_WATCH else f"{VIDEO}/tech/") if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
     poster = f"/assets/cards/{video_slug}.webp"
     if not (ROOT / poster.lstrip("/")).is_file():
         raise FileNotFoundError(f"Missing GPT Image card art: {poster}")
@@ -219,13 +226,13 @@ def hero_carousel() -> str:
         "p5-v04", "p6-v01", "p6-v03",
     }
     clips = [
-        {"id":"sci-v02","object":"sci-v02","title":"每一批，都從製程穩定開始","category":"製程研發・技術壁壘","priority":True,"points":["批次穩定，從製程控制開始","重組蛋白酶 × 活性游離硅"],"src":f"{MEDIA}/sci-v02.mp4","watch":f"{VIDEO}/tech/"},
-        {"id":"sci-v03-r2","object":"sci-v03-r2","title":"游離硅，從原料到結構營養","category":"科普・材料技術","priority":True,"points":["游離硅，連接結構營養","骨・蹄・殼，回到生產指標"],"src":f"{MEDIA}/sci-v03-r2.mp4","watch":f"{VIDEO}/tech/"},
-        {"id":"sci-v01","object":"sci-v01","title":"看懂重組蛋白酶的作用路徑","category":"科普・生物機轉","priority":True,"points":["重組蛋白酶，聚焦蛋白質利用","從作用路徑，看到日糧效率"],"src":f"{MEDIA}/sci-v01.mp4","watch":f"{VIDEO}/tech/"},
-        {"id":"sci-mech-r2","object":"sci-mech-r2","title":"從分子作用到飼料利用","category":"科普・生物機轉","priority":True,"points":["從分子作用，回到飼料利用","蛋白利用 × 結構營養"],"src":f"{MEDIA}/sci-mech-r2.mp4","watch":f"{VIDEO}/tech/"},
-        *[{"id":s, "object":s, "title":t, "category":c, "priority":True, "points":pts, "src":f"{MEDIA}/{s}.mp4", "watch":f"{VIDEO}/s/{s}/"}
-          for s, t, c, pts in SCI_NEW],
-        {"id":"brand-v05","object":"brand-v05-v3-h","title":"同樣的料，為什麼隔壁欄賺更多？","category":"品牌精神","priority":True,"points":["別只看投入；更要看可售產出","6 條產品線，對應現場痛點"],"src":f"{MEDIA}/brand-v05-v3-h.mp4","watch":f"{VIDEO}/v/brand-v05/"},
+        *[{"id":s, "object":SCI_MEDIA[s], "title":t, "category":c, "priority":True, "points":pts, "src":f"{MEDIA}/{SCI_MEDIA[s]}.mp4",
+           "watch":f"{VIDEO}/s/{SCI_MEDIA[s]}/"} for s, t, c, pts in [
+            ("sci-v02", "每一批，都從製程穩定開始", "製程研發・技術壁壘", ["批次穩定，從製程控制開始", "重組蛋白酶 × 活性游離硅"]),
+            ("sci-v03-r2", "游離硅，從原料到結構營養", "科普・材料技術", ["游離硅，連接結構營養", "骨・蹄・殼，回到生產指標"]),
+            ("sci-v01", "看懂重組蛋白酶的作用路徑", "科普・生物機轉", ["重組蛋白酶，聚焦蛋白質利用", "從作用路徑，看到日糧效率"]),
+            ("sci-mech-r2", "從分子作用到飼料利用", "科普・生物機轉", ["從分子作用，回到飼料利用", "蛋白利用 × 結構營養"])] + SCI_NEW],
+        {"id":"brand-v05","object":BRAND_OBJ,"title":"同樣的料，為什麼隔壁欄賺更多？","category":"品牌精神","priority":True,"points":["別只看投入；更要看可售產出","6 條產品線，對應現場痛點"],"src":f"{MEDIA}/brand-v05-v5-h.mp4","watch":f"{VIDEO}/v/brand-v05/"},
     ]
     for product_index, product in enumerate(data.PRODUCTS, 1):
         slug, name, audience, _, _, videos = product
@@ -237,7 +244,7 @@ def hero_carousel() -> str:
                 "category":"科普・生物機轉" if priority else f"{audience}・生產痛點",
                 "priority":priority,
                 "points":[f"{story['value']} {story['unit']}｜{story['metric']}", f"聚焦 {title.rstrip('？?。')}｜回到每批可售產出"],
-                "src":f"{MEDIA}/{object_name}.mp4",
+                "src":f"{MEDIA}/{object_name}-h.mp4",   # 20261118 修直橫:16:9 輪播用橫式檔(無尾碼的是 9:16 直式)
                 "watch":f"{VIDEO}/v/{video_slug}/", "product":name,
                 "poster":poster_style(object_name),
             })
@@ -348,7 +355,7 @@ def build() -> None:
     listing = f'''<section class="inner-title wrap"><p class="kicker">中國市場 / 依物種與階段</p><h1>六條產品，<em>對應不同生產帳。</em></h1><p>先找物種，再看 PSY、FCR、蛋殼、胸肉、育成率與可售苗量；每條產品都回到自身的批次與收益口徑。</p></section><section class="section-products wrap tight"><div class="product-grid">{product_cards}</div></section>{market_taxonomy()}{value_story()}'''
     page("products/index.html", "活力得®六條飼料添加劑產品線｜豬禽牛羊魚蝦", "依物種與生產階段瀏覽活力得®六條產品線、產品數據、影片與經營價值。", listing)
 
-    ruminants = f'''<section class="inner-hero cinematic"><div><p class="kicker">反芻動物 / 生產型態</p><h1>牛羊營養，<br><em>從採食到出欄。</em></h1><p>肉牛肉羊的育肥、奶牛奶羊的泌乳，各有不同的日糧、體況與收益口徑。重組蛋白酶與游離硅的複合材料軸心，連接蛋白利用與蹄部、骨架結構。</p><a class="button solid" href="/products/">看物種與產品 ↗</a></div>{hero_video('brand-v05-v3-h','牛羊品牌故事',VIDEO+'/v/brand-v05/',True,'cattle')}</section><section class="tech-panes wrap"><article><span>MEAT / 肉用</span><h2>肉牛・肉羊</h2><p>按同物種和育肥階段追蹤採食、日增重、終重、FCR、肢蹄與出欄價格。</p></article><article><span>DAIRY / 乳用</span><h2>奶牛・奶山羊</h2><p>將泌乳量、乳成分、體況、採食與肢蹄紀錄分開閱讀，不套用肉用動物的數值。</p></article></section>'''
+    ruminants = f'''<section class="inner-hero cinematic"><div><p class="kicker">反芻動物 / 生產型態</p><h1>牛羊營養，<br><em>從採食到出欄。</em></h1><p>肉牛肉羊的育肥、奶牛奶羊的泌乳，各有不同的日糧、體況與收益口徑。重組蛋白酶與游離硅的複合材料軸心，連接蛋白利用與蹄部、骨架結構。</p><a class="button solid" href="/products/">看物種與產品 ↗</a></div>{hero_video('brand-v05-v5-h','牛羊品牌故事',VIDEO+'/v/brand-v05/',True,'cattle')}</section><section class="tech-panes wrap"><article><span>MEAT / 肉用</span><h2>肉牛・肉羊</h2><p>按同物種和育肥階段追蹤採食、日增重、終重、FCR、肢蹄與出欄價格。</p></article><article><span>DAIRY / 乳用</span><h2>奶牛・奶山羊</h2><p>將泌乳量、乳成分、體況、採食與肢蹄紀錄分開閱讀，不套用肉用動物的數值。</p></article></section>'''
     page("products/ruminants.html", "牛羊飼料利用與結構營養｜活力得®", "依肉牛、肉羊、奶牛和奶山羊生產型態閱讀飼料利用、採食、泌乳或出欄指標與本場 ROI。", ruminants)
 
     for slug, name, audience, _, _, videos in data.PRODUCTS:
@@ -394,7 +401,7 @@ def build() -> None:
     (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
     media_sources = {"source_site": VIDEO + "/", "public_r2_base": MEDIA + "/",
-                     "brand": {"watch_page": VIDEO + "/v/brand-v05/", "video": MEDIA + "/brand-v05-v3-h.mp4", "preview": MEDIA + "/brand-v05-v3-hero-h.mp4"},
+                     "brand": {"watch_page": VIDEO + "/v/brand-v05/", "video": MEDIA + "/brand-v05-v5-h.mp4", "preview": MEDIA + "/brand-v05-v5-hero-h.mp4"},
                      "products": [{"slug": slug, "name": name, "source_page": f"{VIDEO}/p/{slug}/",
                                    "videos": [{"watch_page": f"{VIDEO}/v/{video_slug}/", "r2_video": f"{MEDIA}/{object_name}.mp4", "preview": f"{MEDIA}/{object_name}-hero-h.mp4", "poster": f"{VIDEO}/assets/t/{object_name}.jpg", "topic": title}
                                               for video_slug, object_name, title in videos]}
