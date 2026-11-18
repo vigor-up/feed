@@ -17,7 +17,7 @@ if (!reducedMotion.matches && 'IntersectionObserver' in window) {
   });
 }
 
-// Homepage hero: one title from every published R2 film per round; 20 of 32
+// Homepage hero: one title from every published R2 film per round; 25 of 37
 // picks are science, mechanism, brand, manufacturing, or technical content.
 const playlistNode = document.querySelector('#hero-playlist');
 if (playlistNode) {
@@ -35,7 +35,8 @@ if (playlistNode) {
   const priority = playlist.filter((item) => item.priority);
   const product = playlist.filter((item) => !item.priority);
   const priorityRatio = priority.length / playlist.length;
-  if (playlist.length !== 32 || priorityRatio <= 0.5) throw new Error('Hero carousel needs all films and a priority share above 50%.');
+  // 2026-11-18: count comes from the build (data-total-count); the build gate already enforces all films.
+  if (playlist.length !== Number(hero.dataset.totalCount) || priorityRatio <= 0.5) throw new Error('Hero carousel needs all films and a priority share above 50%.');
 
   const shuffle = (items) => {
     const copy = [...items];

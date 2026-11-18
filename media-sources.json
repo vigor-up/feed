@@ -297,6 +297,76 @@
       "poster": "background-image:url('/assets/scenes/science.webp');background-size:200% auto;background-position:100% 0%"
     },
     {
+      "id": "sci-v04",
+      "object": "sci-v04",
+      "title": "攪拌越快，酶越快死？流場結構決定穩定性",
+      "category": "製程研發・技術壁壘",
+      "priority": true,
+      "points": [
+        "剪切讓酶解摺疊失活",
+        "泰勒渦流：沒有攪拌棒的共組裝"
+      ],
+      "src": "https://media.feed-pet.com/sci-v04.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v04/",
+      "poster": "background-image:url('/assets/cards/sci-v04.webp');background-size:cover;background-position:center"
+    },
+    {
+      "id": "sci-v05",
+      "object": "sci-v05",
+      "title": "量產為什麼翻車？放大不是把設備做大",
+      "category": "製程研發・技術壁壘",
+      "priority": true,
+      "points": [
+        "放大不是把設備做大",
+        "溫度・流量・停留時間 三參數鎖住"
+      ],
+      "src": "https://media.feed-pet.com/sci-v05.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v05/",
+      "poster": "background-image:url('/assets/cards/sci-v05.webp');background-size:cover;background-position:center"
+    },
+    {
+      "id": "sci-v06",
+      "object": "sci-v06",
+      "title": "同款設備，為何結果不同？",
+      "category": "製程研發・技術壁壘",
+      "priority": true,
+      "points": [
+        "設備買得到，參數窗口買不到",
+        "4–10°C × 30–120 秒"
+      ],
+      "src": "https://media.feed-pet.com/sci-v06.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v06/",
+      "poster": "background-image:url('/assets/cards/sci-v06.webp');background-size:cover;background-position:center"
+    },
+    {
+      "id": "sci-v07",
+      "object": "sci-v07",
+      "title": "1 公斤憑什麼贏 25 公斤？",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "蛋白酶像剪刀，可重複使用",
+        "育肥豬 FCR 2.8 → 2.0"
+      ],
+      "src": "https://media.feed-pet.com/sci-v07.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v07/",
+      "poster": "background-image:url('/assets/cards/sci-v07.webp');background-size:cover;background-position:center"
+    },
+    {
+      "id": "sci-v08",
+      "object": "sci-v08",
+      "title": "細菌也當工人？枯草桿菌的蛋白酶",
+      "category": "科普・生物機轉",
+      "priority": true,
+      "points": [
+        "土壤篩選的枯草桿菌",
+        "把蛋白酶分泌到細胞外"
+      ],
+      "src": "https://media.feed-pet.com/sci-v08.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v08/",
+      "poster": "background-image:url('/assets/cards/sci-v08.webp');background-size:cover;background-position:center"
+    },
+    {
       "id": "brand-v05",
       "object": "brand-v05-v3-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",

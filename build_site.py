@@ -137,6 +137,8 @@ def poster_style(object_name: str, brand: bool = False, brand_image: str = "bran
     if brand:
         image = "/assets/species/cattle.webp" if brand_image == "cattle" else "/assets/scenes/brand.webp"
         return f"background-image:url('{image}');background-size:cover;background-position:center"
+    if object_name in {s[0] for s in SCI_NEW}:   # 新科普片:輪播底圖用各自的 GPT Image 卡片圖
+        return f"background-image:url('/assets/cards/{object_name}.webp');background-size:cover;background-position:center"
     if object_name.startswith("sci-"):
         if object_name == "sci-v02":
             return "background-image:url('/assets/scenes/science-hero.png');background-size:cover;background-position:center"
@@ -191,8 +193,19 @@ def hero_video(object_name: str, label: str, watch: str, brand: bool = False, br
     return f'''<div class="film-stage"><video class="motion-preview hero-film" muted loop playsinline preload="none" style="{poster_style(object_name, brand, brand_image)}" data-preview="{preview}" aria-label="{escape(label, quote=True)}"></video><div class="film-bar"><span>活力得® · 影音紀錄</span><a href="{watch}">觀看完整影片 <span aria-hidden="true">↗</span></a></div></div>'''
 
 
+# 2026-11-18 第二批技術科普片(總監 gate pass;影音館各有獨立觀看頁 /s/<slug>/,VideoObject 只在影音館宣告)
+SCI_NEW = [
+    ("sci-v04", "攪拌越快，酶越快死？流場結構決定穩定性", "製程研發・技術壁壘", ["剪切讓酶解摺疊失活", "泰勒渦流：沒有攪拌棒的共組裝"]),
+    ("sci-v05", "量產為什麼翻車？放大不是把設備做大", "製程研發・技術壁壘", ["放大不是把設備做大", "溫度・流量・停留時間 三參數鎖住"]),
+    ("sci-v06", "同款設備，為何結果不同？", "製程研發・技術壁壘", ["設備買得到，參數窗口買不到", "4–10°C × 30–120 秒"]),
+    ("sci-v07", "1 公斤憑什麼贏 25 公斤？", "科普・生物機轉", ["蛋白酶像剪刀，可重複使用", "育肥豬 FCR 2.8 → 2.0"]),
+    ("sci-v08", "細菌也當工人？枯草桿菌的蛋白酶", "科普・生物機轉", ["土壤篩選的枯草桿菌", "把蛋白酶分泌到細胞外"]),
+]
+SCI_WATCH = {"sci-v01", "sci-v02", "sci-v03-r2", "sci-mech-r2"} | {s[0] for s in SCI_NEW}
+
+
 def video_card(video_slug: str, object_name: str, title: str) -> str:
-    watch = f"{VIDEO}/tech/" if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
+    watch = (f"{VIDEO}/s/{video_slug}/" if video_slug in SCI_WATCH else f"{VIDEO}/tech/") if video_slug.startswith("sci-") else f"{VIDEO}/v/{video_slug}/"
     poster = f"/assets/cards/{video_slug}.webp"
     if not (ROOT / poster.lstrip("/")).is_file():
         raise FileNotFoundError(f"Missing GPT Image card art: {poster}")
@@ -210,6 +223,8 @@ def hero_carousel() -> str:
         {"id":"sci-v03-r2","object":"sci-v03-r2","title":"游離硅，從原料到結構營養","category":"科普・材料技術","priority":True,"points":["游離硅，連接結構營養","骨・蹄・殼，回到生產指標"],"src":f"{MEDIA}/sci-v03-r2.mp4","watch":f"{VIDEO}/tech/"},
         {"id":"sci-v01","object":"sci-v01","title":"看懂重組蛋白酶的作用路徑","category":"科普・生物機轉","priority":True,"points":["重組蛋白酶，聚焦蛋白質利用","從作用路徑，看到日糧效率"],"src":f"{MEDIA}/sci-v01.mp4","watch":f"{VIDEO}/tech/"},
         {"id":"sci-mech-r2","object":"sci-mech-r2","title":"從分子作用到飼料利用","category":"科普・生物機轉","priority":True,"points":["從分子作用，回到飼料利用","蛋白利用 × 結構營養"],"src":f"{MEDIA}/sci-mech-r2.mp4","watch":f"{VIDEO}/tech/"},
+        *[{"id":s, "object":s, "title":t, "category":c, "priority":True, "points":pts, "src":f"{MEDIA}/{s}.mp4", "watch":f"{VIDEO}/s/{s}/"}
+          for s, t, c, pts in SCI_NEW],
         {"id":"brand-v05","object":"brand-v05-v3-h","title":"同樣的料，為什麼隔壁欄賺更多？","category":"品牌精神","priority":True,"points":["別只看投入；更要看可售產出","6 條產品線，對應現場痛點"],"src":f"{MEDIA}/brand-v05-v3-h.mp4","watch":f"{VIDEO}/v/brand-v05/"},
     ]
     for product_index, product in enumerate(data.PRODUCTS, 1):
@@ -229,7 +244,7 @@ def hero_carousel() -> str:
     for clip in clips:
         clip.setdefault("poster", poster_style(clip["object"], clip["id"].startswith("brand-")))
     preferred = sum(1 for clip in clips if clip["priority"])
-    if len(clips) != 32 or preferred <= len(clips) / 2:
+    if len(clips) != 32 + len(SCI_NEW) or preferred <= len(clips) / 2:
         raise ValueError(f"Hero carousel gate failed: {preferred}/{len(clips)} priority videos")
     playlist = escape(json.dumps(clips, ensure_ascii=False, separators=(",", ":")), quote=False)
     first = next(clip for clip in clips if clip["priority"])
@@ -327,7 +342,7 @@ def build() -> None:
     home = f'''{hero_carousel()}<section class="section-products wrap"><div class="section-head inline"><div><p class="kicker">六條產品線 / 對應六類現場問題</p><h2>看痛點，<br>找能改變的指標。</h2></div><a class="text-link" href="/products/">依物種瀏覽 ↗</a></div><div class="product-grid">{product_cards}</div></section>{species_gallery()}<section class="tech-feature"><div class="wrap"><div><p class="kicker">材料技術</p><h2>蛋白質利用 ×<br>結構營養。</h2><p>重組蛋白酶與活性游離硅，連接飼料利用與骨、蹄、殼的結構支持。</p><a class="button outline" href="/technology.html">看技術與製程 ↗</a></div>{hero_video('sci-v03-r2', '游離硅與結構營養', VIDEO+'/tech/')}</div></section>{value_story()}'''
     page("", "活力得®｜重組蛋白酶與游離硅飼料添加劑・產品數據與 ROI", "活力得®動物營養材料：從生產指標、六條產品線與影片，了解母豬、蛋雞、育肥豬、肉雞、魚蝦的生產指標與經營價值。", home)
 
-    tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</section><section class="tech-panes wrap"><article><span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article><span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}</div></section>'''
+    tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</section><section class="tech-panes wrap"><article><span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article><span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}{''.join(video_card(s, s, t) for s, t, _, _ in SCI_NEW)}</div></section>'''
     page("technology.html", "活力得®核心技術｜重組蛋白酶與游離硅複合材料", "閱讀活力得®重組 C 系絲氨酸蛋白酶、游離硅材料與連續流製程，並觀看已發布技術影片。", tech)
 
     listing = f'''<section class="inner-title wrap"><p class="kicker">中國市場 / 依物種與階段</p><h1>六條產品，<em>對應不同生產帳。</em></h1><p>先找物種，再看 PSY、FCR、蛋殼、胸肉、育成率與可售苗量；每條產品都回到自身的批次與收益口徑。</p></section><section class="section-products wrap tight"><div class="product-grid">{product_cards}</div></section>{market_taxonomy()}{value_story()}'''
