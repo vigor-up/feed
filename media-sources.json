@@ -231,9 +231,9 @@
         },
         {
           "watch_page": "https://v.feed-pet.com/v/p6-v04/",
-          "r2_video": "https://media.feed-pet.com/p6-v04-v2.mp4",
-          "preview": "https://media.feed-pet.com/p6-v04-v2-hero-h.mp4",
-          "poster": "https://v.feed-pet.com/assets/t/p6-v04-v2.jpg",
+          "r2_video": "https://media.feed-pet.com/p6-v04-v3.mp4",
+          "preview": "https://media.feed-pet.com/p6-v04-v3-hero-h.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p6-v04-v3.jpg",
           "topic": "魚苗存活與生長"
         }
       ]
@@ -786,7 +786,7 @@
     },
     {
       "id": "p6-v04",
-      "object": "p6-v04-v2",
+      "object": "p6-v04-v3",
       "title": "魚苗存活與生長",
       "category": "魚蝦養殖・生產痛點",
       "priority": false,
@@ -794,7 +794,7 @@
         "60% → 80% 育成｜場域幼蝦育成率對照",
         "聚焦 魚苗存活與生長｜回到每批可售產出"
       ],
-      "src": "https://media.feed-pet.com/p6-v04-v2-h.mp4",
+      "src": "https://media.feed-pet.com/p6-v04-v3-h.mp4",
       "watch": "https://v.feed-pet.com/v/p6-v04/",
       "product": "保苗旺",
       "poster": "background-image:url('/assets/scenes/p6.webp');background-size:200% auto;background-position:100% 100%"
