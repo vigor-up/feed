@@ -49,9 +49,9 @@
       "videos": [
         {
           "watch_page": "https://v.feed-pet.com/v/p2-v01/",
-          "r2_video": "https://media.feed-pet.com/p2-v01-v5.mp4",
-          "preview": "https://media.feed-pet.com/p2-v01-v5-hero-h.mp4",
-          "poster": "https://v.feed-pet.com/assets/t/p2-v01-v5.jpg",
+          "r2_video": "https://media.feed-pet.com/p2-v01-v6.mp4",
+          "preview": "https://media.feed-pet.com/p2-v01-v6-hero-h.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p2-v01-v6.jpg",
           "topic": "蛋殼品質與破損管理"
         },
         {
@@ -175,9 +175,9 @@
       "videos": [
         {
           "watch_page": "https://v.feed-pet.com/v/p5-v01/",
-          "r2_video": "https://media.feed-pet.com/p5-v01-v4.mp4",
-          "preview": "https://media.feed-pet.com/p5-v01-v4-hero-h.mp4",
-          "poster": "https://v.feed-pet.com/assets/t/p5-v01-v4.jpg",
+          "r2_video": "https://media.feed-pet.com/p5-v01-v5.mp4",
+          "preview": "https://media.feed-pet.com/p5-v01-v5-hero-h.mp4",
+          "poster": "https://v.feed-pet.com/assets/t/p5-v01-v5.jpg",
           "topic": "料肉比與利潤"
         },
         {
@@ -242,7 +242,7 @@
   "hero_carousel": [
     {
       "id": "sci-v02",
-      "object": "sci-v02-r2",
+      "object": "sci-v02-r3",
       "title": "每一批，都從製程穩定開始",
       "category": "製程研發・技術壁壘",
       "priority": true,
@@ -250,13 +250,13 @@
         "批次穩定，從製程控制開始",
         "重組蛋白酶 × 活性游離硅"
       ],
-      "src": "https://media.feed-pet.com/sci-v02-r2.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v02-r2/",
+      "src": "https://media.feed-pet.com/sci-v02-r3.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v02-r3/",
       "poster": "background-image:url('/assets/scenes/science-hero.png');background-size:cover;background-position:center"
     },
     {
       "id": "sci-v03-r2",
-      "object": "sci-v03-r3",
+      "object": "sci-v03-r4",
       "title": "游離硅，從原料到結構營養",
       "category": "科普・材料技術",
       "priority": true,
@@ -264,13 +264,13 @@
         "游離硅，連接結構營養",
         "骨・蹄・殼，回到生產指標"
       ],
-      "src": "https://media.feed-pet.com/sci-v03-r3.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v03-r3/",
+      "src": "https://media.feed-pet.com/sci-v03-r4.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v03-r4/",
       "poster": "background-image:url('/assets/scenes/science.webp');background-size:200% auto;background-position:100% 0%"
     },
     {
       "id": "sci-v01",
-      "object": "sci-v01-r2",
+      "object": "sci-v01-r3",
       "title": "看懂重組蛋白酶的作用路徑",
       "category": "科普・生物機轉",
       "priority": true,
@@ -278,8 +278,8 @@
         "重組蛋白酶，聚焦蛋白質利用",
         "從作用路徑，看到日糧效率"
       ],
-      "src": "https://media.feed-pet.com/sci-v01-r2.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v01-r2/",
+      "src": "https://media.feed-pet.com/sci-v01-r3.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v01-r3/",
       "poster": "background-image:url('/assets/scenes/science.webp');background-size:200% auto;background-position:100% 0%"
     },
     {
@@ -298,7 +298,7 @@
     },
     {
       "id": "sci-v04",
-      "object": "sci-v04-r2",
+      "object": "sci-v04-r3",
       "title": "攪拌越快，酶越快死？流場結構決定穩定性",
       "category": "製程研發・技術壁壘",
       "priority": true,
@@ -306,8 +306,8 @@
         "剪切讓酶解摺疊失活",
         "泰勒渦流：沒有攪拌棒的共組裝"
       ],
-      "src": "https://media.feed-pet.com/sci-v04-r2.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v04-r2/",
+      "src": "https://media.feed-pet.com/sci-v04-r3.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v04-r3/",
       "poster": "background-image:url('/assets/cards/sci-v04.webp');background-size:cover;background-position:center"
     },
     {
@@ -382,7 +382,7 @@
     },
     {
       "id": "brand-v05",
-      "object": "brand-v05-v5-h",
+      "object": "brand-v05-v6-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",
       "category": "品牌精神",
       "priority": true,
@@ -456,7 +456,7 @@
     },
     {
       "id": "p2-v01",
-      "object": "p2-v01-v5",
+      "object": "p2-v01-v6",
       "title": "蛋殼品質與破損管理",
       "category": "科普・生物機轉",
       "priority": true,
@@ -464,7 +464,7 @@
         "+12–15% 厚度｜蛋殼厚度的比較值",
         "聚焦 蛋殼品質與破損管理｜回到每批可售產出"
       ],
-      "src": "https://media.feed-pet.com/p2-v01-v5-h.mp4",
+      "src": "https://media.feed-pet.com/p2-v01-v6-h.mp4",
       "watch": "https://v.feed-pet.com/v/p2-v01/",
       "product": "殼力旺",
       "poster": "background-image:url('/assets/scenes/p2-hero.png');background-size:cover;background-position:center"
@@ -681,7 +681,7 @@
     },
     {
       "id": "p5-v01",
-      "object": "p5-v01-v4",
+      "object": "p5-v01-v5",
       "title": "料肉比與利潤",
       "category": "肉雞・生產痛點",
       "priority": false,
@@ -689,7 +689,7 @@
         "+15.24% 胸肉｜肉雞胸肉產量比較",
         "聚焦 料肉比與利潤｜回到每批可售產出"
       ],
-      "src": "https://media.feed-pet.com/p5-v01-v4-h.mp4",
+      "src": "https://media.feed-pet.com/p5-v01-v5-h.mp4",
       "watch": "https://v.feed-pet.com/v/p5-v01/",
       "product": "足斤旺",
       "poster": "background-image:url('/assets/scenes/p5-hero.png');background-size:cover;background-position:center"
