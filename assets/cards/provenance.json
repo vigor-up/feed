@@ -291,6 +291,13 @@
       "bytes": 83020,
       "type": "new_gpt_image",
       "source": "blender_osa2_redline_A frame"
+    },
+    {
+      "file": "cards/sci-v12.webp",
+      "sha256": "354a6a79287d5bc6922104fe553594efe8d2f5400bb43bad93f70614cfd86aaa",
+      "bytes": 76338,
+      "type": "new_gpt_image",
+      "source": "blender_v12_cut_A frame"
     }
   ]
 }
