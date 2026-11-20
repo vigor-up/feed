@@ -167,6 +167,14 @@ def pane_img(name: str, alt: str, group: tuple = ()) -> str:
     return f'<img class="pane-img" src="/assets/img/{name}.webp?v={asset_version("img/" + name + ".webp")}" alt="{escape(alt, quote=True)}" width="1200" height="800" loading="lazy" decoding="async">'
 
 
+def pane_video(name: str, label: str) -> str:
+    """技術頁機轉動畫(總監 20261121:對齊 v.feed-pet.com,用媒體1=蛋白酶、媒體2=矽 的分子組裝影片自動播放,不用靜態圖)。"""
+    v = "img/" + name + ".mp4"
+    return (f'<video class="pane-img pane-vid" autoplay muted loop playsinline webkit-playsinline preload="metadata" '
+            f'poster="/assets/img/{name}.jpg?v={asset_version("img/" + name + ".jpg")}" width="480" height="300" aria-label="{escape(label, quote=True)}">'
+            f'<source src="/assets/{v}?v={asset_version(v)}" type="video/mp4"></video>')
+
+
 # 產品頁「三個專業視角」配圖：獸醫／農場主按物種各一張（GPT Image 20261120，本地 35B gate＋目檢），配方師共用
 ROLE_IMG = {
     "junzaiwang": ("獸醫師在豬舍檢查母豬蹄部", "豬場主在產房看紀錄，母豬正在哺乳仔豬"),
@@ -371,7 +379,7 @@ def build() -> None:
     home = f'''{hero_carousel()}<section class="section-products wrap"><div class="section-head inline"><div><p class="kicker">六條產品線 / 對應六類現場問題</p><h2>看痛點，<br>找能改變的指標。</h2></div><a class="text-link" href="/products/">依物種瀏覽 ↗</a></div><div class="product-grid">{product_cards}</div></section>{species_gallery()}<section class="tech-feature"><div class="wrap"><div><p class="kicker">材料技術</p><h2>蛋白質利用 ×<br>結構營養。</h2><p>重組蛋白酶與活性游離硅，連接飼料利用與骨、蹄、殼的結構支持。</p><a class="button outline" href="/technology.html">看技術與製程 ↗</a></div>{hero_video('sci-v03-r2', '游離硅與結構營養', VIDEO+'/tech/')}</div></section>{value_story()}'''
     page("", "活力得®｜重組蛋白酶與游離硅飼料添加劑・產品數據與 ROI", "活力得®動物營養材料：從生產指標、六條產品線與影片，了解母豬、蛋雞、育肥豬、肉雞、魚蝦的生產指標與經營價值。", home)
 
-    tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</section><section class="tech-panes wrap"><article>{pane_img('rt_protease', '枯草桿菌絲氨酸蛋白酶（PDB 1SUP）原子結構與多肽鏈', ('rt_protease', 'rt_silicon'))}<span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article>{pane_img('rt_silicon', '單矽酸 Si(OH)4 分子的原子結構示意', ('rt_protease', 'rt_silicon'))}<span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}{''.join(video_card(s, s, t) for s, t, _, _ in SCI_NEW)}</div></section>'''
+    tech = f'''<section class="inner-hero cinematic"><div><p class="kicker">材料技術 / 製程 / 品質</p><h1>蛋白質利用，<br><em>連接結構營養。</em></h1><p>活力得®以重組 C 系絲氨酸蛋白酶與游離硅相關組分，構成單一複合功能材料。獸醫師看組織，配方師看日糧，農場主看可售產出與投入。</p></div>{hero_video('sci-v02', '連續流反應器與製程', VIDEO+'/tech/')}</section><section class="tech-panes wrap"><article>{pane_video('triad', 'Ser-His-Asp 三聯體蛋白酶：蛋白複合體組裝')}<span>PROTEASE / 蛋白質利用</span><h2>重組蛋白酶</h2><p>絲氨酸蛋白酶以 Ser–His–Asp 催化三聯體參與蛋白水解，對應小肽與胺基酸供給。</p></article><article>{pane_video('silicon', '有機游離單體硅：螺旋骨架組裝')}<span>SILICON / 結構營養</span><h2>活性游離硅</h2><p>游離硅相關組分連接膠原基質、骨礦化與殼部結構，與蛋白利用放在同一材料軸心。</p></article></section><section class="section-videos wrap"><div class="section-head inline"><div><p class="kicker">技術影音</p><h2>把製程和作用路徑看清楚。</h2></div></div><div class="video-grid">{video_card('sci-v02','sci-v02','同一台反應器，為什麼每一批都一樣？')}{video_card('sci-v03-r2','sci-v03-r2','硅不是加了就有用')}{''.join(video_card(s, s, t) for s, t, _, _ in SCI_NEW)}</div></section>'''
     page("technology.html", "活力得®核心技術｜重組蛋白酶與游離硅複合材料", "閱讀活力得®重組 C 系絲氨酸蛋白酶、游離硅材料與連續流製程，並觀看已發布技術影片。", tech)
 
     listing = f'''<section class="inner-title wrap"><p class="kicker">中國市場 / 依物種與階段</p><h1>六條產品，<em>對應不同生產帳。</em></h1><p>先找物種，再看 PSY、FCR、蛋殼、胸肉、育成率與可售苗量；每條產品都回到自身的批次與收益口徑。</p></section><section class="section-products wrap tight"><div class="product-grid">{product_cards}</div></section>{market_taxonomy()}{value_story()}'''

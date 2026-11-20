@@ -103,3 +103,5 @@ h1,h2,h3{text-wrap:balance}
 @media(max-width:540px){.hero-cinema{min-height:760px;padding-block:48px 100px}.hero-metrics{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:16px}.hero-metrics b{padding:11px 8px 10px 0;font-size:1.22rem}.hero-controls #hero-motion{min-width:62px;padding-inline:8px}.section-products,.section-videos,.audience-section,.field-section,.market-taxonomy{padding-block:40px}.product-grid,.video-grid{gap:10px}}
 @media(prefers-reduced-motion:reduce){.hero-controls #hero-motion{display:none}.hero-cinema .hero-reel{transition:none}.button:hover,.product-card:hover{transform:none}}
 .pane-img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;margin-bottom:18px;background:#cfdedb}
+
+.pane-img.pane-vid{aspect-ratio:16/10;object-fit:contain;background:#fff}
