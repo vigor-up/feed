@@ -381,6 +381,20 @@
       "poster": "background-image:url('/assets/cards/sci-v09.webp');background-size:cover;background-position:center"
     },
     {
+      "id": "sci-v10",
+      "object": "sci-v10",
+      "title": "低蛋白日粮，真正要解决的是什么？",
+      "category": "配方决策",
+      "priority": true,
+      "points": [
+        "两成以上蛋白没被消化就排掉",
+        "下修粗蛋白＋补足氨基酸＋加蛋白酶"
+      ],
+      "src": "https://media.feed-pet.com/sci-v10.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v10/",
+      "poster": "background-image:url('/assets/cards/sci-v10.webp');background-size:cover;background-position:center"
+    },
+    {
       "id": "brand-v05",
       "object": "brand-v05-v6-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",

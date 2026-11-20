@@ -277,6 +277,13 @@
       "bytes": 51416,
       "type": "new_gpt_image",
       "source": "codex_gpt_image_card.png"
+    },
+    {
+      "file": "cards/sci-v10.webp",
+      "sha256": "183801770869c4cb8a0f69b442055928999fe910ba4bb76d57968975e0f1bf68",
+      "bytes": 35106,
+      "type": "new_gpt_image",
+      "source": "codex_gpt_image_formulator.png"
     }
   ]
 }
