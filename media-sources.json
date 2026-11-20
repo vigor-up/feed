@@ -395,6 +395,20 @@
       "poster": "background-image:url('/assets/cards/sci-v10.webp');background-size:cover;background-position:center"
     },
     {
+      "id": "sci-v11",
+      "object": "sci-v11",
+      "title": "单体硅最好吸收，为什么没人直接卖纯的？",
+      "category": "兽医营养",
+      "priority": true,
+      "points": [
+        "2 mM 饱和红线 · 分子隔离罩",
+        "有效浓度 ×125 · 制粒后释放率 ≥40%"
+      ],
+      "src": "https://media.feed-pet.com/sci-v11.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v11/",
+      "poster": "background-image:url('/assets/cards/sci-v11.webp');background-size:cover;background-position:center"
+    },
+    {
       "id": "brand-v05",
       "object": "brand-v05-v6-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",
