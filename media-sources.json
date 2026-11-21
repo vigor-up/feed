@@ -410,7 +410,7 @@
     },
     {
       "id": "sci-v12",
-      "object": "sci-v12-r2",
+      "object": "sci-v12-r3",
       "title": "饲料配方一点没改，为什么加了蛋白酶，肉鸡就长得更好？",
       "category": "配方决策",
       "priority": true,
@@ -418,8 +418,8 @@
         "粗蛋白、粗脂肪不变 · 只加蛋白酶",
         "料肉比 −2.5~3.2% · 胸肉 +15.24%"
       ],
-      "src": "https://media.feed-pet.com/sci-v12-r2.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v12-r2/",
+      "src": "https://media.feed-pet.com/sci-v12-r3.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v12-r3/",
       "poster": "background-image:url('/assets/cards/sci-v12.webp');background-size:cover;background-position:center"
     },
     {
