@@ -215,69 +215,67 @@
     },
     {
       "file": "cards/sci-v02.webp",
-      "sha256": "6fe09e8079e7262405fbe6c3a6e7d4fa0608d5e2bcc5cdf06af27768bf3546ca",
-      "bytes": 32800,
-      "type": "crop_from_gpt_scene_board",
-      "source": "science.webp",
-      "panel_index_zero_based": 1,
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "sha256": "f8db075b6c5c21fd50bfc62c5778d6650c70901b8f7e8936872e87ca41791723",
+      "bytes": 56278,
+      "type": "new_gpt_image",
+      "source": "cards_gpt_ab_20261122/sci-v02_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v03-r2.webp",
-      "sha256": "d3a21ea499b29fc2f729858427cad7b4a13489c8229bb0f70f1bca62bbf8f3e3",
-      "bytes": 30646,
-      "type": "crop_from_gpt_scene_board",
-      "source": "science.webp",
-      "panel_index_zero_based": 3,
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "sha256": "52a01492ddb020d40955c06b3818241e6de788a2cbfe8dae6509cb1c547fe7fe",
+      "bytes": 63828,
+      "type": "new_gpt_image",
+      "source": "cards_gpt_ab_20261122/sci-v03-r2_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v04.webp",
-      "sha256": "c0c495eb9af9f51b493353526cd2e7261d6665e1ffcb7f9d8cbd65d9327c2e76",
-      "bytes": 38974,
+      "sha256": "b4dd9aee6fbb709287bd9383d7b89d224e25acf1a7514cbd9158e17055392abd",
+      "bytes": 62384,
       "type": "new_gpt_image",
-      "source": "gptimg_cards_20261118/sci-v04.png (Codex GPT Image, 2026-11-18)",
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "source": "cards_gpt_ab_20261122/sci-v04_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v05.webp",
-      "sha256": "d6041f3fb01c8edba760fabc6603afa15a65ec69bf06fad6bba1676bd06f1e46",
-      "bytes": 45652,
+      "sha256": "30e04a77df17e6b24b17437b873b0db4c6cb5d92fc4e40010c5f65d0e5fda4fb",
+      "bytes": 63444,
       "type": "new_gpt_image",
-      "source": "gptimg_cards_20261118/sci-v05.png (Codex GPT Image, 2026-11-18)",
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "source": "cards_gpt_ab_20261122/sci-v05_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v06.webp",
-      "sha256": "9dcb563fc1b1312c791382d4cbe3b11a04866b649233489d509c558876e5947d",
-      "bytes": 41240,
+      "sha256": "d9683ec4b8ea79a95ac63fd7c4249a7c56013b1e2de469a157f2c6f0759f9e4d",
+      "bytes": 53982,
       "type": "new_gpt_image",
-      "source": "gptimg_cards_20261118/sci-v06.png (Codex GPT Image, 2026-11-18)",
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "source": "cards_gpt_ab_20261122/sci-v06_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v07.webp",
-      "sha256": "b01f69b3b46f18cc7171ba60c16ddd130b487ed1563b972165e1f127ec28de6b",
-      "bytes": 41028,
+      "sha256": "216a380bbf8247b66a1694f701141dd342fd6064c2d6dabd44f5956ec383ca43",
+      "bytes": 71480,
       "type": "new_gpt_image",
-      "source": "gptimg_cards_20261118/sci-v07.png (Codex GPT Image, 2026-11-18)",
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "source": "cards_gpt_ab_20261122/sci-v07_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v08-r2.webp",
-      "sha256": "9bf0f6ca651f3c046fcf00a12dad949fce8874730e98c73f69f69048f2075d86",
-      "bytes": 33364,
-      "type": "copy_of_sci-v08.webp",
-      "source": "same GPT Image card as sci-v08 (new object name for re-encoded V08)",
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "sha256": "c0db30efd2dc72f390f8d3eed2c63199439e44c24a17ac91f06b726191bc1a12",
+      "bytes": 52432,
+      "type": "new_gpt_image",
+      "source": "cards_gpt_ab_20261122/sci-v08-r2_gpt.png",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v09.webp",
-      "sha256": "5d44b54d5bd718d4cd3d0582820517a3640efd4adccd1c9a067dc9ed705a08c5",
-      "bytes": 51416,
+      "sha256": "78eae5e040c024eeddc66ce3203c06de6c83c5242bd724b97e8eb83a9431cb84",
+      "bytes": 63730,
       "type": "new_gpt_image",
-      "source": "codex_gpt_image_card.png",
-      "generator": "Qwen-Image 2.1 local eGPU + PE (ops/qwen_pe_20261121/cards_semantic.py; v07/v09 card_fix_edit.py), Claude full-size gate 2026-11-21"
+      "source": "cards_gpt_ab_20261122/sci-v09_gpt_fix.png (Codex GPT Image local edit: removed fake-text sign)",
+      "generator": "OpenAI GPT Image via Codex CLI (ChatGPT subscription), prompts from ops/qwen_pe_20261121/cards_semantic.py via cards_gpt_ab.py; replaced Qwen-Image 2.1 after Claude side-by-side gate 2026-11-22"
     },
     {
       "file": "cards/sci-v10.webp",
