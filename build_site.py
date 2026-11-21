@@ -236,7 +236,7 @@ SCI_NEW = [
 SCI_WATCH = {"sci-v01", "sci-v02", "sci-v03-r2", "sci-mech-r2"} | {s[0] for s in SCI_NEW}
 # 2026-11-18 讀音修正後科普片換新音軌:R2 媒體檔不可覆寫,改用新檔名;影音館觀看頁同名(舊網址 301)。
 # 卡片圖仍以原代號命名,這裡只換媒體/觀看頁名稱。
-SCI_MEDIA = {"sci-v13": "sci-v13", "sci-v12": "sci-v12", "sci-v11": "sci-v11-r3", "sci-v10": "sci-v10-r3", "sci-v09": "sci-v09", "sci-v01": "sci-v01-r3", "sci-v02": "sci-v02-r3", "sci-v03-r2": "sci-v03-r4", "sci-mech-r2": "sci-mech-r3",
+SCI_MEDIA = {"sci-v13": "sci-v13-r2", "sci-v12": "sci-v12", "sci-v11": "sci-v11-r3", "sci-v10": "sci-v10-r3", "sci-v09": "sci-v09", "sci-v01": "sci-v01-r3", "sci-v02": "sci-v02-r3", "sci-v03-r2": "sci-v03-r4", "sci-mech-r2": "sci-mech-r3",
              "sci-v04": "sci-v04-r3", "sci-v05": "sci-v05-r3", "sci-v06": "sci-v06-r3", "sci-v07": "sci-v07-r3", "sci-v08-r2": "sci-v08-r4"}
 SCI_REV = {v: k for k, v in SCI_MEDIA.items()}
 BRAND_OBJ = "brand-v05-v6-h"   # 品牌片 v4(讀音修正後新版次)

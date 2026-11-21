@@ -424,7 +424,7 @@
     },
     {
       "id": "sci-v13",
-      "object": "sci-v13",
+      "object": "sci-v13-r2",
       "title": "牛羊吃得不少，为什么就是长不上膘？",
       "category": "兽医营养",
       "priority": true,
@@ -432,8 +432,8 @@
         "蹄病淘汰 3–8% · 奶牛减产 10–15%",
         "蛋白酶 × 游离硅 · 骨架跟上体重"
       ],
-      "src": "https://media.feed-pet.com/sci-v13.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v13/",
+      "src": "https://media.feed-pet.com/sci-v13-r2.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v13-r2/",
       "poster": "background-image:url('/assets/cards/sci-v13.webp');background-size:cover;background-position:center"
     },
     {
