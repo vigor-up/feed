@@ -298,6 +298,13 @@
       "bytes": 76338,
       "type": "new_gpt_image",
       "source": "blender_v12_cut_A frame"
+    },
+    {
+      "file": "cards/sci-v13.webp",
+      "sha256": "074b92cabde070f92302dd1d896b730698f2f1542e2489bd7340175db0174d40",
+      "bytes": 43650,
+      "type": "new_gpt_image",
+      "source": "after anchor, AI generated)"
     }
   ]
 }
