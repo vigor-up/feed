@@ -479,6 +479,20 @@
       "poster": "background-image:url('/assets/cards/sci-v18.webp');background-size:cover;background-position:center"
     },
     {
+      "id": "sci-v19",
+      "object": "sci-v19",
+      "title": "母鸡肚子里的蛋黄在排队，为什么有的半路被淘汰？",
+      "category": "兽医营养",
+      "priority": true,
+      "points": [
+        "卵泡排队 · 荷尔蒙指挥链",
+        "壳力旺 · 高峰期延长约 7–10 天"
+      ],
+      "src": "https://media.feed-pet.com/sci-v19.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v19/",
+      "poster": "background-image:url('/assets/cards/sci-v19.webp');background-size:cover;background-position:center"
+    },
+    {
       "id": "brand-v05",
       "object": "brand-v05-v6-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",
