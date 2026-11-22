@@ -304,6 +304,13 @@
       "bytes": 43650,
       "type": "new_gpt_image",
       "source": "after anchor, AI generated)"
+    },
+    {
+      "file": "cards/sci-v16.webp",
+      "sha256": "0d02791ea25ff581f2ac5edfacb007b4fa1bfcd403a63aa85514861f9fe40e5c",
+      "bytes": 41924,
+      "type": "new_gpt_image",
+      "source": "pexels_7001276 frame (real footage)"
     }
   ]
 }
