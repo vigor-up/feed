@@ -465,6 +465,20 @@
       "poster": "background-image:url('/assets/cards/sci-v17.webp');background-size:cover;background-position:center"
     },
     {
+      "id": "sci-v18",
+      "object": "sci-v18",
+      "title": "一颗蛋壳，为什么是母鸡半夜赶出来的？",
+      "category": "兽医营养",
+      "priority": true,
+      "points": [
+        "髓质骨夜里借钙 · 开产前四周存满",
+        "壳力旺 · 破损率 8.42%→3.96%"
+      ],
+      "src": "https://media.feed-pet.com/sci-v18.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v18/",
+      "poster": "background-image:url('/assets/cards/sci-v18.webp');background-size:cover;background-position:center"
+    },
+    {
       "id": "brand-v05",
       "object": "brand-v05-v6-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",
