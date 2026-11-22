@@ -234,11 +234,12 @@ SCI_NEW = [
     ("sci-v13", "牛羊吃得不少，为什么就是长不上膘？", "兽医营养", ["蹄病淘汰 3–8% · 奶牛减产 10–15%", "蛋白酶 × 游离硅 · 骨架跟上体重"]),
     ("sci-v16", "小鸡出壳时，肚子里为什么还带着便当？", "兽医营养", ["卵黄便当 · 开口料交接期", "足斤旺 三段加量 500→1000 克/吨"]),
     ("sci-v17", "同样是鸡蛋，为什么有的放几天就不新鲜？", "兽医营养", ["哈夫单位 · 蛋清高度 · 老母鸡实测", "壳力旺 · 两项都稳住"]),
+    ("sci-v18", "一颗蛋壳，为什么是母鸡半夜赶出来的？", "兽医营养", ["髓质骨夜里借钙 · 开产前四周存满", "壳力旺 · 破损率 8.42%→3.96%"]),
 ]
 SCI_WATCH = {"sci-v01", "sci-v02", "sci-v03-r2", "sci-mech-r2"} | {s[0] for s in SCI_NEW}
 # 2026-11-18 讀音修正後科普片換新音軌:R2 媒體檔不可覆寫,改用新檔名;影音館觀看頁同名(舊網址 301)。
 # 卡片圖仍以原代號命名,這裡只換媒體/觀看頁名稱。
-SCI_MEDIA = {"sci-v17": "sci-v17", "sci-v16": "sci-v16", "sci-v13": "sci-v13-r2", "sci-v12": "sci-v12-r3", "sci-v11": "sci-v11-r4", "sci-v10": "sci-v10-r3", "sci-v09": "sci-v09", "sci-v01": "sci-v01-r3", "sci-v02": "sci-v02-r3", "sci-v03-r2": "sci-v03-r4", "sci-mech-r2": "sci-mech-r3",
+SCI_MEDIA = {"sci-v18": "sci-v18", "sci-v17": "sci-v17", "sci-v16": "sci-v16", "sci-v13": "sci-v13-r2", "sci-v12": "sci-v12-r3", "sci-v11": "sci-v11-r4", "sci-v10": "sci-v10-r3", "sci-v09": "sci-v09", "sci-v01": "sci-v01-r3", "sci-v02": "sci-v02-r3", "sci-v03-r2": "sci-v03-r4", "sci-mech-r2": "sci-mech-r3",
              "sci-v04": "sci-v04-r3", "sci-v05": "sci-v05-r3", "sci-v06": "sci-v06-r3", "sci-v07": "sci-v07-r3", "sci-v08-r2": "sci-v08-r4"}
 SCI_REV = {v: k for k, v in SCI_MEDIA.items()}
 BRAND_OBJ = "brand-v05-v6-h"   # 品牌片 v4(讀音修正後新版次)

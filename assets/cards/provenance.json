@@ -318,6 +318,13 @@
       "bytes": 12678,
       "type": "new_gpt_image",
       "source": "pexels_6287620 frame (real footage)"
+    },
+    {
+      "file": "cards/sci-v18.webp",
+      "sha256": "30c01726bd3b293713734b43e249c40a1bc3ee6db3ffcd39593403e571c7186a",
+      "bytes": 55182,
+      "type": "new_gpt_image",
+      "source": "pexels_35020842 frame (real footage)"
     }
   ]
 }
