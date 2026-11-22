@@ -437,6 +437,20 @@
       "poster": "background-image:url('/assets/cards/sci-v13.webp');background-size:cover;background-position:center"
     },
     {
+      "id": "sci-v16",
+      "object": "sci-v16",
+      "title": "小鸡出壳时，肚子里为什么还带着便当？",
+      "category": "兽医营养",
+      "priority": true,
+      "points": [
+        "卵黄便当 · 开口料交接期",
+        "足斤旺 三段加量 500→1000 克/吨"
+      ],
+      "src": "https://media.feed-pet.com/sci-v16.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v16/",
+      "poster": "background-image:url('/assets/cards/sci-v16.webp');background-size:cover;background-position:center"
+    },
+    {
       "id": "brand-v05",
       "object": "brand-v05-v6-h",
       "title": "同樣的料，為什麼隔壁欄賺更多？",
