@@ -452,7 +452,7 @@
     },
     {
       "id": "sci-v17",
-      "object": "sci-v17",
+      "object": "sci-v17-r2",
       "title": "同样是鸡蛋，为什么有的放几天就不新鲜？",
       "category": "兽医营养",
       "priority": true,
@@ -460,8 +460,8 @@
         "哈夫单位 · 蛋清高度 · 老母鸡实测",
         "壳力旺 · 两项都稳住"
       ],
-      "src": "https://media.feed-pet.com/sci-v17.mp4",
-      "watch": "https://v.feed-pet.com/s/sci-v17/",
+      "src": "https://media.feed-pet.com/sci-v17-r2.mp4",
+      "watch": "https://v.feed-pet.com/s/sci-v17-r2/",
       "poster": "background-image:url('/assets/cards/sci-v17.webp');background-size:cover;background-position:center"
     },
     {
